@@ -1,0 +1,33 @@
+@import "../../../assets/styles/abstracts";
+
+.loading {
+  background-color: red;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  &__icon-wrapper{
+    &__icon{
+      font-size: rem(60);
+      //color: $main;
+    }
+  }
+  &--absolute{
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    position: absolute!important;
+    &__icon-wrapper{
+      &__icon{
+        font-size: rem(60);
+        //color: $main;
+      }
+    }
+  }
+
+}
