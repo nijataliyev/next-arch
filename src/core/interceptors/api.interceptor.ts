@@ -1,13 +1,40 @@
 import axios from "axios";
+import store from "../../store";
+import {useAppDispatch} from "../../hooks/redux";
+import {setLoader} from "../../store/modules/public-store/public-actions";
+import {useEffect, useState} from "react";
 
-axios.interceptors.request.use(function (config) {
-    return config;
-}, (error) => {
-    return Promise.reject(error);
-})
+export const Interceptor = () => {
+    // const [lang, setLang] = useState('az');
+    // useEffect(() => {
+    //     let lang = localStorage.getItem('lang') || 'az';
+    //     setLang(lang);
+    // },[lang])
 
-axios.interceptors.response.use((response) => {
-    return response;
-}, (error) => {
-    return Promise.reject(error);
-})
+    // const dispatch = useAppDispatch();
+    axios.interceptors.request.use((request) =>  {
+        console.log(request);
+        request.headers['Accept-language'] = localStorage.getItem('lang') || 'az';
+        const loading = store.getState().publicReducers.loading;
+        if(!loading){
+            store.dispatch(setLoader(true));
+        }
+        // dispatch(setLoader(true));
+        return request;
+    }, (error) => {
+        return Promise.reject(error);
+    })
+
+    axios.interceptors.response.use((response) => {
+        console.log(response);
+        const loading = store.getState().publicReducers.loading;
+        loading && store.dispatch(setLoader(false));
+        // dispatch(setLoader(false));
+        return response;
+    }, (error) => {
+        const loading = store.getState().publicReducers.loading;
+        loading && store.dispatch(setLoader(false));
+        // dispatch(setLoader(false));
+        return Promise.reject(error);
+    })
+}

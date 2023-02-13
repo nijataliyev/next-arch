@@ -1,0 +1,419 @@
+{
+  "az": {
+    "header": [
+      {
+        "id": 1,
+        "text": "Ana səhifə",
+        "linkto": "/"
+      },
+      {
+        "id": 2,
+        "text": "Niyə Lorex",
+        "routeId": "video"
+      },
+      {
+        "id": 3,
+        "text": "Qiymətlər",
+        "routeId": "planning"
+      },
+      {
+        "id": 4,
+        "text": "Bloq",
+        "linkto": "/blog"
+      }
+    ],
+    "modalContactButton": "Əlaqə",
+    "modal": {
+      "title": "Zəng sifarişi",
+      "text": "zəng edin",
+      "username": "Soyad, ad",
+      "email": "Elektron poçt",
+      "phone": "Əlaqə nömrəsi",
+      "btn": "Göndər",
+      "errorFullname": "Soyad,ad qeyd edin!",
+      "errorEmailRequired": "Elektron poçtu qeyd edin",
+      "errorEmailPattern": "Elektron poçtun formatı düzgün deyil",
+      "errorPhone": "Əlaqə nömrəsi qeyd edin",
+      "errorPhonePattern": "Əlaqə nömrəsini düzgün qeyd edin"
+    },
+    "learning": {
+      "title": "Öyrənməyin yeni yolu",
+      "text": "Azərbaycanda ilk təlim idarəetmə sistemi",
+      "subText": "Lorex LMS müasir texnologiyalar ilə hazırlanmış veb əsaslı LMS sistemidir.",
+      "btnText": "Demo sifariş et",
+      "more": "Daha çox"
+    },
+    "video": "Niyə Lorex LMS?",
+    "plan": {
+      "btn": "Sifariş et",
+      "title": "Planınızı seçin",
+      "description": "Planınızı seçin"
+    },
+    "contact": {
+      "country": "Ölkə",
+      "errorCountry": "Ölkə seçin",
+      "title": "Müraciət edin",
+      "fullname": "Soyad, ad",
+      "email": "Elektron poçt",
+      "phone": "Əlaqə nömrəsi",
+      "company": "Şirkət",
+      "profession": "Sahə",
+      "plan": "Plan",
+      "message": "Mesaj",
+      "selectText": "Seçin",
+      "btn": "Göndər",
+      "errorFullname": "Soyad,ad qeyd edin",
+      "errorEmailRequired": "E-poçt qeyd edin",
+      "errorEmailPattern": "E-poçtun formatı düzgün deyil",
+      "errorPhoneRequired": "Əlaqə nömrəsi qeyd edin",
+      "errorPhonePattern": "Əlaqə nömrəsinin formatı düzgün deyil",
+      "errorCompany": "Şirkət qeyd edin",
+      "errorProfession": "Sahə qeyd edin",
+      "errorPlan": "Plan qeyd edin",
+      "errorMessage": "Mesaj qeyd edin"
+    },
+    "blog": {
+      "category": "Kateqoriyalar",
+      "tag": "Təglər"
+    },
+    "partners": {
+      "title": "Bizi seçənlər",
+      "text": "Bizi seçənlər"
+    },
+    "categoryTitles": "Kateqoriya",
+    "footer": {
+      "commonHeading": "Ümumi",
+      "contactHeading": "Əlaqə",
+      "subscribeHeading": "Abunə ol",
+      "nav": [
+        {
+          "id": 1,
+          "text": "Niyə Lorex",
+          "routeId": "video"
+        },
+        {
+          "id": 2,
+          "text": "Qiymətlər",
+          "routeId": "planning"
+        },
+        {
+          "id": 3,
+          "text": "Bloq",
+          "linkto": "/blog"
+        },
+        {
+          "id": 4,
+          "text": "Gizlilik Siyasəti"
+        }
+      ],
+      "text": "Daimi olarak yeniliklərimizdən xəbərdar olmaq üçün elektron poçt ünvanınızı qeyd edib “Abunə ol” düyməsinə klikləyin.",
+      "logoText": "Lorex LMS bir IDEA Consulting & Solutions məhsuludur",
+      "btn": "Abunə ol",
+      "bottomText": "© Lorex LMS - Bütün hüquqlar qorunur"
+    },
+    "subscriptionText": "Siz artıq abunə olmusunuz.",
+    "breadcrumbOne": "Bloq",
+    "breadcrumbTwo": "Bloqun detallısı",
+    "notFound": {
+      "title": "Səhifə tapılmadı",
+      "desc": "Axtardığınız səhifə mövcud deyil, əsas səhifəyə qayıdın.",
+      "text": "Əsas səhifə"
+    },
+    "slider": [
+      {
+        "title": "Lorex LMS",
+        "text": "Lorex LMS istənilən biznes sahəsi üçün ideal bir həlldir."
+      },
+      {
+        "title": "Lorex LMS",
+        "text": "Lorex LMS ilə təlimlərinizi asanlıqla yaradın."
+      },
+      {
+        "title": "Lorex LMS",
+        "text": "Kadr hazırlığı, biznesin inkişafına edilən uğurlu investisiyadır."
+      },
+      {
+        "title": "Lorex LMS",
+        "text": "Onlayn kurslar dünyanı təhsilə doğru dəyişdirə bilən inanılmaz şansdır."
+      }
+    ]
+  },
+  "en": {
+    "header": [
+      {
+        "id": 1,
+        "text": "Main page",
+        "linkto": "/"
+      },
+      {
+        "id": 2,
+        "text": "Why Lorex",
+        "routeId": "video"
+      },
+      {
+        "id": 3,
+        "text": "Payments",
+        "routeId": "planning"
+      },
+      {
+        "id": 4,
+        "text": "Blog",
+        "linkto": "/blog"
+      }
+    ],
+    "modalContactButton": "Contact",
+    "modal": {
+      "title": "Call order",
+      "text": "call",
+      "username": "Fullname",
+      "email": "Mail",
+      "phone": "Phone number",
+      "btn": "Send",
+      "errorFullname": "Please enter fullname",
+      "errorEmailRequired": "Please enter email",
+      "errorEmailPattern": "The email format is incorrect",
+      "errorPhone": "Please enter phone number",
+      "errorPhonePattern": "Enter the contact number correctly"
+    },
+    "learning": {
+      "title": "A new way to learn",
+      "text": "The first training management system in Azerbaijan",
+      "subText": "Lorex LMS is a web-based LMS system developed with modern technologies.",
+      "btnText": "Order a demo",
+      "more": "More"
+    },
+    "categoryTitles": "Category",
+    "video": "Why Lorex LMS?",
+    "plan": {
+      "btn": "Do order",
+      "title": "Choose your plan",
+      "description": "Choose your plan"
+    },
+    "contact": {
+      "country": "Country",
+      "errorCountry": "Choose country",
+      "title": "Apply",
+      "fullname": "Fullname",
+      "email": "Email",
+      "phone": "Phone",
+      "company": "Company",
+      "profession": "Profession",
+      "plan": "Plan",
+      "message": "Message",
+      "selectText": "Select",
+      "btn": "Send",
+      "errorFullname": "Please enter fullname",
+      "errorEmailRequired": "Please enter email",
+      "errorEmailPattern": "The email format is incorrect",
+      "errorPhoneRequired": "Please enter phone number",
+      "errorPhonePattern": "The phone number is incorrect",
+      "errorCompany": "Please enter company",
+      "errorProfession": "Please enter profession",
+      "errorPlan": "Please enter plan",
+      "errorMessage": "Please enter message"
+    },
+    "blog": {
+      "category": "Categories",
+      "tag": "Tags"
+    },
+    "partners": {
+      "title": "Those who choose us",
+      "text": "Those who choose us"
+    },
+    "footer": {
+      "commonHeading": "Common",
+      "contactHeading": "Contact",
+      "subscribeHeading": "Subscribe",
+      "nav": [
+        {
+          "id": 1,
+          "text": "Why Lorex",
+          "routeId": "video"
+        },
+        {
+          "id": 2,
+          "text": "Price",
+          "routeId": "planning"
+        },
+        {
+          "id": 3,
+          "text": "Blog",
+          "linkto": "/blog"
+        },
+        {
+          "id": 4,
+          "text": "Privacy policy"
+        }
+      ],
+      "text": "Enter your e-mail address and click \"Subscribe\" to be regularly informed about our news.",
+      "logoText": "Lorex LMS is an IDEA Consulting & Solutions product",
+      "btn": "Subscribe",
+      "bottomText": "© Lorex LMS - All rights reserved"
+    },
+    "subscriptionText": "You are already subscribed",
+    "breadcrumbOne": "Blog",
+    "breadcrumbTwo": "Bloqun detail",
+    "notFound": {
+      "title": "Page not found",
+      "desc": "The page you are looking for is not available, please return to the main page.",
+      "text": "Main page"
+    },
+    "slider": [
+      {
+        "title": "Lorex LMS",
+        "text": "Lorex LMS is an ideal solution for any business area."
+      },
+      {
+        "title": "Lorex LMS",
+        "text": "Easily create your training with Lorex LMS."
+      },
+      {
+        "title": "Lorex LMS",
+        "text": "Staff training is a successful investment in business development."
+      },
+      {
+        "title": "Lorex LMS",
+        "text": "Online courses are an incredible opportunity that can change the world of education."
+      }
+    ]
+  },
+  "ru": {
+    "header": [
+      {
+        "id": 1,
+        "text": "Главная страница",
+        "linkto": "/"
+      },
+      {
+        "id": 2,
+        "text": "Почему Лорекс",
+        "routeId": "video"
+      },
+      {
+        "id": 3,
+        "text": "Цены",
+        "routeId": "planning"
+      },
+      {
+        "id": 4,
+        "text": "Блог",
+        "linkto": "/blog"
+      }
+    ],
+    "modalContactButton": "Контакт",
+    "modal": {
+      "title": "Заказ звонка",
+      "text": "вызов",
+      "username": "Фамилия,имя",
+      "email": "Эл. почта",
+      "phone": "Контактный номер",
+      "btn": "Отправлять",
+      "errorFullname": "Пожалуйста, введите Фамилия,имя",
+      "errorEmailRequired": "Пожалуйста, введите почту",
+      "errorEmailPattern": "Неверный формат электронной почты",
+      "errorPhone": "Пожалуйста, введите номер телефона",
+      "errorPhonePattern": "Введите контактный номер правильно"
+    },
+    "categoryTitles": "Категория",
+    "learning": {
+      "title": "Новый способ учиться",
+      "text": "Первая система управления обучением в Азербайджане",
+      "subText": "Lorex LMS — это веб-система LMS, разработанная с использованием современных технологий.",
+      "btnText": "Заказать демо",
+      "more": "Более"
+    },
+    "video": "Почему Лорекс ЛМС?",
+    "plan": {
+      "btn": "Сделай заказ",
+      "title": "Выберите свой план",
+      "description": "Выберите свой план"
+    },
+    "contact": {
+      "country": "Страна",
+      "errorCountry": "Выберите страну",
+      "title": "Применять",
+      "fullname": "Фамилия Имя",
+      "email": "Эл. почта",
+      "phone": "Контактный номер",
+      "company": "Компания",
+      "profession": "Профессия",
+      "plan": "План",
+      "message": "Сообщение",
+      "selectText": "Выбирать",
+      "btn": "Отправлять",
+      "errorFullname": "Пожалуйста, введите Фамилия,имя",
+      "errorEmailRequired": "Пожалуйста, введите почту",
+      "errorEmailPattern": "Неверный формат электронной почты",
+      "errorPhoneRequired": "Пожалуйста, введите номер телефона",
+      "errorPhonePattern": "Введите контактный номер правильно",
+      "errorCompany": "Пожалуйста, введите компанию",
+      "errorProfession": "Пожалуйста, введите профессию",
+      "errorPlan": "Пожалуйста, введите план",
+      "errorMessage": "Пожалуйста, введите сообщение"
+    },
+    "blog": {
+      "category": "Категории",
+      "tag": "Теги"
+    },
+    "partners": {
+      "title": "Те, кто выбирает нас",
+      "text": "Те, кто выбирает нас"
+    },
+    "footer": {
+      "commonHeading": "Общий",
+      "contactHeading": "Контакт",
+      "subscribeHeading": "Подписывайся",
+      "nav": [
+        {
+          "id": 1,
+          "text": "Почему Лорекс",
+          "routeId": "video"
+        },
+        {
+          "id": 2,
+          "text": "Цены",
+          "routeId": "planning"
+        },
+        {
+          "id": 3,
+          "text": "Блог",
+          "linkto": "/blog"
+        },
+        {
+          "id": 4,
+          "text": "Политика конфиденциальности"
+        }
+      ],
+      "text": "Введите свой адрес электронной почты и нажмите «Подписаться», чтобы регулярно получать информацию о наших новостях.",
+      "logoText": "Lorex LMS — это продукт IDEA Consulting & Solutions.",
+      "btn": "Подписывайся",
+      "bottomText": "© Лорекс ЛМС - Все права защищены"
+    },
+    "subscriptionText": "Вы уже подписаны.",
+    "breadcrumbOne": "Блог",
+    "breadcrumbTwo": "Подробности блога",
+    "notFound": {
+      "title": "Страница не найдена",
+      "desc": "Страница, которую вы ищете, недоступна, пожалуйста, вернитесь на главную страницу.",
+      "text": "Главная страница"
+    },
+    "slider": [
+      {
+        "title": "Lorex LMS",
+        "text": "Lorex LMS идеальное решение для любой сферы бизнеса."
+      },
+      {
+        "title": "Lorex LMS",
+        "text": "Легко создавайте свои тренировки с помощью Lorex LMS."
+      },
+      {
+        "title": "Lorex LMS",
+        "text": "Обучение персонала удачная инвестиция в развитие бизнеса."
+      },
+      {
+        "title": "Lorex LMS",
+        "text": "Онлайн-курсы это невероятная возможность, которая может изменить мир образования."
+      }
+    ]
+  }
+}

@@ -1,0 +1,151 @@
+@import "../../assets/styles/abstracts";
+
+.learning{
+  background-color: $modal-bg-color;
+  padding-top: rem(15);
+  padding-bottom: rem(65);
+  &__left{
+    margin-top: rem(107);
+  }
+  &__title{
+    h1{
+      font-family: $ec-bold;
+      font-size: rem(52);
+    }
+  }
+  &__first{
+    position: relative;
+    margin-top: rem(20);
+    font-family: $ec-medium;
+    font-size: rem(32);
+    line-height: rem(45);
+    background-repeat: no-repeat;
+    background-position: 0 rem(40);
+    &:before{
+      position: absolute;
+      top: rem(10);
+      content: url("../../assets/images/underline.svg");
+      display: block;
+      margin-top: rem(2);
+    }
+  }
+  &__sub{
+    margin-top: rem(30);
+    font-family: $ec-regular;
+    font-size: rem(22);
+  }
+  &__btn{
+    margin-top: rem(100);
+    display: flex;
+    align-items: center;
+    gap: rem(25);
+    &__demo{
+      border: none;
+      button{
+        position: relative;
+        z-index: 1;
+        border: none;
+        outline: none;
+        background-color: $bg-btn;
+        border-radius: rem(10);
+        color: white;
+        font-family: $ec-bold;
+        font-size: (18);
+        padding: rem(18) rem(53);
+        &::before{
+          position: absolute;
+          opacity: 0;
+          visibility: hidden;
+          z-index: -1;
+          content: '';
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-color: $main-color;
+          width: 0px;
+          transition: all 0.3s ease-in-out;
+          border-radius: rem(10);
+        }
+        &:hover::before {
+          width: 100%;
+          opacity: 1;
+          visibility: visible;
+          border-radius: rem(10);
+        }
+      }
+    }
+    &__more{
+      display: flex;
+      align-items: center;
+      width: rem(120);
+      a{
+        text-decoration: none;
+        color: black;
+        font-family: $ec-bold;
+        font-size: rem(18);
+        margin-right: rem(10);
+      }
+      svg{
+        transition: all 1s ease;
+        width: rem(10);
+      }
+      &:hover{
+        svg{
+          margin-left: rem(15);
+        }
+      }
+    }
+  }
+  &__right{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    &__element{
+      position: absolute;
+      top: rem(10);
+      right: 0;
+      z-index: 1;
+      width: 90%;
+      height: 75%;
+      transition: all 0.5s ease;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &__back{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 95%;
+      height: 94%;
+      transition: all 0.5s ease;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &__girl{
+      position: absolute;
+      bottom: 0;
+      z-index: 2;
+      width: 100%;
+      height: rem(400);
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &:hover {
+      .learning__right__element{
+        top: 0;
+        right: rem(15);
+      }
+      .learning__right__back{
+        left: rem(15);
+        top: rem(15);
+      }
+    }
+  }
+}

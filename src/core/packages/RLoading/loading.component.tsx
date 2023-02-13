@@ -1,13 +1,13 @@
 import React from 'react';
-import './loading.component.scss';
+import cssModule from './loading.module.scss';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {ILoadingProps} from "./types/loading.type";
 const LoadingComponent = (props : ILoadingProps)=> {
     return (
-        <div className={`loading ${props.scoped ? 'loading--absolute' : ''}`}>
-            <div className={`loading__icon-wrapper ${props.scoped ? 'loading--absolute__icon-wrapper' : ''}`}>
+        <div className={`${cssModule.loading} ${props.scoped ? cssModule.loading__absolute : ''}`}>
+            <div className={`${cssModule.loading__icon__wrapper} ${props.scoped ? cssModule.loading__absolute__icon__wrapper : ''}`}>
                 <FontAwesomeIcon
-                    className={ props.scoped ? 'loading--absolute__icon-wrapper__icon' : 'loading__icon-wrapper__icon'}
+                    className={ props.scoped ? cssModule.loading__absolute__icon__wrapper__icon : cssModule.loading__icon__wrapper__icon}
                     icon={props.icon || 'spinner'}
                     spin={props.spin || true}/>
             </div>

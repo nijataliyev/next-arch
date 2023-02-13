@@ -1,0 +1,116 @@
+@import "../../assets/styles/abstracts";
+
+.slider{
+  margin-top: rem(55);
+  margin-bottom: rem(55);
+  &__content{
+    height: rem(300);
+    position: relative;
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
+    &__inner{
+      position: absolute;
+      right: 0;
+      top: rem(55);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      width: rem(160);
+      height: rem(160);
+      &__swiper{
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+          &__slide{
+            border-radius: 20px;
+            width: 100%;
+            height: 100%;
+            box-shadow: 0px 0px 10px 0px rgba(107,107,107,0.50);
+            background-color: white !important;
+            img{
+              padding: 15px;
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+            }
+          }
+      }
+
+    }
+    &__first{
+      position: absolute;
+      left: 15px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 0px rgba(107,107,107,0.50);
+      width: rem(38);
+      height: rem(38);
+      padding: 5px;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &__second{
+      position: absolute;
+      top: -8px;
+      right: -20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 0px rgba(107,107,107,0.50);
+      width: rem(51);
+      height: rem(51);
+      padding: 10px;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &__third{
+      position: absolute;
+      left: 15px;
+      bottom: 16px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 0px rgba(107,107,107,0.50);
+      width: rem(71);
+      height: rem(71);
+      padding: 15px;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &__fourth{
+      position: absolute;
+      right: -40px;
+      bottom: 0;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 0px rgba(107,107,107,0.50);
+      width: rem(51);
+      height: rem(51);
+      padding: 10px;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &__text{
+      height: 100%;
+      display: flex;
+      align-items: center;
+      h1{
+        font-family: $ec-regular;
+        font-size: rem(24);
+      }
+      p{
+        font-family: $ec-medium;
+        font-size: rem(28);
+        line-height: 30px;
+        color: $slider-text;
+      }
+    }
+  }
+}

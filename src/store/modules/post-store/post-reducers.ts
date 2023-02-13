@@ -10,9 +10,13 @@ export const postSlice = createSlice({
     initialState,
     reducers: {
         getPostSuccess(state: any, action: PayloadAction){
-            state.post =  action
+            state.posts =  action.payload;
         }
+    },
+    extraReducers: (builder) => {
+
     }
 })
 
 export default postSlice.reducer;
+export const { getPostSuccess } = postSlice.actions;

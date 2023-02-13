@@ -1,0 +1,86 @@
+@import "../../../../../../assets/styles/abstracts";
+
+.header {
+  &__activeClass{
+    background-color: #B7CCF8;
+    a{
+      color: $main-color !important;
+      font-family: $ec-bold !important;
+    }
+
+  }
+  &_item{
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: rem(15);
+    li{
+      width: 22%;
+      position: relative;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 1s;
+      pointer-events: none;
+      a{
+        text-align: center;
+        padding: 0 rem(10);
+        pointer-events: auto;
+        display: flex;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+        text-decoration: none;
+        font-family: $ec-regular;
+        color: black;
+        cursor: pointer;
+        &:hover{
+          color: $main-color;
+          font-family: $ec-bold;
+        }
+      }
+      &::after{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1px;
+        width: 1px;
+        margin: auto;
+        content: '';
+        visibility: hidden;
+        opacity: 0;
+        background-color: $main-color;
+      }
+      &:hover::after{
+        visibility: visible;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        transition: all 0.3s linear;
+      }
+      &:last-child{
+        width: 11%;
+      }
+    }
+  }
+  &__static{
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover{
+      color: $main-color;
+      font-family: $ec-bold;
+    }
+  }
+}

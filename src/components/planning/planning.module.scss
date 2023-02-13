@@ -1,0 +1,59 @@
+@import "../../assets/styles/abstracts";
+
+.plan{
+  background-color: $modal-bg-color;
+  padding-top: rem(65);
+  padding-bottom: rem(65);
+  min-height: rem(850);
+  &__left{
+    &__title{
+      h1{
+        font-size: rem(42);
+        font-family: $ec-bold;
+      }
+      p{
+        font-size: rem(18);
+        font-family: $ec-regular;
+      }
+    }
+    &__img{
+      margin-top: rem(55);
+      width: 100%;
+      height: rem(500);
+      position: relative;
+      pointer-events: none;
+      img{
+        width: 100%;
+        position: absolute;
+        transition: all 0.3s ease;
+        pointer-events: auto;
+      }
+      img:first-child{
+        position: absolute;
+        top: rem(15);
+        left: rem(10);
+        width: 82%;
+      }
+      img:nth-child(2){
+        width: 48%;
+        height: 48%;
+        left: rem(25);
+        top: rem(10);
+      }
+      img:last-child{
+        width: rem(450);
+        bottom: 0;
+      }
+      &:hover{
+        img:first-child{
+          top: 0;
+          left: 0;
+        }
+        img:nth-child(2){
+          top: rem(20);
+          left: rem(28);
+        }
+      }
+    }
+  }
+}

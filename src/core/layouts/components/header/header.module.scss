@@ -1,5 +1,17 @@
+@import "../../../../assets/styles/abstracts";
 .header{
-    padding: 25px 15px;
-    background-color: grey;
-    color: white;
+    background: rgba(255, 255, 255, 0.58);
+    height: rem(100);
+    box-shadow: 0 3px 12px lightgray;
+    position: sticky;
+    top: 0;
+    z-index: 25;
+    backdrop-filter: blur(15px);
+    display: flex;
+    align-items: center;
+    &__left{
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
 }
