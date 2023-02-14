@@ -7,6 +7,7 @@ export class PlanModule {
     public members: string | undefined;
     public memberUnit: string | undefined;
     public price: string | undefined;
+    public priceUnit: string | undefined;
     public sort: number | null = null;
 
     constructor(item: IPlan) {
@@ -16,6 +17,7 @@ export class PlanModule {
         this._setMembers(item);
         this._setMemberUnit(item);
         this._setPrice(item);
+        this._setPriceUnit(item);
         this._setSort(item);
     }
 
@@ -80,5 +82,14 @@ export class PlanModule {
      */
     private _setSort({sort}: IPlan) {
         this.sort = sort;
+    }
+
+    /**
+     * set priceUnit
+     * @param priceUnit
+     * @private
+     */
+    private _setPriceUnit({priceUnit}: IPlan) {
+        this.priceUnit = priceUnit;
     }
 }

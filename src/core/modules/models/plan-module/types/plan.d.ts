@@ -5,5 +5,6 @@ export interface IPlan {
     members: string | undefined;
     memberUnit: string | undefined;
     price: string | undefined;
+    priceUnit: string | undefined;
     sort: number | null;
 }

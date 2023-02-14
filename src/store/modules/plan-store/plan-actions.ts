@@ -14,6 +14,7 @@ export const getPlansList = () => (
                 return new PlanModule(planList)
             })
         }).then((resultModel) => {
+            console.log(resultModel)
             dispatch(getPlansSuccess(resultModel))
         }).catch((err) => {
             console.log(err)

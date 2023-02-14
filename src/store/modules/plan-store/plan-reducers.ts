@@ -10,6 +10,7 @@ export const planSlice = createSlice({
     initialState,
     reducers: {
         getPlansSuccess(state, action){
+            console.log(action)
             state.plans = action.payload;
         }
     }

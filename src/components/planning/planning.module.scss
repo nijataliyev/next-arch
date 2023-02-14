@@ -56,4 +56,108 @@
       }
     }
   }
+  &__right{
+    margin-top: rem(55);
+    &__items{
+      position: relative;
+      overflow: hidden;
+      background-color: white;
+      border-radius: rem(10);
+      display: flex;
+      justify-content: space-between;
+      padding: rem(20);
+      margin-top: rem(10);
+      &__content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        h5{
+          font-family: $ec-bold;
+          font-size: rem(26);
+          margin: 0;
+        }
+        p{
+          font-family: $ec-regular;
+          font-size: rem(12);
+          margin: 0;
+        }
+      }
+      &__price{
+        display: flex;
+        &__left{
+          border-right: 5px solid black;
+          padding-right: rem(15);
+          h3{
+            font-family: $ec-bold;
+            font-size: rem(32);
+            margin: 0;
+          }
+          p{
+            font-family: $ec-regular;
+            font-size: rem(16);
+            margin: 0;
+            text-align: end;
+          }
+        }
+        &__right{
+          padding-left: rem(10);
+          h3{
+            font-family: $ec-bold;
+            font-size: rem(32);
+            color: $main-color;
+            margin: 0;
+          }
+          pre:last-child{
+            font-family: $ec-regular;
+            font-size: rem(16);
+            color: $main-color;
+            margin: 0;
+          }
+        }
+      }
+      &__btn{
+        z-index: 1;
+        border: none;
+        outline: none;
+        background-color: $bg-btn;
+        border-radius: rem(10);
+        color: white;
+        font-family: $ec-bold;
+        font-size: (18);
+        padding: rem(20) rem(53);
+        min-width: rem(300);
+        position: absolute;
+        top: rem(20);
+        right: 0;
+        transform: translateX(300px);
+        transition: transform .3s ease-out;
+        &:before{
+          position: absolute;
+          opacity: 0;
+          visibility: hidden;
+          z-index: -1;
+          content: '';
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-color: $main-color;
+          width: 0px;
+          transition: all 0.3s ease-in-out;
+          border-radius: rem(10);
+        }
+        &:hover:before{
+          width: 100%;
+          opacity: 1;
+          visibility: visible;
+          border-radius: rem(10);
+        }
+      }
+      &:hover{
+        .plan__right__items__btn{
+          transform: translateX(-15px);
+        }
+      }
+    }
+  }
 }

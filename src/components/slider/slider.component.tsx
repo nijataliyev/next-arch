@@ -87,9 +87,9 @@ const SliderComponent = () => {
                         <div className={css.slider__content__text}>
                             <Swiper modules={[Autoplay]} slidesPerView={1} speed={1000} loop={true} autoplay={{delay: 1000, disableOnInteraction: false}}>
                                 {
-                                    sliderList.map((item: any) => {
+                                    sliderList.map((item: any, index: number) => {
                                         return (
-                                            <SwiperSlide>
+                                            <SwiperSlide key={index}>
                                                 <h1>{item.title}</h1>
                                                 <p>{item.text}</p>
                                             </SwiperSlide>
