@@ -1,5 +1,5 @@
 import css from './planning.module.scss';
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import Image from "next/image";
 import {useDispatch, useSelector} from "react-redux";
 import {getPlansList} from "../../store/modules/plan-store/plan-actions";
@@ -24,6 +24,17 @@ const PlanningComponent = () => {
         setPlanList(list);
 
     },[lang])
+
+    const scroolTo = useCallback((id: string) => {
+        if(id && id.length){
+            if (typeof window !== "undefined") {
+                let element = document.getElementById(id);
+                if(element){
+                    element.scrollIntoView({behavior: 'smooth'})
+                }
+            }
+        }
+    },[])
 
 
     return (
@@ -63,7 +74,7 @@ const PlanningComponent = () => {
                                                     <pre>{item.priceUnit}</pre>
                                                 </div>
                                             </div>
-                                            <button className={css.plan__right__items__btn}>dede</button>
+                                            <button onClick={() => scroolTo('contact')} className={css.plan__right__items__btn}>dede</button>
                                         </div>
                                     )
                                 })
