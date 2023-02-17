@@ -6,6 +6,6 @@ import {API} from "../../../config/api.config";
 export class PartnersService {
 
     getPartners(): Promise<any>{
-        return axios.get(API.partners).then((res) => res.data.rows)
+        return axios.get(API.partners).then((res) => res.data)
     }
 }

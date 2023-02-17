@@ -12,12 +12,9 @@ const publicSlice = createSlice({
     initialState,
     reducers: {
         setLoaderSuccess(state, action: any){
-            console.log(action.payload);
-            console.log(action.payload);
             state.loading = action.payload;
         },
         setLangSuccess(state, action: any){
-            console.log(action.payload);
             state.lang = action.payload;
         }
     }

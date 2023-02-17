@@ -14,3 +14,23 @@ html {
 .video-js{
     width: 100%;
 }
+
+img{
+    width: 100%;
+    height: 100%;
+}
+
+/* the slides */
+.slick-slide {
+    gap: 10px !important;
+}
+/* the parent */
+.slick-list {
+    margin: 0 -10px;
+}
+
+.slick-track{
+    display: flex !important;
+    gap: 10px !important;
+}
+

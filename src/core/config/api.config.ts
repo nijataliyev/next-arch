@@ -4,5 +4,6 @@ export const API = {
     // users: environment + 'users',
     blogs: environment + 'blogs',
     plan: environment + 'plans',
-    partners: environment + '/partners'
+    partners: environment + 'partners',
+    blogCategories: environment + 'blog-categories'
 }

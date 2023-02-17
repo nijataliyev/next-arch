@@ -1,8 +1,78 @@
 import css from './partners.module.scss';
+import {useEffect, useState} from "react";
+import * as data from '../../assets/db/db.json';
+import {useDispatch, useSelector} from "react-redux";
+import {getPartners} from "../../store/modules/partners-store/partners-action";
+import Image from "next/image";
+import {IPartners} from "../../core/modules/models/partners-module/types/partners";
+// import 'swiper/swiper.min.css';
+// import {Swiper, SwiperSlide} from "swiper/react";
+// import {Autoplay} from "swiper";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import NatureOne from '../../assets/stattic-img/nature_5.jpg';
+import NatureTwo from '../../assets/stattic-img/nature_2.jpg';
+import NatureThree from '../../assets/stattic-img/nature_3.jpg';
+import NatureFour from '../../assets/stattic-img/nature_4.jpg';
+
 const PartnersComponent = () => {
+    const dispatch: any = useDispatch();
+    const partnersList = useSelector((state: any) => state.partnersReducers.partners)
+    const [lang, setLang] = useState('az');
+    const [staticContent, setStaticContent] = useState<any>(null)
+
+    const settings = {
+        dots: false,
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        spaceBetween: 10,
+        autoplay: true,
+        // speed: 2000,
+        autoplaySpeed: 2000,
+        pauseOnHover: true,
+        // cssEase: "linear"
+    };
+
+    useEffect(() => {
+        dispatch(getPartners())
+    }, [dispatch])
+
+    useEffect(() => {
+        let language: any = localStorage.getItem('lang');
+        let dataList: any = data;
+        setStaticContent(dataList[language].partners)
+        setLang(language);
+    }, [lang])
+
     return (
         <div className={css.partners}>
-            <h1>Partners</h1>
+            <div className="container">
+                <div className="row">
+                    <div className="col-12">
+                        <div className={css.partners__title}>
+                            <h2>{staticContent?.title}</h2>
+                            <p>{staticContent?.text}</p>
+                        </div>
+                        <div className={css.partners__logos}>
+                            <Slider {...settings}>
+                                {
+                                    partnersList.map((list: IPartners) =>{
+                                        if(list?.icon?.length){
+                                            return (
+                                                <div className={css.partners__logos__images}>
+                                                    <Image src={list?.icon ? list?.icon : NatureOne} alt={list?.title ? list?.title : ''}/>
+                                                </div>
+                                            )
+                                        }
+                                    })
+                                }
+                            </Slider>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

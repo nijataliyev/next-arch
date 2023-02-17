@@ -1,6 +1,25 @@
 @import "../../assets/styles/abstracts";
 
 .partners{
-  height: rem(500);
-  border: 1px solid yellow;
+  &__title{
+    text-align: center;
+    padding: rem(10) rem(150);
+    h2{
+      font-family: $ec-bold;
+      font-size: rem(42);
+    }
+    p{
+      font-family: $ec-regular;
+    }
+  }
+  &__logos{
+    margin-top: rem(35);
+    &__images{
+      img{
+        width: 100%;
+        height: rem(150);
+        object-fit: cover;
+      }
+    }
+  }
 }

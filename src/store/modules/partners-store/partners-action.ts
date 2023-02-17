@@ -12,11 +12,11 @@ export const getPartners = () => (
         return service.getPartners().then((res) => {
             return res.map((partnersList: IPartners) => {
                 return new PartnersModule(partnersList)
-            }).then((resultModel: any) => {
-                dispatch(getPartnersSuccess(resultModel))
-            }).catch((err: any) => {
-                console.log(err)
             })
+        }).then((resultModel: any) => {
+            dispatch(getPartnersSuccess(resultModel))
+        }).catch((err: any) => {
+            return Promise.reject(err);
         })
     }
 )

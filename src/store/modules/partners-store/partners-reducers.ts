@@ -11,7 +11,6 @@ export const partnersSlice = createSlice({
     initialState,
     reducers: {
         getPartnersSuccess(state, action){
-            console.log(action)
             state.partners = action.payload
         }
     }

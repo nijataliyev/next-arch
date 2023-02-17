@@ -2,13 +2,18 @@ import {IBlogState} from "./blog-types";
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState: IBlogState = {
-    blogs: []
+    blogs: [],
+    blogCategories: []
 }
 
 export const blogSlice = createSlice({
     name: 'blog',
     initialState,
     reducers: {
+        getBlogCategoriesSuccess(state,action){
+            console.log(action)
+            state.blogCategories = action.payload;
+        },
         getBlogSuccess(state, action){
             state.blogs = action.payload;
         }
@@ -16,4 +21,4 @@ export const blogSlice = createSlice({
 })
 
 export default blogSlice.reducer;
-export const { getBlogSuccess } = blogSlice.actions;
+export const { getBlogSuccess,getBlogCategoriesSuccess } = blogSlice.actions;

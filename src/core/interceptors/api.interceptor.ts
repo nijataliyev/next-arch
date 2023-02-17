@@ -13,7 +13,6 @@ export const Interceptor = () => {
 
     // const dispatch = useAppDispatch();
     axios.interceptors.request.use((request) =>  {
-        console.log(request);
         request.headers['Accept-language'] = localStorage.getItem('lang') || 'az';
         const loading = store.getState().publicReducers.loading;
         if(!loading){
@@ -26,7 +25,6 @@ export const Interceptor = () => {
     })
 
     axios.interceptors.response.use((response) => {
-        console.log(response);
         const loading = store.getState().publicReducers.loading;
         loading && store.dispatch(setLoader(false));
         // dispatch(setLoader(false));
