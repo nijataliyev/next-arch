@@ -1,6 +1,6 @@
 import {IPartners} from "./types/partners";
 
-export class PartnersModule {
+export class PartnersModel {
     id: number | null = null;
     title: string | undefined;
     icon: string | undefined;

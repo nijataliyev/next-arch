@@ -14,4 +14,18 @@
         display: flex;
         align-items: center;
     }
+
+    &__title{
+        h1{
+            font-size: rem(42);
+            font-family: $ec-bold;
+            margin: 0;
+        }
+        p{
+            margin-top: rem(20);
+            font-family: $ec-regular;
+            font-size: rem(18);
+            line-height: rem(25);
+        }
+    }
 }

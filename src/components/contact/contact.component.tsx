@@ -4,14 +4,21 @@ import {useDispatch, useSelector} from "react-redux";
 import * as data from '../../assets/db/db.json';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
-import {changeInputValue} from "../../core/helpers/common-functions/common-functions";
-import {getBlogCategories} from "../../store/modules/blog-store/blog-action";
-import Select from "react-select";
+import {changeInputValue, generateGuid} from "../../core/helpers/common-functions/common-functions";
+import {getBlogCategories, getMobPrefix} from "../../store/modules/blog-store/blog-action";
+// import Select from "react-select";
+import ReactFlagsSelect from "react-flags-select";
+import ButtonComponent from "../../core/packages/RButton/button.component";
 
 const ContactComponent = () => {
     const dispatch: any = useDispatch();
     const blogCategoriesList = useSelector((state: any) => state.blogReducers.blogCategories)
+    const mobPrefix = useSelector((state: any) => state.blogReducers.mobPrefix)
+    const plansList = useSelector((state: any) => state.planReducers.plans)
+    const [flags, setFlags] = useState<string[]>([]);
+    const [prefix, setPrefix] = useState('');
     const [lang, setLang] = useState('az');
+    const [select, setSelect] = useState("AZ");
     const [staticContent, setStaticContent] = useState<any>(null)
     const [inputState, setInputState] = useState({
         inputs: {
@@ -47,6 +54,21 @@ const ContactComponent = () => {
                 touched: false,
                 isValid: false
             },
+            country: {
+                type: 'select',
+                label: 'Tip',
+                value: 'AZ',
+                rules: {
+                    required: {
+                        value: true,
+                        errorText: `Öləkə əlavə edin`
+                    },
+                },
+                options: [],
+                currentErrTxt: '',
+                touched: false,
+                isValid: false
+            },
             phone: {
                 type: 'text',
                 label: 'Tip',
@@ -57,7 +79,7 @@ const ContactComponent = () => {
                         errorText: `Əlaqə nömrəsi əlavə edin`
                     },
                     regexp: {
-                        value: /^[\d\(\)\-+]+$/m,
+                        value: '^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$',
                         errorText: '()+0-9 simvollarından istifadə edin'
                     }
                 },
@@ -128,6 +150,7 @@ const ContactComponent = () => {
 
     useEffect(() => {
         dispatch(getBlogCategories())
+        dispatch(getMobPrefix())
     }, [dispatch])
 
     useEffect(() => {
@@ -137,12 +160,32 @@ const ContactComponent = () => {
             const prevInput: any = prevInputState.inputs
             prevInput.profession = {...prevInput.profession, options: [...blogCategoriesList]}
             prevInputState = {...prevInputState, inputs: prevInput}
-            console.log(prevInputState)
             return {
                 ...prevInputState
             }
         })
     }, [blogCategoriesList])
+
+    // useEffect(() => {
+    //     setInputState((prev: any) => {
+    //         console.log(prev)
+    //         let prevInputState: any = {...prev}
+    //         const prevInput: any = prevInputState.inputs
+    //         prevInput.plan = {...prevInput.plan, options: [...plansList]}
+    //         prevInputState = {...prevInputState, inputs: prevInput}
+    //         return {
+    //             ...prevInputState
+    //         }
+    //     })
+    // }, [plansList])
+
+    useEffect(() => {
+        const list = mobPrefix.map((item: any) => {
+            return item.code
+        })
+        console.log(list)
+        setFlags(list)
+    }, [mobPrefix])
 
     useEffect(() => {
         let language: any = localStorage.getItem('lang');
@@ -152,8 +195,19 @@ const ContactComponent = () => {
     }, [lang])
 
     const handleInputChange = useCallback((val: string, inputName: string) => {
+        console.log(val)
         changeInputValue({target: {value: val}}, inputName, inputState.inputs, setInputState)
     }, [])
+
+    const onSelect = (code: any) => {
+        console.log(code)
+        setSelect(code)
+        if (mobPrefix) {
+            let selectedItem = mobPrefix.find((item: any) => item.code === code)
+            console.log(selectedItem)
+            setPrefix(selectedItem.dialCode)
+        }
+    }
 
     return (
         <div id={'contact'} className={css.contact}>
@@ -173,7 +227,8 @@ const ContactComponent = () => {
                                                 <FontAwesomeIcon icon={faStar}/>
                                             </sup>
                                             <input type={inputState.inputs.fullName.type}
-                                                   onChange={(e: any) => handleInputChange(e.target.value, 'fullName')}/>
+                                                   onChange={(e: any) => handleInputChange(e.target.value, 'fullName')}
+                                                   value={inputState.inputs.fullName.value}/>
                                             <span>{inputState.inputs.fullName.currentErrTxt}</span>
                                         </div>
                                     </div>
@@ -183,8 +238,25 @@ const ContactComponent = () => {
                                             <sup>
                                                 <FontAwesomeIcon icon={faStar}/>
                                             </sup>
-                                            <input type={inputState.inputs.email.type} onChange={(e: any) => handleInputChange(e.target.value, 'email')}/>
+                                            <input type={inputState.inputs.email.type}
+                                                   onChange={(e: any) => handleInputChange(e.target.value, 'email')}
+                                                   value={inputState.inputs.email.value}/>
                                             <span>{inputState.inputs.email.currentErrTxt}</span>
+                                        </div>
+                                    </div>
+                                    <div className={css.contact__left__form__items}>
+                                        <div className={css.contact__left__form__items__label}>
+                                            <label htmlFor="">{staticContent?.country}</label>
+                                            <sup>
+                                                <FontAwesomeIcon icon={faStar}/>
+                                            </sup>
+                                            <ReactFlagsSelect className={css.contact__left__form__items__label__fla} searchable searchPlaceholder={staticContent?.search}
+                                                              onSelect={(e) => {
+                                                                  handleInputChange(e, 'country'), onSelect(e)
+                                                              }} selected={inputState.inputs.country.value}
+                                                              countries={[...flags]}/>
+                                            {/*<input type={inputState.inputs.country.type} onChange={(e: any) => handleInputChange(e.target.value, 'country')}/>*/}
+                                            <span>{inputState.inputs.country.currentErrTxt}</span>
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
@@ -193,8 +265,13 @@ const ContactComponent = () => {
                                             <sup>
                                                 <FontAwesomeIcon icon={faStar}/>
                                             </sup>
-                                            <input type="text"/>
-                                            <span></span>
+                                            <span
+                                                className={css.contact__left__form__items__label__prefix}>{prefix ? prefix : '+994'}</span>
+                                            <input onChange={(e: any) => handleInputChange(e.target.value, 'phone')}
+                                                   value={inputState.inputs.phone.value}
+                                                   className={css.contact__left__form__items__label__pre} type="text"
+                                                   placeholder={'XXX-XX-XX'}/>
+                                            <span>{inputState.inputs.phone.currentErrTxt}</span>
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
@@ -203,8 +280,10 @@ const ContactComponent = () => {
                                             <sup>
                                                 <FontAwesomeIcon icon={faStar}/>
                                             </sup>
-                                            <input type="text"/>
-                                            <span></span>
+                                            <input type="text"
+                                                   onChange={(e: any) => handleInputChange(e.target.value, 'company')}
+                                                   value={inputState.inputs.company.value}/>
+                                            <span>{inputState.inputs.company.currentErrTxt}</span>
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
@@ -213,13 +292,15 @@ const ContactComponent = () => {
                                             <sup>
                                                 <FontAwesomeIcon icon={faStar}/>
                                             </sup>
-                                            <Select
-                                                options={inputState.inputs.profession.options}
-                                                onChange={(e: any) => handleInputChange(e.value, 'profession')}/>
-                                            {/*<select>*/}
-                                            {/*    <option value="">dwd</option>*/}
-                                            {/*</select>*/}
-                                            <span></span>
+                                            <select onChange={(e: any) => handleInputChange(e.target.value, 'profession')}>
+                                                <option selected={true} disabled>Seçin</option>
+                                                {
+                                                    inputState.inputs.profession.options.map((optionList: any,index: number) => {
+                                                        return <option key={index} value={optionList.id}>{optionList.title}</option>
+                                                    })
+                                                }
+                                            </select>
+                                            <span>{inputState.inputs.profession.currentErrTxt}</span>
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
@@ -228,8 +309,15 @@ const ContactComponent = () => {
                                             <sup>
                                                 <FontAwesomeIcon icon={faStar}/>
                                             </sup>
-                                            <select>
-                                                <option value="">dwd</option>
+                                            <select onChange={(e: any) => handleInputChange(e.target.value, 'plan')}>
+                                                <option selected={true} disabled>Seçin</option>
+                                                {
+                                                    plansList.map((plans: any,index: number) => {
+                                                        return (
+                                                            <option key={index} value={plans.id}>{plans.title}</option>
+                                                        )
+                                                    })
+                                                }
                                             </select>
                                             <span></span>
                                         </div>
@@ -240,9 +328,12 @@ const ContactComponent = () => {
                                             <sup>
                                                 <FontAwesomeIcon icon={faStar}/>
                                             </sup>
-                                            <textarea></textarea>
-                                            <span></span>
+                                            <textarea onChange={(e: any) => handleInputChange(e.target.value, 'message')}></textarea>
+                                            <span>{inputState.inputs.message.currentErrTxt}</span>
                                         </div>
+                                    </div>
+                                    <div className={css.contact__left__form__items}>
+                                        <button className={css.contact__left__form__items__btn}>{staticContent?.btn}</button>
                                     </div>
                                 </div>
                             </form>

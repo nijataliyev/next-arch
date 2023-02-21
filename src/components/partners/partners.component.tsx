@@ -4,7 +4,7 @@ import * as data from '../../assets/db/db.json';
 import {useDispatch, useSelector} from "react-redux";
 import {getPartners} from "../../store/modules/partners-store/partners-action";
 import Image from "next/image";
-import {IPartners} from "../../core/modules/models/partners-module/types/partners";
+import {IPartners} from "../../core/modules/models/partners-model/types/partners";
 // import 'swiper/swiper.min.css';
 // import {Swiper, SwiperSlide} from "swiper/react";
 // import {Autoplay} from "swiper";

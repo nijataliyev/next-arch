@@ -5,5 +5,6 @@ export const API = {
     blogs: environment + 'blogs',
     plan: environment + 'plans',
     partners: environment + 'partners',
-    blogCategories: environment + 'blog-categories'
+    blogCategories: environment + 'blog-categories',
+    mobPrefix: environment + 'mob-prefixes'
 }

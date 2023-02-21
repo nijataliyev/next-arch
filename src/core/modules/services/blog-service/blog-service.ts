@@ -11,4 +11,8 @@ export class BlogService{
     getBlogCategories(): Promise<any> {
         return axios.get(API.blogCategories).then((res) => res.data.rows)
     }
+
+    getMobilePrefix(): Promise<any> {
+        return axios.get(API.mobPrefix).then((res) => res.data)
+    }
 }

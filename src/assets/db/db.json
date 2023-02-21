@@ -50,6 +50,7 @@
       "description": "Planınızı seçin"
     },
     "contact": {
+      "search": "Axtar",
       "country": "Ölkə",
       "errorCountry": "Ölkə seçin",
       "title": "Müraciət edin",
@@ -192,6 +193,7 @@
     "contact": {
       "country": "Country",
       "errorCountry": "Choose country",
+      "search": "Search",
       "title": "Apply",
       "fullname": "Fullname",
       "email": "Email",
@@ -329,6 +331,7 @@
       "description": "Выберите свой план"
     },
     "contact": {
+      "search": "Поиск",
       "country": "Страна",
       "errorCountry": "Выберите страну",
       "title": "Применять",

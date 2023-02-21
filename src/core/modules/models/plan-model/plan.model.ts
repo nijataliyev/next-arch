@@ -1,6 +1,6 @@
 import {IPlan} from "./types/plan";
 
-export class PlanModule {
+export class PlanModel {
     public id: number | null = null;
     public title: string | undefined;
     public description: string | undefined;

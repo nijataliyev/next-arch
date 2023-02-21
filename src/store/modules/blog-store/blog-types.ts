@@ -1,4 +1,5 @@
 export interface IBlogState {
     blogs: [],
-    blogCategories: []
+    blogCategories: [],
+    mobPrefix: []
 }
