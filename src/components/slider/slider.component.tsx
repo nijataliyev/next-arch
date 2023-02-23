@@ -14,24 +14,6 @@ import {useEffect, useState} from "react";
 const SliderComponent = () => {
     const [lang,setLang] = useState<any>('az');
     const [sliderList,setSliderList] = useState<any>([]);
-    const text = [
-        {
-            title: "Lorex LMS",
-            text: "Lorex LMS istənilən biznes sahəsi üçün ideal bir həlldir."
-        },
-        {
-            title: "Lorex LMS",
-            text: "Lorex LMS ilə təlimlərinizi asanlıqla yaradın."
-        },
-        {
-            title: "Lorex LMS",
-            text: "Kadr hazırlığı, biznesin inkişafına edilən uğurlu investisiyadır."
-        },
-        {
-            title: "Lorex LMS",
-            text: "Onlayn kurslar dünyanı təhsilə doğru dəyişdirə bilən inanılmaz şansdır."
-        }
-    ]
 
 
     useEffect(() => {

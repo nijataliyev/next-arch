@@ -9,16 +9,22 @@ import {useDispatch} from "react-redux";
 import {AppDispatch} from "../../../../store";
 import ModalComponent from "../../../packages/RModal/modal.component";
 import BodyComponent from "../../../packages/RModal/components/body.component";
-import {str} from "video.js";
 import {changeInputValue} from "../../../helpers/common-functions/common-functions";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faStar,faBars} from "@fortawesome/free-solid-svg-icons";
+import CallCenter from '../../../../assets/images/Call center-bro.svg';
+import {faPhone} from "@fortawesome/free-solid-svg-icons";
+import {useRouter} from "next/router";
+import MobileHeaderItemComponent from "./components/mobile-header-item/mobile-header-item.component";
 
 const HeaderComponent = () => {
-
+    const router = useRouter();
     const dispatch: any = useDispatch<AppDispatch>();
     const [nav, setNav] = useState<any>([]);
     const [staticContent, setStaticContent] = useState<any>(null);
+    const [staticModalText,setStaticModalText] = useState<any>(null);
     const [lang, setLang] = useState<string | any>('az');
-    const [show, setShow] = useState(true);
+    const [show, setShow] = useState(false);
     const [inputState, setInputState] = useState({
         inputs: {
             fullName: {
@@ -71,8 +77,9 @@ const HeaderComponent = () => {
                 touched: false,
                 isValid: false
             },
-        }
+        }, formValid: false
     })
+    const [openDropMenu,setOpenDropMenu] = useState(false);
 
     useEffect(() => {
         let lang = localStorage.getItem('lang');
@@ -85,6 +92,7 @@ const HeaderComponent = () => {
         console.log(data)
         setNav(datas[lang].header)
         setStaticContent(datas[lang].modal)
+        setStaticModalText(datas[lang].modalContactButton)
     }, [lang])
 
     const handleSelect = useCallback((e: any) => {
@@ -94,33 +102,58 @@ const HeaderComponent = () => {
         localStorage.setItem('lang', e.target.value);
     }, [lang])
 
+    const openDropMenuContent = () => {
+        setOpenDropMenu(true)
+    }
+
+    const closeDropMenuContent = () => {
+        setOpenDropMenu(false)
+    }
+
     const closeModal = () => {
         setShow(false)
     }
 
     const handleInputChange = useCallback((val: string, inputName: string) => {
         changeInputValue({target: {value: val}}, inputName, inputState.inputs, setInputState)
-    }, [])
+    }, [inputState.inputs])
+
+    const toGo = useCallback(() => {
+        router.push('/')
+    },[])
 
     return (
         <>
             <div className={scss.header}>
                 <div className="container" style={{height: '100%'}}>
                     <div className="row" style={{height: '100%'}}>
-                        <div className="col-3">
+                        <div className="col-6 col-sm-6 col-md-6 col-lg-3">
                             <div className={scss.header__left}>
-                                <Image src={Logo} alt="logo"/>
+                                <Image onClick={toGo} src={Logo} alt="logo"/>
                             </div>
                         </div>
-                        <div className="col-6">
+                        <div className="col-6 col-sm-6 col-md-6 col-lg-6">
                             <HeaderItemComponent nav={nav}/>
+                            <div className={scss.header__bars}>
+                                <FontAwesomeIcon onClick={openDropMenuContent} icon={faBars}/>
+                            </div>
                         </div>
-                        <div className={'col-3'}>
-                            <select name="" id="" value={lang} onChange={handleSelect}>
-                                <option value="az">AZ</option>
-                                <option value="en">EN</option>
-                                <option value="ru">RU</option>
-                            </select>
+                        <div className={`col-1 col-sm-3 col-md-3 col-lg-3 ${scss.header__right}`}>
+                            <div className={scss.header__info}>
+                                <div className={scss.header__info__btn}>
+                                    <button onClick={() => setShow(true)} className={scss.header__info__btn__contact}>
+                                        <FontAwesomeIcon icon={faPhone}/>
+                                        {staticModalText}
+                                    </button>
+                                </div>
+                                <div className={scss.header__info__dropdown}>
+                                    <select name="" id="" value={lang} onChange={handleSelect}>
+                                        <option value="az">AZ</option>
+                                        <option value="en">EN</option>
+                                        <option value="ru">RU</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -137,30 +170,67 @@ const HeaderComponent = () => {
                                 <div className={scss.header__form}>
                                     <form action="">
                                         <div className={scss.header__form__content}>
-                                            <label htmlFor="">{staticContent?.username}</label>
-                                            <input type={inputState.inputs.fullName.type} value={inputState.inputs.fullName.value}
-                                                   onChange={(e: any) => handleInputChange(e.target.value, 'fullname')}/>
-                                            <span>{inputState.inputs.fullName.currentErrTxt}</span>
+                                            <label htmlFor="">{staticContent?.username}
+                                                <sup>
+                                                    <FontAwesomeIcon icon={faStar}/>
+                                                </sup>
+                                            </label>
+                                            <input type={'text'}
+                                                   value={inputState.inputs.fullName.value}
+                                                   onChange={(e: any) => handleInputChange(e.target.value, 'fullName')}/>
+                                            {
+                                                !inputState.inputs.fullName.isValid && inputState.inputs.fullName.touched && (
+                                                    <span className={scss.header__form__content__error}>{inputState.inputs.fullName.currentErrTxt}</span>
+                                                )
+                                            }
                                         </div>
                                         <div className={scss.header__form__content}>
-                                            <label htmlFor="">{staticContent?.email}</label>
-                                            <input type={inputState.inputs.email.type} value={inputState.inputs.email.value}
-                                                   onChange={(e: any) => handleInputChange(e.target.value, 'fullname')}/>
-                                            <span>{inputState.inputs.email.currentErrTxt}</span>
+                                            <label htmlFor="">{staticContent?.email}
+                                                <sup>
+                                                    <FontAwesomeIcon icon={faStar}/>
+                                                </sup>
+                                            </label>
+                                            <input type={inputState.inputs.email.type}
+                                                   value={inputState.inputs.email.value}
+                                                   onChange={(e: any) => handleInputChange(e.target.value, 'email')}/>
+                                            {
+                                                !inputState.inputs.email.isValid && inputState.inputs.email.touched && (
+                                                    <span className={scss.header__form__content__error}>{inputState.inputs.email.currentErrTxt}</span>
+                                                )
+                                            }
                                         </div>
                                         <div className={scss.header__form__content}>
-                                            <label htmlFor="">{staticContent?.phone}</label>
-                                            <input type={inputState.inputs.phone.type} value={inputState.inputs.phone.value}
-                                                   onChange={(e: any) => handleInputChange(e.target.value, 'fullname')}/>
-                                            <span>{inputState.inputs.phone.currentErrTxt}</span>
+                                            <label htmlFor="">{staticContent?.phone}
+                                                <sup>
+                                                    <FontAwesomeIcon icon={faStar}/>
+                                                </sup>
+                                            </label>
+                                            <input className={scss.header__form__content__contacts} type={inputState.inputs.phone.type}
+                                                   value={inputState.inputs.phone.value}
+                                                   onChange={(e: any) => handleInputChange(e.target.value, 'phone')}/>
+                                            <div className={scss.header__form__content__num}>(+994)</div>
+                                            {
+                                                !inputState.inputs.phone.isValid && inputState.inputs.phone.touched && (
+                                                    <span className={scss.header__form__content__error}>{inputState.inputs.phone.currentErrTxt}</span>
+                                                )
+                                            }
+                                        </div>
+                                        <div className={scss.header__form__btn}>
+                                            <button>{staticContent?.btn}</button>
                                         </div>
                                     </form>
+                                </div>
+                            </div>
+                            <div className={'col-lg-5'}>
+                                <div className={scss.header__image}>
+                                    <Image src={CallCenter} alt={'Call center'}/>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </BodyComponent>
             </ModalComponent>
+            <MobileHeaderItemComponent nav={nav} showModal={openDropMenu} setModalDropShow={closeDropMenuContent}/>
         </>
     )
 }

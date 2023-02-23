@@ -71,15 +71,30 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        h5{
-          font-family: $ec-bold;
-          font-size: rem(26);
-          margin: 0;
+        &__head{
+          h5{
+            font-family: $ec-bold;
+            font-size: rem(26);
+            margin: 0;
+          }
+          p{
+            font-family: $ec-regular;
+            font-size: rem(12);
+            margin: 0;
+          }
         }
-        p{
-          font-family: $ec-regular;
-          font-size: rem(12);
-          margin: 0;
+        &__responsive{
+          display: none;
+          h5{
+            font-family: $ec-bold;
+            font-size: rem(26);
+            margin: 0;
+          }
+          p{
+            font-family: $ec-regular;
+            font-size: rem(12);
+            margin: 0;
+          }
         }
       }
       &__price{
@@ -101,6 +116,23 @@
         }
         &__right{
           padding-left: rem(10);
+          h3{
+            font-family: $ec-bold;
+            font-size: rem(32);
+            color: $main-color;
+            margin: 0;
+          }
+          pre:last-child{
+            font-family: $ec-regular;
+            font-size: rem(16);
+            color: $main-color;
+            margin: 0;
+          }
+        }
+      }
+      &__mobile{
+        display: none;
+        &__info{
           h3{
             font-family: $ec-bold;
             font-size: rem(32);
@@ -156,6 +188,240 @@
       &:hover{
         .plan__right__items__btn{
           transform: translateX(-15px);
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+  .plan{
+    &__right{
+      &__items{
+        &__price{
+          &__left{
+            h3{
+              font-family: $ec-bold;
+              font-size: rem(16);
+              margin: 0;
+            }
+          }
+          &__right{
+            h3{
+              font-family: $ec-bold;
+              font-size: rem(16);
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
+  .plan{
+    &__right{
+      &__items{
+        &__price{
+          &__left{
+            h3{
+              font-family: $ec-bold;
+              font-size: rem(16);
+              margin: 0;
+            }
+          }
+          &__right{
+            h3{
+              font-family: $ec-bold;
+              font-size: rem(16);
+              margin: 0;
+            }
+          }
+        }
+        &__btn{
+          padding: rem(20) rem(33);
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 400px) and  (max-width: 991px) {
+  .plan{
+    padding-top: rem(25);
+    &__left{
+      &__title{
+        h1{
+          font-size: rem(36);
+        }
+      }
+      &__img{
+        display: none;
+      }
+    }
+    &__right{
+      margin-top: rem(20);
+      &__items{
+        display: flex;
+        flex-direction: column;
+        &__content{
+          width: 100%;
+          justify-content: flex-start;
+          align-items: flex-start;
+          display: flex;
+          flex-direction: row;
+          padding-bottom: rem(15);
+          border-bottom: 1px solid $tag-border;
+          &__responsive{
+            display: block;
+            margin-left: auto;
+            h3{
+              font-family: $ec-bold;
+              font-size: rem(26);
+              margin: 0;
+            }
+            p{
+              font-family: $ec-regular;
+              font-size: rem(12);
+              margin: 0;
+              text-align: end;
+            }
+          }
+        }
+        &__price{
+          display: none;
+          //margin-top: rem(15);
+          &__left{
+            border-right: none;
+            padding-right: 0;
+            h3{
+              font-size: rem(26);
+            }
+          }
+          &__right{
+            display: none;
+          }
+        }
+        &__mobile{
+          margin-top: rem(10);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          &__info{
+            h3{
+              font-size: rem(26);
+            }
+          }
+          &__mob{
+            button{
+              border: none;
+              outline: none;
+              background-color: $bg-btn;
+              border-radius: rem(10);
+              color: white;
+              font-family: $ec-bold;
+              font-size: (18);
+              padding: rem(14) rem(13);
+              min-width: rem(150);
+            }
+          }
+        }
+        &__btn{
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 399px) {
+  .plan{
+    padding-top: rem(25);
+    &__left{
+      &__title{
+        h1{
+          font-size: rem(36);
+        }
+      }
+      &__img{
+        display: none;
+      }
+    }
+    &__right{
+      margin-top: rem(20);
+      &__items{
+        display: flex;
+        flex-direction: column;
+        &__content{
+          width: 100%;
+          justify-content: flex-start;
+          align-items: flex-start;
+          display: flex;
+          flex-direction: row;
+          padding-bottom: rem(15);
+          border-bottom: 1px solid $tag-border;
+          &__head{
+            h5{
+              font-size: rem(20);
+            }
+          }
+          &__responsive{
+            display: block;
+            margin-left: auto;
+            h3{
+              font-family: $ec-bold;
+              font-size: rem(20);
+              margin: 0;
+            }
+            p{
+              font-family: $ec-regular;
+              font-size: rem(12);
+              margin: 0;
+              text-align: end;
+            }
+          }
+        }
+        &__price{
+          display: none;
+          //margin-top: rem(15);
+          &__left{
+            border-right: none;
+            padding-right: 0;
+            h3{
+              font-size: rem(26);
+            }
+          }
+          &__right{
+            display: none;
+          }
+        }
+        &__mobile{
+          margin-top: rem(10);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          &__info{
+            h3{
+              font-size: rem(26);
+            }
+          }
+          &__mob{
+            button{
+              border: none;
+              outline: none;
+              background-color: $bg-btn;
+              border-radius: rem(10);
+              color: white;
+              font-family: $ec-bold;
+              font-size: (18);
+              padding: rem(14) rem(13);
+              min-width: rem(150);
+            }
+          }
+        }
+        &__btn{
+          display: none;
         }
       }
     }

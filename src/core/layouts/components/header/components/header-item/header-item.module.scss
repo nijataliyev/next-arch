@@ -84,3 +84,15 @@
     }
   }
 }
+
+@media only screen and (max-width: 991px) {
+  .header{
+    //&__info{
+    //  display: none;
+    //}
+
+    &_item{
+      display: none;
+    }
+  }
+}

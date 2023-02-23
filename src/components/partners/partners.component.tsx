@@ -5,16 +5,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {getPartners} from "../../store/modules/partners-store/partners-action";
 import Image from "next/image";
 import {IPartners} from "../../core/modules/models/partners-model/types/partners";
-// import 'swiper/swiper.min.css';
-// import {Swiper, SwiperSlide} from "swiper/react";
-// import {Autoplay} from "swiper";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import NatureOne from '../../assets/stattic-img/nature_5.jpg';
-import NatureTwo from '../../assets/stattic-img/nature_2.jpg';
-import NatureThree from '../../assets/stattic-img/nature_3.jpg';
-import NatureFour from '../../assets/stattic-img/nature_4.jpg';
+// import NatureTwo from '../../assets/stattic-img/nature_2.jpg';
+// import NatureThree from '../../assets/stattic-img/nature_3.jpg';
+// import NatureFour from '../../assets/stattic-img/nature_4.jpg';
 
 const PartnersComponent = () => {
     const dispatch: any = useDispatch();
@@ -32,6 +29,33 @@ const PartnersComponent = () => {
         // speed: 2000,
         autoplaySpeed: 2000,
         pauseOnHover: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: false
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    infinite: true,
+                }
+            }
+        ]
         // cssEase: "linear"
     };
 
@@ -58,14 +82,13 @@ const PartnersComponent = () => {
                         <div className={css.partners__logos}>
                             <Slider {...settings}>
                                 {
-                                    partnersList.map((list: IPartners) =>{
-                                        if(list?.icon?.length){
-                                            return (
-                                                <div className={css.partners__logos__images}>
-                                                    <Image src={list?.icon ? list?.icon : NatureOne} alt={list?.title ? list?.title : ''}/>
-                                                </div>
-                                            )
-                                        }
+                                    partnersList.map((list: IPartners, index: number) => {
+                                        return (
+                                            <div key={index} className={css.partners__logos__images}>
+                                                <Image src={list?.icon ? list?.icon : NatureOne}
+                                                       alt={list?.title ? list?.title : ''}/>
+                                            </div>
+                                        )
                                     })
                                 }
                             </Slider>

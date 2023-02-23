@@ -149,3 +149,54 @@
     }
   }
 }
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .learning{
+    &__left{
+      margin-top: rem(40);
+    }
+    &__title{
+      h1{
+        margin: 0;
+        //font-size: rem(30);
+      }
+      p{
+        //font-size: rem(18);
+      }
+    }
+    &__right{
+      display: none;
+    }
+    &__btn{
+      margin-top: rem(30);
+    }
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  .learning{
+    &__left{
+      margin-top: rem(40);
+    }
+    &__title{
+      h1{
+        margin: 0;
+        font-size: rem(30);
+      }
+      p{
+        font-size: rem(18);
+      }
+    }
+    &__right{
+      display: none;
+    }
+    &__btn{
+      margin-top: rem(30);
+      &__demo{
+        button{
+          padding: rem(18) rem(33);
+        }
+      }
+    }
+  }
+}

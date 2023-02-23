@@ -14,11 +14,23 @@
   }
   &__logos{
     margin-top: rem(35);
+    margin-bottom: rem(35);
     &__images{
       img{
         width: 100%;
         height: rem(150);
         object-fit: cover;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .partners{
+    &__title{
+      padding: 0;
+      h2{
+        font-size: rem(36);
       }
     }
   }

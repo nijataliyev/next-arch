@@ -40,7 +40,7 @@ const LearningComponent = () => {
         <div className={css.learning}>
             <div className="container">
                 <div className="row">
-                    <div className="col-lg-7">
+                    <div className="col-12 col-sm-12 col-md-12 col-lg-7">
                         <div className={css.learning__left}>
                             <div className={css.learning__title}>
                                 <h1>{learning?.title}</h1>
@@ -58,7 +58,7 @@ const LearningComponent = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-5">
+                    <div className="col-12 col-sm-12 col-md-12 col-lg-5">
                         <div className={css.learning__right}>
                             <div className={css.learning__right__element}>
                                 <Image src={ElementPic} alt={'element-pic'}/>
