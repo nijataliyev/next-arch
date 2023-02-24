@@ -126,5 +126,58 @@
         //}
       }
     }
+    &__error{
+        font-family: $ec-regular;
+        color: $danger;
+    }
+  }
+  &__right{
+    position: relative;
+    pointer-events: none;
+    &:hover{
+      .contact__first{
+        top: rem(30);
+        left: rem(10);
+      }
+      .contact__third{
+        top: rem(390);
+      }
+    }
+  }
+  &__first{
+    position: absolute;
+    top: rem(45);
+    left: 0;
+  }
+  &__second{
+    top: rem(145);
+  }
+  &__third{
+    top: rem(370);
+    left: rem(35);
+  }
+  &__body{
+    position: absolute;
+    width: 100%;
+    pointer-events: auto;
+    transition: all 0.3s ease;
+    img{
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .contact{
+    &__left{
+      &__title{
+        h3{
+          margin-top: 0;
+        }
+      }
+    }
+    &__right{
+      display: none;
+    }
   }
 }

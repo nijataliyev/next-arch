@@ -7,12 +7,7 @@ import {useRouter} from "next/router";
 const HeaderItemComponent = ({nav}: any) => {
     const router = useRouter();
 
-    useEffect(() => {
-        console.log(router)
-    },[router])
-
     const scroolElement = useCallback((str: any) => {
-        console.log(str)
         if(str && str.length){
             router.replace('/').then(() => {
                 let element: any = document.querySelector("#"+str);
@@ -26,7 +21,7 @@ const HeaderItemComponent = ({nav}: any) => {
     return (
         <ul className={module.header_item}>
             {
-                nav.map((item: any, index: number) => {
+                nav && nav?.map((item: any, index: number) => {
                     return (
                         <li className={router.pathname === item?.linkto ? module.header__activeClass : ''} key={index}>
                             {item.linkto ?

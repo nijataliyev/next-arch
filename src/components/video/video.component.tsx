@@ -22,7 +22,6 @@ const VideoComponent = () => {
             height: 450,
             // fluid: true,
         })
-        console.log(player.poster_)
 
 
         return () => {

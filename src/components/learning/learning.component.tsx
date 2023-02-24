@@ -16,7 +16,7 @@ const LearningComponent = () => {
     useEffect(() => {
         let lang: any = localStorage.getItem('lang');
         let dataList: any = data;
-        setLearning(dataList[lang].learning)
+        setLearning(dataList[lang]?.learning)
 
     },[])
 

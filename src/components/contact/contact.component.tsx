@@ -4,11 +4,13 @@ import {useDispatch, useSelector} from "react-redux";
 import * as data from '../../assets/db/db.json';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
-import {changeInputValue, generateGuid} from "../../core/helpers/common-functions/common-functions";
+import {changeInputValue} from "../../core/helpers/common-functions/common-functions";
 import {getBlogCategories, getMobPrefix} from "../../store/modules/blog-store/blog-action";
-// import Select from "react-select";
 import ReactFlagsSelect from "react-flags-select";
-import ButtonComponent from "../../core/packages/RButton/button.component";
+import Image from 'next/image';
+import FirstImg from '../../assets/images/freepik--background-simple--inject-46.svg';
+import SecondImg from '../../assets/images/computer.svg';
+import ThirdImg from '../../assets/images/freepik--Hands--inject-46.svg';
 
 const ContactComponent = () => {
     const dispatch: any = useDispatch();
@@ -190,8 +192,77 @@ const ContactComponent = () => {
     useEffect(() => {
         let language: any = localStorage.getItem('lang');
         let dataList: any = data;
-        setStaticContent(dataList[language].contact)
+        const langContent = dataList[language].contact
+        setStaticContent(langContent)
         setLang(language);
+
+        setInputState((prev: any) => {
+            let prevInputState: any = {...prev}
+            const prevInput: any = prevInputState.inputs
+            prevInput.fullName = {
+                ...prevInput.fullName,
+                rules: {
+                    ...prevInput.fullName.rules,
+                    required: {...prevInput.fullName.rules.required, errorText: langContent?.errorFullname}
+                }
+            }
+            prevInput.email = {
+                ...prevInput.email,
+                rules: {
+                    ...prevInput.email.rules,
+                    required: {...prevInput.email.rules.required, errorText: langContent?.errorEmailRequired},
+                    regexp: {...prevInput.email.rules.regexp, errorText: langContent?.errorEmailPattern}
+                }
+            }
+            prevInput.country = {
+                ...prevInput.country,
+                rules: {
+                    ...prevInput.country.rules,
+                    required: {...prevInput.country.rules.required, errorText: langContent?.errorCountryRequired},
+                }
+            }
+            prevInput.phone = {
+                ...prevInput.phone,
+                rules: {
+                    ...prevInput.phone.rules,
+                    required: {...prevInput.phone.rules.required, errorText: langContent?.errorPhoneRequired},
+                    regexp: {...prevInput.phone.rules.regexp, errorText: langContent?.errorPhonePattern}
+                }
+            }
+            prevInput.company = {
+                ...prevInput.company,
+                rules: {
+                    ...prevInput.company.rules,
+                    required: {...prevInput.company.rules.required, errorText: langContent?.errorCompany},
+                }
+            }
+            prevInput.profession = {
+                ...prevInput.profession,
+                rules: {
+                    ...prevInput.profession.rules,
+                    required: {...prevInput.profession.rules.required, errorText: langContent?.errorProfession},
+                }
+            }
+            prevInput.plan = {
+                ...prevInput.plan,
+                rules: {
+                    ...prevInput.plan.rules,
+                    required: {...prevInput.plan.rules.required, errorText: langContent?.errorPlan},
+                }
+            }
+            prevInput.message = {
+                ...prevInput.message,
+                rules: {
+                    ...prevInput.message.rules,
+                    required: {...prevInput.message.rules.required, errorText: langContent?.errorMessage},
+                }
+            }
+            console.log(prevInput)
+            prevInputState = {...prevInputState,inputs:{...prevInput}}
+            return {
+                ...prevInputState
+            }
+        })
     }, [lang])
 
     const handleInputChange = useCallback((val: string, inputName: string) => {
@@ -213,7 +284,7 @@ const ContactComponent = () => {
         <div id={'contact'} className={css.contact}>
             <div className="container">
                 <div className="row">
-                    <div className="col-lg-6">
+                    <div className="col-md-12 col-lg-6">
                         <div className={css.contact__left}>
                             <div className={css.contact__left__title}>
                                 <h3>{staticContent?.title}</h3>
@@ -229,7 +300,8 @@ const ContactComponent = () => {
                                             <input type={inputState.inputs.fullName.type}
                                                    onChange={(e: any) => handleInputChange(e.target.value, 'fullName')}
                                                    value={inputState.inputs.fullName.value}/>
-                                            <span>{inputState.inputs.fullName.currentErrTxt}</span>
+                                            <span
+                                                className={css.contact__left__error}>{inputState.inputs.fullName.currentErrTxt}</span>
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
@@ -241,7 +313,8 @@ const ContactComponent = () => {
                                             <input type={inputState.inputs.email.type}
                                                    onChange={(e: any) => handleInputChange(e.target.value, 'email')}
                                                    value={inputState.inputs.email.value}/>
-                                            <span>{inputState.inputs.email.currentErrTxt}</span>
+                                            <span
+                                                className={css.contact__left__error}>{inputState.inputs.email.currentErrTxt}</span>
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
@@ -250,13 +323,15 @@ const ContactComponent = () => {
                                             <sup>
                                                 <FontAwesomeIcon icon={faStar}/>
                                             </sup>
-                                            <ReactFlagsSelect className={css.contact__left__form__items__label__fla} searchable searchPlaceholder={staticContent?.search}
+                                            <ReactFlagsSelect className={css.contact__left__form__items__label__fla}
+                                                              searchable searchPlaceholder={staticContent?.search}
                                                               onSelect={(e) => {
                                                                   handleInputChange(e, 'country'), onSelect(e)
                                                               }} selected={inputState.inputs.country.value}
                                                               countries={[...flags]}/>
                                             {/*<input type={inputState.inputs.country.type} onChange={(e: any) => handleInputChange(e.target.value, 'country')}/>*/}
-                                            <span>{inputState.inputs.country.currentErrTxt}</span>
+                                            <span
+                                                className={css.contact__left__error}>{inputState.inputs.country.currentErrTxt}</span>
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
@@ -271,7 +346,8 @@ const ContactComponent = () => {
                                                    value={inputState.inputs.phone.value}
                                                    className={css.contact__left__form__items__label__pre} type="text"
                                                    placeholder={'XXX-XX-XX'}/>
-                                            <span>{inputState.inputs.phone.currentErrTxt}</span>
+                                            <span
+                                                className={css.contact__left__error}>{inputState.inputs.phone.currentErrTxt}</span>
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
@@ -283,7 +359,8 @@ const ContactComponent = () => {
                                             <input type="text"
                                                    onChange={(e: any) => handleInputChange(e.target.value, 'company')}
                                                    value={inputState.inputs.company.value}/>
-                                            <span>{inputState.inputs.company.currentErrTxt}</span>
+                                            <span
+                                                className={css.contact__left__error}>{inputState.inputs.company.currentErrTxt}</span>
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
@@ -292,15 +369,18 @@ const ContactComponent = () => {
                                             <sup>
                                                 <FontAwesomeIcon icon={faStar}/>
                                             </sup>
-                                            <select onChange={(e: any) => handleInputChange(e.target.value, 'profession')}>
+                                            <select
+                                                onChange={(e: any) => handleInputChange(e.target.value, 'profession')}>
                                                 <option selected={true} disabled>Seçin</option>
                                                 {
-                                                    inputState.inputs.profession.options.map((optionList: any,index: number) => {
-                                                        return <option key={index} value={optionList.id}>{optionList.title}</option>
+                                                    inputState.inputs.profession.options.map((optionList: any, index: number) => {
+                                                        return <option key={index}
+                                                                       value={optionList.id}>{optionList.title}</option>
                                                     })
                                                 }
                                             </select>
-                                            <span>{inputState.inputs.profession.currentErrTxt}</span>
+                                            <span
+                                                className={css.contact__left__error}>{inputState.inputs.profession.currentErrTxt}</span>
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
@@ -312,14 +392,15 @@ const ContactComponent = () => {
                                             <select onChange={(e: any) => handleInputChange(e.target.value, 'plan')}>
                                                 <option selected={true} disabled>Seçin</option>
                                                 {
-                                                    plansList.map((plans: any,index: number) => {
+                                                    plansList.map((plans: any, index: number) => {
                                                         return (
                                                             <option key={index} value={plans.id}>{plans.title}</option>
                                                         )
                                                     })
                                                 }
                                             </select>
-                                            <span></span>
+                                            <span
+                                                className={css.contact__left__error}>{inputState.inputs.plan.currentErrTxt}</span>
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
@@ -328,15 +409,31 @@ const ContactComponent = () => {
                                             <sup>
                                                 <FontAwesomeIcon icon={faStar}/>
                                             </sup>
-                                            <textarea onChange={(e: any) => handleInputChange(e.target.value, 'message')}></textarea>
-                                            <span>{inputState.inputs.message.currentErrTxt}</span>
+                                            <textarea
+                                                onChange={(e: any) => handleInputChange(e.target.value, 'message')}></textarea>
+                                            <span
+                                                className={css.contact__left__error}>{inputState.inputs.message.currentErrTxt}</span>
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
-                                        <button className={css.contact__left__form__items__btn}>{staticContent?.btn}</button>
+                                        <button
+                                            className={css.contact__left__form__items__btn}>{staticContent?.btn}</button>
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                    <div className={'col-md-12 col-lg-6'}>
+                        <div className={css.contact__right}>
+                            <div className={`${css.contact__first} ${css.contact__body}`}>
+                                <Image src={FirstImg} alt={'first'}/>
+                            </div>
+                            <div className={`${css.contact__second} ${css.contact__body}`}>
+                                <Image src={SecondImg} alt={'second'}/>
+                            </div>
+                            <div className={`${css.contact__third} ${css.contact__body}`}>
+                                <Image src={ThirdImg} alt={'third'}/>
+                            </div>
                         </div>
                     </div>
                 </div>

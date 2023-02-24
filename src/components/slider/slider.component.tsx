@@ -20,9 +20,8 @@ const SliderComponent = () => {
         let language: any = window.localStorage.getItem('lang');
         setLang(language);
         let dataList: any = data;
-        let list = dataList[language].slider;
+        let list = dataList[language]?.slider;
         setSliderList(list);
-        console.log(list)
     },[lang])
 
 
@@ -69,7 +68,7 @@ const SliderComponent = () => {
                         <div className={css.slider__content__text}>
                             <Swiper modules={[Autoplay]} slidesPerView={1} speed={1000} loop={true} autoplay={{delay: 1000, disableOnInteraction: false}}>
                                 {
-                                    sliderList.map((item: any, index: number) => {
+                                    sliderList && sliderList?.map((item: any, index: number) => {
                                         return (
                                             <SwiperSlide key={index}>
                                                 <h1>{item.title}</h1>

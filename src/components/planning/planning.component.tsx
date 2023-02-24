@@ -20,7 +20,7 @@ const PlanningComponent = () => {
         let language: any = localStorage.getItem('lang');
         setLang(language);
         let dataList: any = data
-        let list = dataList[language].plan
+        let list = dataList[language]?.plan
         setPlanList(list);
 
     },[lang])

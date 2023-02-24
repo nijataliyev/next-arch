@@ -89,14 +89,12 @@ const HeaderComponent = () => {
     useEffect(() => {
         let datas: any = data;
         let lang: any = localStorage.getItem('lang');
-        console.log(data)
-        setNav(datas[lang].header)
-        setStaticContent(datas[lang].modal)
-        setStaticModalText(datas[lang].modalContactButton)
+        setNav(datas[lang]?.header)
+        setStaticContent(datas[lang]?.modal)
+        setStaticModalText(datas[lang]?.modalContactButton)
     }, [lang])
 
     const handleSelect = useCallback((e: any) => {
-        console.log(e.target.value)
         dispatch(setLocalization(e.target.value))
         setLang(e.target.value)
         localStorage.setItem('lang', e.target.value);

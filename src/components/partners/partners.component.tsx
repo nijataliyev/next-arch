@@ -66,7 +66,7 @@ const PartnersComponent = () => {
     useEffect(() => {
         let language: any = localStorage.getItem('lang');
         let dataList: any = data;
-        setStaticContent(dataList[language].partners)
+        setStaticContent(dataList[language]?.partners)
         setLang(language);
     }, [lang])
 
