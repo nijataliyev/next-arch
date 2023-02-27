@@ -144,8 +144,8 @@ export function mapFormItems(inputs: any, callback: any, validCallback: any) {
                 }
                 }
                 value={currentInput.value} className={`r-select `}>
-          {currentInput.options.map((opt: any) => {
-            return <option value={opt.value}>{opt.title}</option>;
+          {currentInput.options.map((opt: any,index: number) => {
+            return <option key={index} value={opt.value}>{opt.title}</option>;
           })}
         </select>
         <span className={'err-txt'}>

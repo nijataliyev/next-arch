@@ -76,7 +76,7 @@ const TopFooterComponent = () => {
                                 {
                                     staticContent?.nav?.map((navList: any,index: number) => {
                                         return (
-                                            <li>
+                                            <li key={index}>
                                                 {
                                                     navList?.linkto ?
                                                         <Link href={navList?.linkto || undefined}>{navList?.text}</Link> :

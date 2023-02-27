@@ -1,7 +1,6 @@
 import css from './learning.module.scss';
 import * as data from '../../assets/db/db.json';
 import {useCallback, useEffect, useState} from "react";
-import Underline from '../../assets/images/underline.svg';
 import Link from "next/link";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons";

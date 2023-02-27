@@ -185,7 +185,6 @@ const ContactComponent = () => {
         const list = mobPrefix.map((item: any) => {
             return item.code
         })
-        console.log(list)
         setFlags(list)
     }, [mobPrefix])
 
@@ -266,16 +265,13 @@ const ContactComponent = () => {
     }, [lang])
 
     const handleInputChange = useCallback((val: string, inputName: string) => {
-        console.log(val)
         changeInputValue({target: {value: val}}, inputName, inputState.inputs, setInputState)
     }, [])
 
     const onSelect = (code: any) => {
-        console.log(code)
         setSelect(code)
         if (mobPrefix) {
             let selectedItem = mobPrefix.find((item: any) => item.code === code)
-            console.log(selectedItem)
             setPrefix(selectedItem.dialCode)
         }
     }

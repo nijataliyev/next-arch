@@ -9,9 +9,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import NatureOne from '../../assets/stattic-img/nature_5.jpg';
-// import NatureTwo from '../../assets/stattic-img/nature_2.jpg';
-// import NatureThree from '../../assets/stattic-img/nature_3.jpg';
-// import NatureFour from '../../assets/stattic-img/nature_4.jpg';
 
 const PartnersComponent = () => {
     const dispatch: any = useDispatch();
