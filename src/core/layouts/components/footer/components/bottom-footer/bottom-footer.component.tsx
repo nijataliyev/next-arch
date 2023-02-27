@@ -10,7 +10,7 @@ import * as data from "../../../../../../assets/db/db.json";
 
 const BottomFooterComponent = () => {
     const [lang,setLang] = useState('az');
-    const [staticContent,setStaticContent] = useState(null);
+    const [staticContent,setStaticContent] = useState<any>(null);
 
     useEffect(() => {
         let datalist: any = data;

@@ -1,4 +1,4 @@
 export enum environment {
-    env = process.env.NODE_ENV,
-    apiMain = process.env.API_URL
+    // env = process.env.NODE_ENV,
+    // apiMain = process.env.API_URL
 }

@@ -30,7 +30,7 @@ const TopFooterComponent = () => {
             }
         }, formValid: false
     })
-    const [staticContent,setStaticContent] = useState(null);
+    const [staticContent,setStaticContent] = useState<any>(null);
     const router = useRouter();
 
     useEffect(() => {
