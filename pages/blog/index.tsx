@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {getBlogList} from "../../src/store/modules/blog-store/blog-action";
+import scss from './blog.module.scss';
 
 const Blog = () => {
     const dispatch: any = useDispatch();

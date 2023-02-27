@@ -138,7 +138,17 @@
         "title": "Lorex LMS",
         "text": "Onlayn kurslar dünyanı təhsilə doğru dəyişdirə bilən inanılmaz şansdır."
       }
-    ]
+    ],
+    "demo": {
+      "demoOneTitle": "Ana səhifə",
+      "demoOneText": "Hər bir istifadəçi tipi üçün fərqli formada yaranan ilkin hesabatlarını və digər vacib məlumatlarını görüp keçi etkiyi səhifə",
+      "demoTwoTitle": "Hesabatlar",
+      "demoTwoText": "Sistem daxilində istifadəçilərin, təlimlərin kursların ümumi hesaba formaları",
+      "demoThreeTitle": "Təlimlər",
+      "demoThreeText": "Yaradılmış təlimlərin ümumi məlumatları, istifadəçiləri və digər məlumatları mövcud olan hissə",
+      "demoFourTitle": "Təlim yarat",
+      "demoFourText": "Təlimlərin tam olaraq hazırlanması üçün nəzərdə tutulan generator"
+    }
   },
   "en": {
     "header": [
@@ -279,7 +289,17 @@
         "title": "Lorex LMS",
         "text": "Online courses are an incredible opportunity that can change the world of education."
       }
-    ]
+    ],
+    "demo": {
+      "demoOneTitle": "Main page",
+      "demoOneText": "A page where you can see and navigate to your initial reports and other important information, which are generated in a different form for each type of user",
+      "demoTwoTitle": "Reports",
+      "demoTwoText": "General account forms of users, trainings and courses within the system",
+      "demoThreeTitle": "Trainings",
+      "demoThreeText": "The section where the general information, users and other information of the created trainings are available",
+      "demoFourTitle": "Create training",
+      "demoFourText": "A generator intended for the complete preparation of exercises"
+    }
   },
   "ru": {
     "header": [
@@ -420,6 +440,16 @@
         "title": "Lorex LMS",
         "text": "Онлайн-курсы это невероятная возможность, которая может изменить мир образования."
       }
-    ]
+    ],
+    "demo": {
+      "demoOneTitle": "Главная страница",
+      "demoOneText": "Страница, на которой вы можете просмотреть исходные отчеты и другую важную информацию и перейти к ней, которые создаются в разной форме для каждого типа пользователей.",
+      "demoTwoTitle": "Отчеты",
+      "demoTwoText": "Общие формы учета пользователей, тренингов и курсов внутри системы",
+      "demoThreeTitle": "Тренинги",
+      "demoThreeText": "Раздел, где доступна общая информация, пользователи и другая информация о созданных тренингах",
+      "demoFourTitle": "Создать обучение",
+      "demoFourText": "Генератор, предназначенный для полной подготовки упражнений"
+    }
   }
 }
