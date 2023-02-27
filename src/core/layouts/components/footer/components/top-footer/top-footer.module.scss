@@ -1,0 +1,171 @@
+@import "../../../../../../assets/styles/abstracts";
+
+.top{
+  background-color: $footer-top-bg;
+  padding: rem(25) 0;
+  &__left{
+    h3{
+      margin: 0;
+      font-family: $ec-bold;
+      font-size: rem(18);
+    }
+  }
+  &__nav{
+    margin-top: rem(20);
+    padding-left: 0;
+    list-style-type: none;
+    li{
+      font-family: $ec-regular;
+      margin-top: rem(20);
+      a{
+        text-decoration: none;
+        color: $black;
+      }
+    }
+  }
+  &__middle{
+    h3{
+      margin: 0;
+      font-family: $ec-bold;
+      font-size: rem(18);
+    }
+  }
+  &__logo{
+    margin-top: rem(35);
+    padding-right: rem(53);
+    display: flex;
+    p{
+      margin-top: rem(8);
+      font-family: $ec-regular;
+      line-height: rem(15);
+      font-size: rem(12);
+    }
+  }
+  &__img{
+    width: rem(250);
+    border-right: rem(3) solid black;
+    margin-right: rem(7);
+    img{
+      width: 100%;
+    }
+  }
+  &__info{
+    ul{
+      margin-top: rem(20);
+      padding-left: 0;
+      list-style-type: none;
+      li{
+        font-family: $ec-regular;
+        margin-top: rem(20);
+        a{
+          text-decoration: none;
+          color: $black;
+        }
+      }
+    }
+  }
+  &__right{
+    h3{
+      margin: 0;
+      font-family: $ec-bold;
+      font-size: rem(18);
+    }
+    p{
+      margin-top: rem(8);
+      font-family: $ec-regular;
+      line-height: rem(25);
+    }
+  }
+  &__form{
+    display: flex;
+    align-items: center;
+    gap: rem(5);
+    input{
+      margin-top: rem(5);
+      margin-bottom: rem(2);
+      width: 65%;
+      font-family: $ec-bold;
+      font-size: rem(18);
+      border: 1px solid #C7CBD6;
+      outline: none;
+      padding: rem(10) rem(17);
+      border-radius: rem(10);
+    }
+    &__btnError{
+      cursor: not-allowed;
+      position: relative;
+      z-index: 1;
+      border: none;
+      outline: none;
+      background-color: $bg-btn;
+      border-radius: rem(10);
+      color: white;
+      font-family: $ec-bold;
+      font-size: (18);
+      padding: rem(11) rem(13);
+      width: rem(150);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &::before{
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+        z-index: -1;
+        content: '';
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: $main-color;
+        width: 0px;
+        transition: all 0.3s ease-in-out;
+        border-radius: rem(10);
+      }
+      &:hover::before {
+        width: 100%;
+        opacity: 1;
+        visibility: visible;
+        border-radius: rem(10);
+      }
+    }
+    &__btnSuccess{
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      border: none;
+      outline: none;
+      background-color: $bg-btn;
+      border-radius: rem(10);
+      color: white;
+      font-family: $ec-bold;
+      font-size: (18);
+      padding: rem(11) rem(13);
+      width: rem(150);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &::before{
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+        z-index: -1;
+        content: '';
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: $main-color;
+        width: 0px;
+        transition: all 0.3s ease-in-out;
+        border-radius: rem(10);
+      }
+      &:hover::before {
+        width: 100%;
+        opacity: 1;
+        visibility: visible;
+        border-radius: rem(10);
+      }
+    }
+  }
+}

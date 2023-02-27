@@ -1,0 +1,32 @@
+@import "../../../../../../assets/styles/abstracts";
+
+.bottom{
+  background-color: $footer-bottom-bg;
+  padding: rem(45) 0;
+  &__img{
+    width: rem(150);
+  }
+  &__info{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    p{
+      color: white;
+      font-family: $ec-regular;
+      font-size: rem(12);
+    }
+  }
+
+  &__social{
+    height: 100%;
+    ul{
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: rem(25);
+      list-style-type: none;
+    }
+  }
+
+}

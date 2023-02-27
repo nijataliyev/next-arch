@@ -1,5 +1,6 @@
 import React from 'react';
 import HeaderComponent from "../../components/header/header.component";
+import FooterComponent from "../../components/footer/footer.component";
 import LoadingComponent from "../../../packages/RLoading/loading.component";
 import {useSelector} from "react-redux";
 
@@ -13,7 +14,7 @@ function RootLayoutComponent({children}:any) {
                 {loading && <LoadingComponent/>}
                 {children}
             </div>
-            {/*//Footer*/}
+            <FooterComponent/>
         </div>
     );
 }

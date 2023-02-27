@@ -3,7 +3,7 @@ import {useDispatch} from "react-redux";
 import {getBlogList} from "../../src/store/modules/blog-store/blog-action";
 
 const Blog = () => {
-    const dispatch = useDispatch();
+    const dispatch: any = useDispatch();
     const [searchParams, setSearchParams] = useState({page: 1, limit: 10})
 
     useEffect(() => {
