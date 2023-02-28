@@ -1,13 +1,97 @@
 @import "src/assets/styles/abstracts";
 
 .demo{
-
+  background-color: $modal-bg-color;
   &__items{
+    margin-top: rem(45);
+    border-radius: rem(10);
+    padding: rem(10);
+    background-color: white;
+    display: flex;
+    gap: rem(10);
+    align-items: center;
+    flex-wrap: wrap;
     &__img{
-
+      width: 45%;
+      width: rem(250);
+      margin-right: rem(10);
+      img{
+        width: 100%;
+        height: 100%;
+      }
     }
     &__content{
+      width: 45%;
+      h3{
+        font-family: $ec-bold;
+        font-size: rem(18);
+      }
+      p{
+        font-family: $ec-regular;
+        font-size: rem(14);
+      }
+    }
+  }
+  &__btn{
+    margin-top: rem(45);
+    margin-bottom: rem(45);
+    button{
+      margin: 0 auto;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      border: none;
+      outline: none;
+      background-color: $bg-btn;
+      border-radius: rem(10);
+      color: white;
+      font-family: $ec-bold;
+      font-size: (18);
+      padding: rem(11) rem(13);
+      width: rem(150);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &::before{
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+        z-index: -1;
+        content: '';
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: $main-color;
+        width: 0px;
+        transition: all 0.3s ease-in-out;
+        border-radius: rem(10);
+      }
+      &:hover::before {
+        width: 100%;
+        opacity: 1;
+        visibility: visible;
+        border-radius: rem(10);
+      }
+    }
+  }
+}
 
+@media only screen and (min-width: 320px) and (max-width: 1199px) {
+  .demo{
+    &__items{
+      box-sizing: border-box;
+      padding: rem(20);
+      &__img{
+        width: 100%;
+        height: rem(250);
+        img{
+          object-fit: cover;
+        }
+      }
+      &__content{
+        width: 100%;
+      }
     }
   }
 }

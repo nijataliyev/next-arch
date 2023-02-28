@@ -191,7 +191,7 @@ const ContactComponent = () => {
     useEffect(() => {
         let language: any = localStorage.getItem('lang');
         let dataList: any = data;
-        const langContent = dataList[language].contact
+        const langContent = dataList[language]?.contact
         setStaticContent(langContent)
         setLang(language);
 
@@ -256,7 +256,6 @@ const ContactComponent = () => {
                     required: {...prevInput.message.rules.required, errorText: langContent?.errorMessage},
                 }
             }
-            console.log(prevInput)
             prevInputState = {...prevInputState,inputs:{...prevInput}}
             return {
                 ...prevInputState

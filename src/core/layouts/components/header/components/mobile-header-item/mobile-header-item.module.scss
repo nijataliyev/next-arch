@@ -75,4 +75,18 @@
       color: $main-color;
     }
   }
+
+  &__socials{
+    margin-top: rem(45);
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    gap: rem(20);
+    li{
+      img{
+        width: rem(25);
+        height: rem(25);
+      }
+    }
+  }
 }

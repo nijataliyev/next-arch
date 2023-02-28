@@ -51,7 +51,7 @@ const LearningComponent = () => {
                                     <button onClick={() => scroolToElement('contact')}>{learning?.btnText}</button>
                                 </div>
                                 <div className={css.learning__btn__more} onClick={() => goDemo()}>
-                                    <Link href={"#"}>{learning?.more}</Link>
+                                    <Link href={"demo"}>{learning?.more}</Link>
                                     <FontAwesomeIcon icon={faArrowRight}/>
                                 </div>
                             </div>

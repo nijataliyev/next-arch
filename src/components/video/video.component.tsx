@@ -1,9 +1,19 @@
 import css from './video.module.scss';
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import videojs from "video.js";
 import 'video.js/dist/video-js.css';
+import * as data from '../../assets/db/db.json';
 const VideoComponent = () => {
     const videoRef: any = useRef(null);
+    const [lang,setLang] = useState('az');
+    const [staticContent,setStaticContent] = useState<any>(null);
+
+    useEffect(() => {
+        let dataList: any = data;
+        let language: any = localStorage.getItem('lang');
+        setLang(language);
+        setStaticContent(dataList[language]?.video)
+    },[lang])
 
     useEffect(() => {
         const player = videojs(videoRef.current, {
@@ -34,6 +44,9 @@ const VideoComponent = () => {
     },[videoRef])
     return (
         <div id='video' className={css.video}>
+            {/*<div className={css.video__wrapper}>*/}
+            {/*    <h2>{staticContent}</h2>*/}
+            {/*</div>*/}
             <div data-vjs-player>
                 <video ref={videoRef} className={'video-js'}></video>
             </div>

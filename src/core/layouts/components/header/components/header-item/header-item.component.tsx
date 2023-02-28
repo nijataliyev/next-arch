@@ -16,7 +16,7 @@ const HeaderItemComponent = ({nav}: any) => {
                 }
             })
         }
-    },[])
+    },[router])
 
     return (
         <ul className={module.header_item}>

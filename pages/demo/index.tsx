@@ -6,8 +6,10 @@ import DemoThree from '../../src/assets/images/demo3.svg';
 import DemoFour from '../../src/assets/images/demo4.svg';
 import * as data from '../../src/assets/db/db.json';
 import {useEffect, useState} from "react";
+import {useRouter} from "next/router";
 
 const Demo = () => {
+    const router: any = useRouter();
     const [lang,setLang] = useState('az');
     const [staticContent,setStaticContent] = useState<any>(null);
     useEffect(() => {
@@ -16,6 +18,10 @@ const Demo = () => {
         setStaticContent(dataList[language]?.demo)
         setLang(language)
     },[lang])
+
+    const goToHome = () => {
+        router.push('/')
+    }
 
     return (
         <div className={scss.demo}>
@@ -65,6 +71,13 @@ const Demo = () => {
                                 <h3>{staticContent?.demoFourTitle}</h3>
                                 <p>{staticContent?.demoFourText}</p>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-12">
+                        <div className={scss.demo__btn}>
+                            <button onClick={goToHome}>{staticContent?.demoBtn}</button>
                         </div>
                     </div>
                 </div>

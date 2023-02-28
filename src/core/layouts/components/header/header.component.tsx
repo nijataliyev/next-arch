@@ -16,10 +16,11 @@ import CallCenter from '../../../../assets/images/Call center-bro.svg';
 import {faPhone} from "@fortawesome/free-solid-svg-icons";
 import {useRouter} from "next/router";
 import MobileHeaderItemComponent from "./components/mobile-header-item/mobile-header-item.component";
+import {postContactList} from "../../../../store/modules/contact-store/contact-action";
 
 const HeaderComponent = () => {
     const router = useRouter();
-    const dispatch: any = useDispatch<AppDispatch>();
+    const dispatch: any = useDispatch();
     const [nav, setNav] = useState<any>([]);
     const [staticContent, setStaticContent] = useState<any>(null);
     const [staticModalText,setStaticModalText] = useState<any>(null);
@@ -82,16 +83,48 @@ const HeaderComponent = () => {
     const [openDropMenu,setOpenDropMenu] = useState(false);
 
     useEffect(() => {
-        let lang = localStorage.getItem('lang');
-        setLang(lang)
-    }, [lang])
-
-    useEffect(() => {
         let datas: any = data;
-        let lang: any = localStorage.getItem('lang');
-        setNav(datas[lang]?.header)
-        setStaticContent(datas[lang]?.modal)
-        setStaticModalText(datas[lang]?.modalContactButton)
+        let language: any = localStorage.getItem('lang');
+        setNav(datas[language]?.header)
+        setLang(language)
+        let langContent: any = datas[language]?.modal;
+        setStaticContent(datas[language]?.modal)
+        setStaticModalText(datas[language]?.modalContactButton)
+
+        setInputState((prev: any) => {
+            let prevInputState = {...prev}
+            let prevInput = prevInputState.inputs;
+
+            prevInput.fullName = {
+                ...prevInput.fullName,
+                rules: {
+                    ...prevInput.fullName.rules,
+                    required: {...prevInput.fullName.rules.required, errorText: langContent?.errorFullname}
+                }
+            }
+            prevInput.email = {
+                ...prevInput.email,
+                rules: {
+                    ...prevInput.email.rules,
+                    required: {...prevInput.email.rules.required, errorText: langContent?.errorEmailRequired},
+                    regexp: {...prevInput.email.rules.regexp, errorText: langContent?.errorEmailPattern}
+                }
+            }
+            prevInput.phone = {
+                ...prevInput.phone,
+                rules: {
+                    ...prevInput.phone.rules,
+                    required: {...prevInput.phone.rules.required, errorText: langContent?.errorPhoneRequired},
+                    regexp: {...prevInput.phone.rules.regexp, errorText: langContent?.errorPhonePattern}
+                }
+            }
+            prevInputState = {...prevInputState,inputs:{...prevInput}}
+
+            return {
+                ...prevInputState
+            }
+        })
+
     }, [lang])
 
     const handleSelect = useCallback((e: any) => {
@@ -119,6 +152,39 @@ const HeaderComponent = () => {
     const toGo = useCallback(() => {
         router.push('/')
     },[])
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+
+        if(inputState.formValid){
+            let requestBody = {
+                fullname: '',
+                email: '',
+                contact: ''
+            }
+
+            requestBody.fullname = inputState.inputs.fullName.value;
+            requestBody.email = inputState.inputs.email.value;
+            requestBody.contact = inputState.inputs.phone.value;
+
+            dispatch(postContactList(requestBody))
+            setShow(false)
+            setInputState((prev: any) => {
+                let prevInputState = {...prev};
+                let prevInput = prevInputState.inputs;
+                prevInput.fullName = {...prevInput.fullName, value: '', isValid: false, touched: false}
+                prevInput.email = {...prevInput.email, value: '', isValid: false, touched: false}
+                prevInput.phone = {...prevInput.phone, value: '', isValid: false, touched: false}
+                prevInputState = {...prevInputState, formValid: false,inputs:prevInput}
+
+                return {
+                    ...prevInputState
+                }
+            })
+        }else {
+            return false;
+        }
+    }
 
     return (
         <>
@@ -166,7 +232,7 @@ const HeaderComponent = () => {
                                     <p>{staticContent?.text}</p>
                                 </div>
                                 <div className={scss.header__form}>
-                                    <form action="">
+                                    <form action="" onSubmit={handleSubmit}>
                                         <div className={scss.header__form__content}>
                                             <label htmlFor="">{staticContent?.username}
                                                 <sup>
@@ -214,7 +280,7 @@ const HeaderComponent = () => {
                                             }
                                         </div>
                                         <div className={scss.header__form__btn}>
-                                            <button>{staticContent?.btn}</button>
+                                            <button className={!inputState.formValid ? scss.header__form__btn__btnError : scss.header__form__btn__btnSuccess}>{staticContent?.btn}</button>
                                         </div>
                                     </form>
                                 </div>

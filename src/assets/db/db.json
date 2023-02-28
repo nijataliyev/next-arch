@@ -1,5 +1,6 @@
 {
   "az": {
+    "successAlert": "Əməliyyat uğurlu oldu!",
     "header": [
       {
         "id": 1,
@@ -140,6 +141,7 @@
       }
     ],
     "demo": {
+      "navContact": "Kontakt",
       "demoOneTitle": "Ana səhifə",
       "demoOneText": "Hər bir istifadəçi tipi üçün fərqli formada yaranan ilkin hesabatlarını və digər vacib məlumatlarını görüp keçi etkiyi səhifə",
       "demoTwoTitle": "Hesabatlar",
@@ -147,10 +149,12 @@
       "demoThreeTitle": "Təlimlər",
       "demoThreeText": "Yaradılmış təlimlərin ümumi məlumatları, istifadəçiləri və digər məlumatları mövcud olan hissə",
       "demoFourTitle": "Təlim yarat",
-      "demoFourText": "Təlimlərin tam olaraq hazırlanması üçün nəzərdə tutulan generator"
+      "demoFourText": "Təlimlərin tam olaraq hazırlanması üçün nəzərdə tutulan generator",
+      "demoBtn": "Demo"
     }
   },
   "en": {
+    "successAlert": "The operation was successful!",
     "header": [
       {
         "id": 1,
@@ -291,6 +295,7 @@
       }
     ],
     "demo": {
+      "navContact": "Contact",
       "demoOneTitle": "Main page",
       "demoOneText": "A page where you can see and navigate to your initial reports and other important information, which are generated in a different form for each type of user",
       "demoTwoTitle": "Reports",
@@ -298,10 +303,12 @@
       "demoThreeTitle": "Trainings",
       "demoThreeText": "The section where the general information, users and other information of the created trainings are available",
       "demoFourTitle": "Create training",
-      "demoFourText": "A generator intended for the complete preparation of exercises"
+      "demoFourText": "A generator intended for the complete preparation of exercises",
+      "demoBtn": "Demo"
     }
   },
   "ru": {
+    "successAlert": "Операция прошла успешно!",
     "header": [
       {
         "id": 1,
@@ -442,6 +449,7 @@
       }
     ],
     "demo": {
+      "navContact": "Контакт",
       "demoOneTitle": "Главная страница",
       "demoOneText": "Страница, на которой вы можете просмотреть исходные отчеты и другую важную информацию и перейти к ней, которые создаются в разной форме для каждого типа пользователей.",
       "demoTwoTitle": "Отчеты",
@@ -449,7 +457,8 @@
       "demoThreeTitle": "Тренинги",
       "demoThreeText": "Раздел, где доступна общая информация, пользователи и другая информация о созданных тренингах",
       "demoFourTitle": "Создать обучение",
-      "demoFourText": "Генератор, предназначенный для полной подготовки упражнений"
+      "demoFourText": "Генератор, предназначенный для полной подготовки упражнений",
+      "demoBtn": "Демо"
     }
   }
 }
