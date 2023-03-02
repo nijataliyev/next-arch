@@ -9,15 +9,16 @@ import ElementPicBack from '../../assets/images/element-pic-back.svg';
 import GirlImage from '../../assets/images/Blog post-bro.svg';
 import Image from "next/image";
 const LearningComponent = () => {
-
+    const [lang,setLang] = useState('az');
     const [learning, setLearning] = useState<any>(null);
 
     useEffect(() => {
-        let lang: any = localStorage.getItem('lang');
+        let language: any = localStorage.getItem('lang');
         let dataList: any = data;
-        setLearning(dataList[lang]?.learning)
+        setLearning(dataList[language]?.learning)
+        setLang(language);
 
-    },[])
+    },[lang])
 
     const scroolToElement = useCallback((id: string) => {
         console.log('scrool learning')

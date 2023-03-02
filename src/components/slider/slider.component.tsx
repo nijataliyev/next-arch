@@ -10,6 +10,9 @@ import 'swiper/css';
 import "swiper/css/effect-flip";
 import Image from "next/image";
 import {useEffect, useState} from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const SliderComponent = () => {
     const [lang,setLang] = useState<any>('az');
@@ -39,6 +42,88 @@ const SliderComponent = () => {
         setSliderList(myList);
     },[lang])
 
+    const settings = {
+        dots: false,
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        spaceBetween: 10,
+        autoplay: true,
+        arrows: false,
+        speed: 2000,
+        autoplaySpeed: 2000,
+        fade: true,
+        pauseOnHover: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: false
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    infinite: true,
+                }
+            }
+        ]
+        // cssEase: "linear"
+    };
+    const settingsTwo = {
+        dots: false,
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        spaceBetween: 10,
+        autoplay: true,
+        arrows: false,
+        speed: 2000,
+        autoplaySpeed: 2000,
+        pauseOnHover: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: false
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    infinite: true,
+                }
+            }
+        ]
+        // cssEase: "linear"
+    };
+
 
     return (
         <div className={css.slider}>
@@ -47,33 +132,44 @@ const SliderComponent = () => {
                     <div className="col-md-12 col-lg-3">
                         <div className={css.slider__content}>
                             <div className={css.slider__content__inner}>
-                                <Swiper className={css.slider__content__inner__swiper}
-                                        effect={'flip'}
-                                        modules={[Autoplay, EffectFlip]} slidesPerView={1}
-                                        speed={1000} loop={true}
-                                        autoplay={{delay: 1000}}>
+                                <Slider {...settings}>
                                     {
-                                        sliderList && sliderList?.map((listItem: any,index: number) => {
+                                        sliderList && sliderList?.map((listItem: any, index: number) => {
                                             return (
-                                                <SwiperSlide key={index} className={css.slider__content__inner__swiper__slide}>
+                                                <>
                                                     <Image src={listItem.link} alt={'lorexOne'}/>
-                                                </SwiperSlide>
+                                                </>
                                             )
                                         })
                                     }
-                                    {/*<SwiperSlide className={css.slider__content__inner__swiper__slide}>*/}
-                                    {/*    <Image src={LorexOne} alt={'lorexOne'}/>*/}
-                                    {/*</SwiperSlide>*/}
-                                    {/*<SwiperSlide className={css.slider__content__inner__swiper__slide}>*/}
-                                    {/*    <Image src={LorexTwo} alt={'lorexTwo'}/>*/}
-                                    {/*</SwiperSlide>*/}
-                                    {/*<SwiperSlide className={css.slider__content__inner__swiper__slide}>*/}
-                                    {/*    <Image src={LorexThree} alt={'lorexThree'}/>*/}
-                                    {/*</SwiperSlide>*/}
-                                    {/*<SwiperSlide className={css.slider__content__inner__swiper__slide}>*/}
-                                    {/*    <Image src={LorexFour} alt={'lorexFour'}/>*/}
-                                    {/*</SwiperSlide>*/}
-                                </Swiper>
+                                </Slider>
+                                {/*<Swiper className={css.slider__content__inner__swiper}*/}
+                                {/*        effect={'flip'}*/}
+                                {/*        modules={[Autoplay, EffectFlip]} slidesPerView={1}*/}
+                                {/*        speed={1000} loop={true}*/}
+                                {/*        autoplay={{delay: 1000}}>*/}
+                                {/*    {*/}
+                                {/*        sliderList && sliderList?.map((listItem: any,index: number) => {*/}
+                                {/*            return (*/}
+                                {/*                <SwiperSlide key={index} className={css.slider__content__inner__swiper__slide}>*/}
+                                {/*                    <Image src={listItem.link} alt={'lorexOne'}/>*/}
+                                {/*                </SwiperSlide>*/}
+                                {/*            )*/}
+                                {/*        })*/}
+                                {/*    }*/}
+                                {/*    /!*<SwiperSlide className={css.slider__content__inner__swiper__slide}>*!/*/}
+                                {/*    /!*    <Image src={LorexOne} alt={'lorexOne'}/>*!/*/}
+                                {/*    /!*</SwiperSlide>*!/*/}
+                                {/*    /!*<SwiperSlide className={css.slider__content__inner__swiper__slide}>*!/*/}
+                                {/*    /!*    <Image src={LorexTwo} alt={'lorexTwo'}/>*!/*/}
+                                {/*    /!*</SwiperSlide>*!/*/}
+                                {/*    /!*<SwiperSlide className={css.slider__content__inner__swiper__slide}>*!/*/}
+                                {/*    /!*    <Image src={LorexThree} alt={'lorexThree'}/>*!/*/}
+                                {/*    /!*</SwiperSlide>*!/*/}
+                                {/*    /!*<SwiperSlide className={css.slider__content__inner__swiper__slide}>*!/*/}
+                                {/*    /!*    <Image src={LorexFour} alt={'lorexFour'}/>*!/*/}
+                                {/*    /!*</SwiperSlide>*!/*/}
+                                {/*</Swiper>*/}
                             </div>
                             <div className={css.slider__content__first}>
                                 <Image src={LorexOne} alt={'lorexOne'}/>
@@ -91,18 +187,30 @@ const SliderComponent = () => {
                     </div>
                     <div className="col-md-12 col-lg-9">
                         <div className={css.slider__content__text}>
-                            <Swiper modules={[Autoplay]} slidesPerView={1} speed={1000} loop={true} autoplay={{delay: 1000, disableOnInteraction: false}}>
+                            <Slider {...settingsTwo}>
                                 {
                                     sliderList && sliderList?.map((item: any, index: number) => {
                                         return (
-                                            <SwiperSlide key={index}>
+                                            <div key={index}>
                                                 <h1>{item.title}</h1>
                                                 <p>{item.text}</p>
-                                            </SwiperSlide>
+                                            </div>
                                         )
                                     })
                                 }
-                            </Swiper>
+                            </Slider>
+                            {/*<Swiper modules={[Autoplay]} slidesPerView={1} speed={1000} loop={true} autoplay={{delay: 1000, disableOnInteraction: false}}>*/}
+                            {/*    {*/}
+                            {/*        sliderList && sliderList?.map((item: any, index: number) => {*/}
+                            {/*            return (*/}
+                            {/*                <SwiperSlide key={index}>*/}
+                            {/*                    <h1>{item.title}</h1>*/}
+                            {/*                    <p>{item.text}</p>*/}
+                            {/*                </SwiperSlide>*/}
+                            {/*            )*/}
+                            {/*        })*/}
+                            {/*    }*/}
+                            {/*</Swiper>*/}
                         </div>
                     </div>
                 </div>

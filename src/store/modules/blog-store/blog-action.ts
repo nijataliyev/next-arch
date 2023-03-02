@@ -2,7 +2,7 @@ import {BlogService} from "../../../core/modules/services/blog-service/blog-serv
 import {container} from "tsyringe";
 import {Dispatch} from "redux";
 import {BlogCategoriesModel} from "../../../core/modules/models/blog-categories-model/blog-categories.model";
-import {getBlogCategoriesSuccess, getMobPrefixSuccess} from "./blog-reducers";
+import {getBlogCategoriesSuccess, getBlogSuccess, getMobPrefixSuccess} from "./blog-reducers";
 import {MobilePrefixModel} from "../../../core/modules/models/mob-prefix-model/mobile-prefix.model";
 
 const service = container.resolve(BlogService);
@@ -11,6 +11,7 @@ export const getBlogList = (params: any) => (
     (dispatch: Dispatch<any>) => {
         return service.getBlogList(params).then((res) => {
             console.log(res);
+            dispatch(getBlogSuccess(res))
         }).catch((err) => {
             console.log(err);
         })

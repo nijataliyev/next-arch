@@ -16,7 +16,7 @@ export default function Home() {
         <div>
             <LearningComponent></LearningComponent>
             <VideoComponent></VideoComponent>
-            <SliderComponent></SliderComponent>
+            {/*<SliderComponent></SliderComponent>*/}
             <PlanningComponent></PlanningComponent>
             <PartnersComponent></PartnersComponent>
             <ContactComponent></ContactComponent>

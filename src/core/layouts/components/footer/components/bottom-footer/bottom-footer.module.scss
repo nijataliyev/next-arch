@@ -2,7 +2,7 @@
 
 .bottom{
   background-color: $footer-bottom-bg;
-  padding: rem(45) 0;
+  padding: rem(15) 0;
   &__img{
     width: rem(150);
   }
@@ -26,6 +26,13 @@
       justify-content: flex-end;
       gap: rem(25);
       list-style-type: none;
+      li{
+        cursor: pointer;
+        img{
+          width: rem(15);
+          height: rem(15);
+        }
+      }
     }
   }
 

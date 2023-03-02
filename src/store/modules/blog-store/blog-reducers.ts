@@ -3,6 +3,7 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState: IBlogState = {
     blogs: [],
+    blogCount: null,
     blogCategories: [],
     mobPrefix: []
 }
@@ -12,11 +13,11 @@ export const blogSlice = createSlice({
     initialState,
     reducers: {
         getBlogCategoriesSuccess(state,action){
-            console.log(action)
             state.blogCategories = action.payload;
         },
         getBlogSuccess(state, action){
-            state.blogs = action.payload;
+            state.blogs = action.payload.rows;
+            state.blogCount = action.payload.count;
         },
         getMobPrefixSuccess(state,action){
             state.mobPrefix = action.payload;
