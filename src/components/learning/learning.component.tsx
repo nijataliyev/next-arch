@@ -20,7 +20,7 @@ const LearningComponent = () => {
     },[])
 
     const scroolToElement = useCallback((id: string) => {
-        console.log(id)
+        console.log('scrool learning')
         if(id && id.length){
             if (typeof window !== "undefined") {
                 let element = document.getElementById(id);

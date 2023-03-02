@@ -82,6 +82,82 @@
           padding: rem(10) rem(17);
           border-radius: rem(10);
         }
+        &__btnError{
+          cursor: not-allowed;
+          position: relative;
+          z-index: 1;
+          border: none;
+          outline: none;
+          background-color: $bg-btn;
+          border-radius: rem(10);
+          color: white;
+          font-family: $ec-bold;
+          font-size: (18);
+          padding: rem(18) rem(90);
+          width: rem(150);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          &::before{
+            position: absolute;
+            opacity: 0;
+            visibility: hidden;
+            z-index: -1;
+            content: '';
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: $main-color;
+            width: 0px;
+            transition: all 0.3s ease-in-out;
+            border-radius: rem(10);
+          }
+          &:hover::before {
+            width: 100%;
+            opacity: 1;
+            visibility: visible;
+            border-radius: rem(10);
+          }
+        }
+        &__btnSuccess{
+          cursor: pointer;
+          position: relative;
+          z-index: 1;
+          border: none;
+          outline: none;
+          background-color: $bg-btn;
+          border-radius: rem(10);
+          color: white;
+          font-family: $ec-bold;
+          font-size: (18);
+          padding: rem(18) rem(90);
+          width: rem(150);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          &::before{
+            position: absolute;
+            opacity: 0;
+            visibility: hidden;
+            z-index: -1;
+            content: '';
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: $main-color;
+            width: 0px;
+            transition: all 0.3s ease-in-out;
+            border-radius: rem(10);
+          }
+          &:hover::before {
+            width: 100%;
+            opacity: 1;
+            visibility: visible;
+            border-radius: rem(10);
+          }
+        }
         &__btn{
           cursor: pointer;
           position: relative;

@@ -2,6 +2,7 @@ import axios from "axios";
 import store from "../../store";
 import {useAppDispatch} from "../../hooks/redux";
 import {setLoader} from "../../store/modules/public-store/public-actions";
+import Swal from "sweetalert2";
 import {useEffect, useState} from "react";
 
 export const Interceptor = () => {
@@ -35,6 +36,17 @@ export const Interceptor = () => {
         const loading = store.getState().publicReducers.loading;
         // @ts-ignore
         loading && store.dispatch(setLoader(false));
+        if(error.response){
+            switch (error.response.status){
+                case 500:
+                    Swal.fire({
+                        icon: 'error'
+                    })
+                break;
+                default:
+                    break;
+            }
+        }
         // dispatch(setLoader(false));
         return Promise.reject(error);
     })

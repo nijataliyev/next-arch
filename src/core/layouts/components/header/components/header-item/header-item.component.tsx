@@ -8,6 +8,7 @@ const HeaderItemComponent = ({nav}: any) => {
     const router = useRouter();
 
     const scroolElement = useCallback((str: any) => {
+        console.log('scrool header item')
         if(str && str.length){
             router.replace('/').then(() => {
                 let element: any = document.querySelector("#"+str);
@@ -16,7 +17,7 @@ const HeaderItemComponent = ({nav}: any) => {
                 }
             })
         }
-    },[router])
+    },[])
 
     return (
         <ul className={module.header_item}>

@@ -41,7 +41,7 @@ const TopFooterComponent = () => {
     },[lang])
 
     const scoolElement = useCallback((str: any) => {
-        console.log(str)
+        console.log('scrool top footer')
         if(str && str.length){
             router.replace('/').then(() => {
                 let element: any = document.querySelector("#"+str);
@@ -69,7 +69,7 @@ const TopFooterComponent = () => {
         <div className={scss.top}>
             <div className={'container'}>
                 <div className="row">
-                    <div className="col-lg-3">
+                    <div className="col-md-6 col-lg-3">
                         <div className={scss.top__left}>
                             <h3>{staticContent?.commonHeading}</h3>
                             <ul className={scss.top__nav}>
@@ -89,7 +89,7 @@ const TopFooterComponent = () => {
                             </ul>
                         </div>
                     </div>
-                    <div className="col-lg-4">
+                    <div className="col-md-6 col-lg-4">
                         <div className={scss.top__middle}>
                             <h3>{staticContent?.contactHeading}</h3>
                             <div className={scss.top__info}>
@@ -106,7 +106,7 @@ const TopFooterComponent = () => {
                             </div>
                         </div>
                     </div>
-                    <div className={'col-lg-5'}>
+                    <div className={'col-md-12 col-lg-5'}>
                         <div className={scss.top__right}>
                             <h3>{staticContent?.subscribeHeading}</h3>
                             <p>{staticContent?.text}</p>

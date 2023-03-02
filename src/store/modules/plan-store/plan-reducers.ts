@@ -2,7 +2,8 @@ import {IPlanTypes} from "./plan-types";
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState: IPlanTypes = {
-    plans: []
+    plans: [],
+    planId: null
 }
 
 export const planSlice = createSlice({
@@ -11,10 +12,13 @@ export const planSlice = createSlice({
     reducers: {
         getPlansSuccess(state, action){
             state.plans = action.payload;
+        },
+        setPlanIdSuccess(state, action){
+            state.planId = action.payload;
         }
     }
 })
 
 export default planSlice.reducer;
 
-export const {getPlansSuccess} = planSlice.actions;
+export const {getPlansSuccess,setPlanIdSuccess} = planSlice.actions;

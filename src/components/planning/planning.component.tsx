@@ -2,7 +2,7 @@ import css from './planning.module.scss';
 import {useCallback, useEffect, useState} from "react";
 import Image from "next/image";
 import {useDispatch, useSelector} from "react-redux";
-import {getPlansList} from "../../store/modules/plan-store/plan-actions";
+import {getPlansList, setPlanId} from "../../store/modules/plan-store/plan-actions";
 import PlanLeftImage from '../../assets/images/plan-left.svg';
 import PlanNumImage from '../../assets/images/plan-num.svg';
 import PlanManImage from '../../assets/images/plan-man.svg';
@@ -25,9 +25,11 @@ const PlanningComponent = () => {
 
     },[lang])
 
-    const scroolTo = useCallback((id: string) => {
+    const scroolTo = useCallback((item: any,id: string) => {
+        console.log('scrool planning')
         if(id && id.length){
             if (typeof window !== "undefined") {
+                dispatch(setPlanId(item))
                 let element = document.getElementById(id);
                 if(element){
                     element.scrollIntoView({behavior: 'smooth'})
@@ -86,10 +88,10 @@ const PlanningComponent = () => {
                                                     <pre>{item.priceUnit}</pre>
                                                 </div>
                                                 <div className={css.plan__right__items__mobile__mob}>
-                                                    <button onClick={() => scroolTo('contact')}>{planList?.btn}</button>
+                                                    <button onClick={() => scroolTo(item,'contact')}>{planList?.btn}</button>
                                                 </div>
                                             </div>
-                                            <button onClick={() => scroolTo('contact')} className={css.plan__right__items__btn}>{planList?.btn}</button>
+                                            <button onClick={() => scroolTo(item,'contact')} className={css.plan__right__items__btn}>{planList?.btn}</button>
                                         </div>
                                     )
                                 })

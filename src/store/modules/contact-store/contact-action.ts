@@ -15,7 +15,24 @@ let staticContent: any = dataList[language]?.successAlert;
 export const postContactList = (data: any) => (
     (dispatch: Dispatch<any>) => {
         return service.postContact(data).then((res) => {
-            console.log(res.status)
+            if(res.status === 201){
+                Swal.fire({
+                    title: staticContent,
+                    position:'top',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        }).catch((err) => {
+            return Promise.reject(err);
+        })
+    }
+)
+
+export const postScheduleDemoList = (data: any) => (
+    (dispatch: Dispatch<any>) => {
+        return service.postScheduleDemo(data).then((res) =>{
             if(res.status === 201){
                 Swal.fire({
                     title: staticContent,

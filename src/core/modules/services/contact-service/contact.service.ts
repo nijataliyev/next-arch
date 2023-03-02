@@ -5,7 +5,10 @@ import {API} from "../../../config/api.config";
 @injectable()
 export class ContactService {
     postContact(data: any):Promise<any> {
-        console.log(data)
         return axios.post(API.contactRequest, {...data})
+    }
+
+    postScheduleDemo(data: any):Promise<any> {
+        return axios.post(API.scheduleDemo, {...data})
     }
 }

@@ -11,9 +11,11 @@ import Image from 'next/image';
 import FirstImg from '../../assets/images/freepik--background-simple--inject-46.svg';
 import SecondImg from '../../assets/images/computer.svg';
 import ThirdImg from '../../assets/images/freepik--Hands--inject-46.svg';
+import {postScheduleDemoList} from "../../store/modules/contact-store/contact-action";
 
 const ContactComponent = () => {
     const dispatch: any = useDispatch();
+    const planId = useSelector((state: any) => state.planReducers.planId)
     const blogCategoriesList = useSelector((state: any) => state.blogReducers.blogCategories)
     const mobPrefix = useSelector((state: any) => state.blogReducers.mobPrefix)
     const plansList = useSelector((state: any) => state.planReducers.plans)
@@ -61,15 +63,15 @@ const ContactComponent = () => {
                 label: 'Tip',
                 value: 'AZ',
                 rules: {
-                    required: {
-                        value: true,
-                        errorText: `Öləkə əlavə edin`
-                    },
+                    // required: {
+                    //     value: true,
+                    //     errorText: `Öləkə əlavə edin`
+                    // },
                 },
                 options: [],
                 currentErrTxt: '',
-                touched: false,
-                isValid: false
+                touched: true,
+                isValid: true
             },
             phone: {
                 type: 'text',
@@ -189,6 +191,20 @@ const ContactComponent = () => {
     }, [mobPrefix])
 
     useEffect(() => {
+        if(planId && planId?.id){
+            setInputState((prev: any) => {
+                let prevInputState: any = {...prev};
+                let prevInput: any = prev.inputs;
+                prevInput.plan = {...prevInput.plan, value: planId?.id.toString(), isValid: true}
+                prevInputState = {...prevInputState, inputs:{...prevInput}}
+                return {
+                    ...prevInputState
+                }
+            })
+        }
+    },[planId])
+
+    useEffect(() => {
         let language: any = localStorage.getItem('lang');
         let dataList: any = data;
         const langContent = dataList[language]?.contact
@@ -213,13 +229,13 @@ const ContactComponent = () => {
                     regexp: {...prevInput.email.rules.regexp, errorText: langContent?.errorEmailPattern}
                 }
             }
-            prevInput.country = {
-                ...prevInput.country,
-                rules: {
-                    ...prevInput.country.rules,
-                    required: {...prevInput.country.rules.required, errorText: langContent?.errorCountryRequired},
-                }
-            }
+            // prevInput.country = {
+            //     ...prevInput.country,
+            //     rules: {
+            //         ...prevInput.country.rules,
+            //         required: {...prevInput.country.rules.required, errorText: langContent?.errorCountryRequired},
+            //     }
+            // }
             prevInput.phone = {
                 ...prevInput.phone,
                 rules: {
@@ -265,13 +281,72 @@ const ContactComponent = () => {
 
     const handleInputChange = useCallback((val: string, inputName: string) => {
         changeInputValue({target: {value: val}}, inputName, inputState.inputs, setInputState)
-    }, [])
+    }, [inputState.inputs])
 
     const onSelect = (code: any) => {
         setSelect(code)
         if (mobPrefix) {
             let selectedItem = mobPrefix.find((item: any) => item.code === code)
             setPrefix(selectedItem.dialCode)
+        }
+    }
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        if(inputState.formValid){
+            let requestBody = {
+                fullname: '',
+                email: '',
+                contact: '',
+                company: '',
+                comment: '',
+                businessSphereId: 0,
+                planId: 0
+            }
+
+            let dialCode: string = '';
+
+
+            requestBody.fullname = inputState.inputs.fullName.value;
+            requestBody.email = inputState.inputs.email.value;
+            requestBody.contact = prefix ?  (prefix+inputState.inputs.phone.value) : ('+994'+inputState.inputs.phone.value);
+            requestBody.company = inputState.inputs.company.value;
+            requestBody.comment = inputState.inputs.message.value;
+            requestBody.businessSphereId = parseInt(inputState.inputs.profession.value);
+            requestBody.planId = parseInt(inputState.inputs.plan.value);
+
+            dispatch(postScheduleDemoList(requestBody))
+            setInputState((prev: any) => {
+                let prevInputState: any = {...prev};
+                let prevInput: any = prevInputState.inputs;
+                prevInput.fullName = {
+                    ...prevInput.fullName,value: ''
+                }
+                prevInput.email = {
+                    ...prevInput.email,value: ''
+                }
+                prevInput.phone = {
+                    ...prevInput.phone,value: ''
+                }
+                prevInput.company = {
+                    ...prevInput.company,value: ''
+                }
+                prevInput.message = {
+                    ...prevInput.message,value: ''
+                }
+                prevInput.profession = {
+                    ...prevInput.profession,value: ''
+                }
+                prevInput.plan = {
+                    ...prevInput.plan,value: ''
+                }
+                prevInputState = {...prevInputState, inputs:{...prevInput},formValid: false}
+                return {
+                    ...prevInputState
+                }
+            })
+        }else {
+            return false;
         }
     }
 
@@ -284,7 +359,7 @@ const ContactComponent = () => {
                             <div className={css.contact__left__title}>
                                 <h3>{staticContent?.title}</h3>
                             </div>
-                            <form action="">
+                            <form action="" onSubmit={handleSubmit}>
                                 <div className={css.contact__left__form}>
                                     <div className={css.contact__left__form__items}>
                                         <div className={css.contact__left__form__items__label}>
@@ -295,8 +370,9 @@ const ContactComponent = () => {
                                             <input type={inputState.inputs.fullName.type}
                                                    onChange={(e: any) => handleInputChange(e.target.value, 'fullName')}
                                                    value={inputState.inputs.fullName.value}/>
-                                            <span
-                                                className={css.contact__left__error}>{inputState.inputs.fullName.currentErrTxt}</span>
+                                            {
+                                                !inputState.inputs.fullName.isValid && inputState.inputs.fullName.touched ? <span className={css.contact__left__error}>{inputState.inputs.fullName.currentErrTxt}</span> : null
+                                            }
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
@@ -308,8 +384,10 @@ const ContactComponent = () => {
                                             <input type={inputState.inputs.email.type}
                                                    onChange={(e: any) => handleInputChange(e.target.value, 'email')}
                                                    value={inputState.inputs.email.value}/>
-                                            <span
-                                                className={css.contact__left__error}>{inputState.inputs.email.currentErrTxt}</span>
+                                            {
+                                                !inputState.inputs.email.isValid && inputState.inputs.email.touched ? <span
+                                                    className={css.contact__left__error}>{inputState.inputs.email.currentErrTxt}</span> : null
+                                            }
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
@@ -325,8 +403,10 @@ const ContactComponent = () => {
                                                               }} selected={inputState.inputs.country.value}
                                                               countries={[...flags]}/>
                                             {/*<input type={inputState.inputs.country.type} onChange={(e: any) => handleInputChange(e.target.value, 'country')}/>*/}
-                                            <span
-                                                className={css.contact__left__error}>{inputState.inputs.country.currentErrTxt}</span>
+                                            {
+                                                !inputState.inputs.country.isValid && inputState.inputs.country.touched ? <span
+                                                    className={css.contact__left__error}>{inputState.inputs.country.currentErrTxt}</span> : null
+                                            }
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
@@ -341,8 +421,10 @@ const ContactComponent = () => {
                                                    value={inputState.inputs.phone.value}
                                                    className={css.contact__left__form__items__label__pre} type="text"
                                                    placeholder={'XXX-XX-XX'}/>
-                                            <span
-                                                className={css.contact__left__error}>{inputState.inputs.phone.currentErrTxt}</span>
+                                            {
+                                                !inputState.inputs.phone.isValid && inputState.inputs.phone.touched ? <span
+                                                    className={css.contact__left__error}>{inputState.inputs.phone.currentErrTxt}</span> : null
+                                            }
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
@@ -354,8 +436,10 @@ const ContactComponent = () => {
                                             <input type="text"
                                                    onChange={(e: any) => handleInputChange(e.target.value, 'company')}
                                                    value={inputState.inputs.company.value}/>
-                                            <span
-                                                className={css.contact__left__error}>{inputState.inputs.company.currentErrTxt}</span>
+                                            {
+                                                !inputState.inputs.company.isValid && inputState.inputs.company.touched ? <span
+                                                    className={css.contact__left__error}>{inputState.inputs.company.currentErrTxt}</span> : null
+                                            }
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
@@ -374,8 +458,10 @@ const ContactComponent = () => {
                                                     })
                                                 }
                                             </select>
-                                            <span
-                                                className={css.contact__left__error}>{inputState.inputs.profession.currentErrTxt}</span>
+                                            {
+                                                !inputState.inputs.profession.isValid && inputState.inputs.profession.touched ? <span
+                                                    className={css.contact__left__error}>{inputState.inputs.profession.currentErrTxt}</span> : null
+                                            }
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
@@ -385,17 +471,19 @@ const ContactComponent = () => {
                                                 <FontAwesomeIcon icon={faStar}/>
                                             </sup>
                                             <select onChange={(e: any) => handleInputChange(e.target.value, 'plan')}>
-                                                <option selected={true} disabled>Seçin</option>
+                                                <option disabled selected>Seçin</option>
                                                 {
                                                     plansList.map((plans: any, index: number) => {
                                                         return (
-                                                            <option key={index} value={plans.id}>{plans.title}</option>
+                                                            <option key={index} selected={plans.id===planId?.id} value={plans.id}>{plans.title}</option>
                                                         )
                                                     })
                                                 }
                                             </select>
-                                            <span
-                                                className={css.contact__left__error}>{inputState.inputs.plan.currentErrTxt}</span>
+                                            {
+                                                !inputState.inputs.plan.isValid && inputState.inputs.plan.touched ? <span
+                                                    className={css.contact__left__error}>{inputState.inputs.plan.currentErrTxt}</span> : null
+                                            }
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
@@ -404,15 +492,17 @@ const ContactComponent = () => {
                                             <sup>
                                                 <FontAwesomeIcon icon={faStar}/>
                                             </sup>
-                                            <textarea
+                                            <textarea value={inputState.inputs.message.value}
                                                 onChange={(e: any) => handleInputChange(e.target.value, 'message')}></textarea>
-                                            <span
-                                                className={css.contact__left__error}>{inputState.inputs.message.currentErrTxt}</span>
+                                            {
+                                                !inputState.inputs.message.isValid && inputState.inputs.message.touched ? <span
+                                                    className={css.contact__left__error}>{inputState.inputs.message.currentErrTxt}</span> : null
+                                            }
                                         </div>
                                     </div>
                                     <div className={css.contact__left__form__items}>
                                         <button
-                                            className={css.contact__left__form__items__btn}>{staticContent?.btn}</button>
+                                            className={!inputState.formValid ? css.contact__left__form__items__btnError : css.contact__left__form__items__btnSuccess}>{staticContent?.btn}</button>
                                     </div>
                                 </div>
                             </form>

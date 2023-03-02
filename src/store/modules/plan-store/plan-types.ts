@@ -1,3 +1,4 @@
 export interface IPlanTypes{
-    plans: []
+    plans: [],
+    planId: any
 }

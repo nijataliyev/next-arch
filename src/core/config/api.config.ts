@@ -7,5 +7,6 @@ export const API = {
     partners: environment + 'partners',
     blogCategories: environment + 'blog-categories',
     mobPrefix: environment + 'mob-prefixes',
-    contactRequest: environment + 'contact-request'
+    contactRequest: environment + 'contact-request',
+    scheduleDemo: environment + 'schedule-demo'
 }

@@ -37,7 +37,7 @@ const MobileHeaderItemComponent = ({showModal, setModalDropShow, nav}: any) => {
     },[lang])
 
     const scroolElement = (routeName: string) => {
-        console.log(routeName)
+        console.log('scrool mobile')
         if(routeName && routeName.length){
             router.replace('/').then(() => {
                 let element: any = document.querySelector("#"+routeName);
