@@ -4,16 +4,23 @@ import {Dispatch} from "redux";
 import {BlogCategoriesModel} from "../../../core/modules/models/blog-categories-model/blog-categories.model";
 import {getBlogCategoriesSuccess, getBlogSuccess, getMobPrefixSuccess} from "./blog-reducers";
 import {MobilePrefixModel} from "../../../core/modules/models/mob-prefix-model/mobile-prefix.model";
+import {BlogModel} from "../../../core/modules/models/blog-model/blog.model";
 
 const service = container.resolve(BlogService);
 
 export const getBlogList = (params: any) => (
     (dispatch: Dispatch<any>) => {
         return service.getBlogList(params).then((res) => {
-            console.log(res);
-            dispatch(getBlogSuccess(res))
+            return {
+                count: res.count,
+                rows: res.rows.map((items: any) => {
+                    return new BlogModel(items)
+                })
+            }
+        }).then((result) => {
+            dispatch(getBlogSuccess(result))
         }).catch((err) => {
-            console.log(err);
+            return Promise.reject(err);
         })
     }
 )
