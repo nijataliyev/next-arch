@@ -5,16 +5,18 @@
   flex-direction: column;
   gap: rem(10);
   &__list{
-    height: rem(250);
+    //height: rem(250);
     background-color: $white;
     border-radius: rem(15);
     padding: rem(10);
     display: flex;
+    flex-direction: row;
     gap: rem(10);
 
   }
   &__img{
-    width: rem(370);
+    width: 45%;
+    height: rem(185);
     border-radius: rem(15);
     img{
       border-radius: rem(15);
@@ -25,7 +27,7 @@
   }
   &__title{
     h4{
-      margin-top: 0;
+      margin: 0;
       line-height: rem(25);
       font-family: $ec-bold;
       font-size: rem(18);
@@ -33,11 +35,12 @@
   }
   &__category{
     display: flex;
+    flex-wrap: wrap;
     gap: rem(10);
+    margin-top: rem(10);
     span{
       margin: 0;
       font-family: $ec-bold;
-      display: inline-block;
     }
     ul{
       list-style-type: none;
@@ -50,8 +53,55 @@
       }
     }
   }
+  &__tag{
+    margin-top: rem(10);
+    ul{
+      list-style-type: none;
+      padding-left: 0;
+      display: flex;
+      flex-wrap: wrap;
+      //gap: rem(10);
+      li{
+        background-color: $modal-bg-color;
+        border: 1px solid $tag-border;
+        border-radius: rem(25);
+        padding: rem(5) rem(10);
+        margin-right: rem(5);
+        margin-top: rem(5);
+      }
+    }
+  }
+  &__info{
+    margin-top: rem(10);
+    display: flex;
+    gap: rem(25);
+  }
+  &__date{
+    display: flex;
+    gap: rem(5);
+    align-items: center;
+    img{
+      width: rem(15);
+      height: rem(15);
+    }
+    span{
+      font-family: $ec-regular;
+    }
+  }
+  &__eye{
+    display: flex;
+    gap: rem(5);
+    align-items: center;
+    img{
+      width: rem(15);
+      height: rem(15);
+    }
+    span{
+      font-family: $ec-regular;
+    }
+  }
   &__content{
-
+    width: 55%;
   }
   &__pagination{
     margin: rem(30) 0;
@@ -61,15 +111,18 @@
     list-style-type: none;
     padding-left: 0;
     &__active{
-      border-radius: rem(15);
+      border-radius: rem(15) !important;
       padding: rem(15) rem(20);
       background-color: $main-color;
+      border: 1px solid $main-color !important;
       color: $white;
     }
     &__btn{
       cursor: pointer;
       width: 45px;
       height: 45px;
+      border: 1px solid $tag-border;
+      border-radius: rem(15);
       a{
         display: flex;
         align-items: center;
@@ -83,6 +136,7 @@
         width: 45px;
         height: 45px;
         background-color: $main-color;
+        border: 1px solid $main-color;
         color: $white;
       }
     }

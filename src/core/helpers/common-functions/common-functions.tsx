@@ -1,12 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { ChangeEvent, SetStateAction } from 'react';
+import JWT from "jwt-simple";
 
-// export const encodeURL = (payload: any) => {
-//   return JWT.encode(payload, 'xxx')
-// }
-// export const decodeURL = (payload: string) => {
-//   return JWT.decode(payload, 'xxx')
-// }
+export const encodeURL = (payload: any) => {
+  return JWT.encode(payload, 'xxx')
+}
+export const decodeURL = (payload: string) => {
+  return JWT.decode(payload, 'xxx')
+}
 
 export const convertToBase64 = (file: any) => {
   return new Promise(async (resolve, reject) => {

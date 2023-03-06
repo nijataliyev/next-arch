@@ -3,4 +3,23 @@
 .child{
   background-color: $modal-bg-color;
   padding-top: rem(45);
+  &__inp{
+    position: relative;
+    input{
+      width: 100%;
+      padding: rem(12) rem(45) rem(12) rem(10);
+      border-radius: rem(10);
+      border: 1px solid $tag-border;
+      outline: none;
+      font-family: $ec-regular;
+      font-size: rem(16);
+    }
+    svg{
+      width: rem(23);
+      position: absolute;
+      right: rem(15);
+      top: rem(12);
+      color: $form-text-color;
+    }
+  }
 }

@@ -9,21 +9,48 @@ import Link from "next/link";
 import {useRouter} from "next/router";
 import Image from "next/image";
 import EmptyIcon from '../../src/assets/images/empty.jpg';
+import CalendarIcon from '../../src/assets/images/FontAwsome (calendar-day).svg';
+import EyeIcon from '../../src/assets/images/FontAwsome (eye).svg';
 import * as data from '../../src/assets/db/db.json';
 import {ICategories, ITags} from "../../src/core/modules/models/blog-model/types/blog";
+import {decodeURL, encodeURL} from "../../src/core/helpers/common-functions/common-functions";
+import {useLocation} from "react-router";
 
 const Blog = ({Component, pageProps}: AppProps) => {
     const dispatch: any = useDispatch();
     const [lang,setLang] = useState('az');
     const [staticContent,setStaticContent] = useState<any>(null);
     const [searchParams, setSearchParams] = useState({page: 1, limit: 5})
+    const [params,setParams] = useState<any>({})
     const blogList = useSelector((state: any) => state.blogReducers.blogs);
     const blogCount = useSelector((state: any) => state.blogReducers.blogCount);
     const router = useRouter();
+    // const {search,state} = useLocation();
+    // const url:any = search?.split('?')[1];
 
     useEffect(() => {
-        dispatch(getBlogList(searchParams));
-    }, [dispatch, searchParams])
+
+        let set_params: any = {
+            page:1,
+            limit: 2,
+            title: '',
+            tagIds: null,
+            categoryIds: null
+        }
+
+        router.push({query:`${encodeURL({...set_params})}`})
+
+        dispatch(getBlogList(set_params));
+    }, [dispatch])
+
+    // useEffect(() => {
+    //     if(url){
+    //         console.log(url)
+    //        let decodedData = decodeURL(url)
+    //         console.log(decodedData)
+    //     }
+    //     console.log(router.query)
+    // },[router])
 
     useEffect(() => {
         let language: any = localStorage.getItem('lang');
@@ -35,6 +62,9 @@ const Blog = ({Component, pageProps}: AppProps) => {
 
     const handlePageClick = useCallback((val: any) => {
         console.log(val);
+        // if(val){
+        //     router.push({query: {pageNumbers:`${encodeURL(val.selected+1)}`}})
+        // }
 
         setSearchParams((prev: any) => {
             return {
@@ -89,6 +119,16 @@ const Blog = ({Component, pageProps}: AppProps) => {
                                                     }) : null
                                                 }
                                             </ul>
+                                        </div>
+                                        <div className={scss.blog__info}>
+                                            <div className={scss.blog__date}>
+                                                <Image src={CalendarIcon} alt={'CalendarIcon'}/>
+                                                <span>{listItem.createdAt}</span>
+                                            </div>
+                                            <div className={scss.blog__eye}>
+                                                <Image src={EyeIcon} alt={'EyeIcon'}/>
+                                                <span>{listItem.seen}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

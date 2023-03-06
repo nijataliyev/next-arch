@@ -5,6 +5,7 @@ const initialState: IBlogState = {
     blogs: [],
     blogCount: null,
     blogCategories: [],
+    blogTags: [],
     mobPrefix: []
 }
 
@@ -14,6 +15,9 @@ export const blogSlice = createSlice({
     reducers: {
         getBlogCategoriesSuccess(state,action){
             state.blogCategories = action.payload;
+        },
+        getBlogTagsSuccess(state,action){
+            state.blogTags = action.payload;
         },
         getBlogSuccess(state, action){
             state.blogs = action.payload.rows;
@@ -26,4 +30,4 @@ export const blogSlice = createSlice({
 })
 
 export default blogSlice.reducer;
-export const { getBlogSuccess,getBlogCategoriesSuccess,getMobPrefixSuccess } = blogSlice.actions;
+export const { getBlogSuccess,getBlogCategoriesSuccess,getMobPrefixSuccess,getBlogTagsSuccess } = blogSlice.actions;

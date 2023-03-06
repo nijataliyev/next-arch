@@ -6,6 +6,7 @@ export const API = {
     plan: environment + 'plans',
     partners: environment + 'partners',
     blogCategories: environment + 'blog-categories',
+    blogTags: environment + 'blog-tags',
     mobPrefix: environment + 'mob-prefixes',
     contactRequest: environment + 'contact-request',
     scheduleDemo: environment + 'schedule-demo'
