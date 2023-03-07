@@ -16,12 +16,18 @@ import {ICategories, ITags} from "../../src/core/modules/models/blog-model/types
 import {decodeURL, encodeURL} from "../../src/core/helpers/common-functions/common-functions";
 import {useLocation} from "react-router";
 
-const Blog = ({Component, pageProps}: AppProps) => {
+const Blog = () => {
     const dispatch: any = useDispatch();
     const [lang,setLang] = useState('az');
     const [staticContent,setStaticContent] = useState<any>(null);
     const [searchParams, setSearchParams] = useState({page: 1, limit: 5})
-    const [params,setParams] = useState<any>({})
+    const [params,setParams] = useState<any>({
+        page:1,
+        limit: 5,
+        title: '',
+        tagIds: null,
+        categoryIds: null
+    })
     const blogList = useSelector((state: any) => state.blogReducers.blogs);
     const blogCount = useSelector((state: any) => state.blogReducers.blogCount);
     const router = useRouter();
@@ -29,19 +35,19 @@ const Blog = ({Component, pageProps}: AppProps) => {
     // const url:any = search?.split('?')[1];
 
     useEffect(() => {
-
-        let set_params: any = {
-            page:1,
-            limit: 2,
-            title: '',
-            tagIds: null,
-            categoryIds: null
+        let {queryParams}: any = router.query;
+        if(queryParams){
+            let decoded: any = decodeURL(queryParams);
+            setParams(() => {
+                return {
+                    ...decoded
+                }
+            })
+            dispatch(getBlogList(decoded));
+        }else {
+            dispatch(getBlogList(params));
         }
-
-        router.push({query:`${encodeURL({...set_params})}`})
-
-        dispatch(getBlogList(set_params));
-    }, [dispatch])
+    }, [dispatch,router])
 
     // useEffect(() => {
     //     if(url){
@@ -62,11 +68,20 @@ const Blog = ({Component, pageProps}: AppProps) => {
 
     const handlePageClick = useCallback((val: any) => {
         console.log(val);
-        // if(val){
-        //     router.push({query: {pageNumbers:`${encodeURL(val.selected+1)}`}})
-        // }
+        let obj: any = {
+            page:1,
+            limit: 5,
+            title: '',
+            tagIds: null,
+            categoryIds: null
+        }
+        obj.page = val.selected + 1;
 
-        setSearchParams((prev: any) => {
+        if(val){
+            router.replace({query: {queryParams:`${encodeURL(obj)}`}})
+        }
+
+        setParams((prev: any) => {
             return {
                 ...prev,
                 page: val.selected + 1,
@@ -142,9 +157,9 @@ const Blog = ({Component, pageProps}: AppProps) => {
                         marginPagesDisplayed={1}
                         breakLabel='...'
                         pageRangeDisplayed={3}
-                        forcePage={searchParams.page - 1}
+                        forcePage={params.page - 1}
                         onPageChange={handlePageClick}
-                        pageCount={Math.ceil(blogCount / searchParams.limit)}/>
+                        pageCount={Math.ceil(blogCount / params.limit)}/>
                 </>
             </div>
         </ChildRootLayoutComponent>

@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getBlogCategories, getBlogTags} from "../../../../store/modules/blog-store/blog-action";
 import debounce from "lodash.debounce";
 import {useRouter} from "next/router";
+import {decodeURL, encodeURL} from "../../../helpers/common-functions/common-functions";
 
 function ChildRootLayoutComponent({children}: any){
     const [lang,setLang] = useState('az');
@@ -30,6 +31,21 @@ function ChildRootLayoutComponent({children}: any){
 
     const getCategoryId = (id: number) => {
         console.log(id);
+        let {queryParams}: any | undefined = router.query;
+        if(queryParams){
+            let decoded: any = decodeURL(queryParams);
+            console.log(queryParams)
+        }else {
+            let obj: any = {
+                page:1,
+                limit: 5,
+                title: '',
+                tagIds: null,
+                categoryIds: null
+            }
+            obj.categoryIds = id
+            router.replace({query: {queryParams:`${encodeURL(obj)}`}})
+        }
     }
 
     const getTagId = (id: number) => {
