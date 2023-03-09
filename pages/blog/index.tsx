@@ -31,13 +31,15 @@ const Blog = () => {
     const blogList = useSelector((state: any) => state.blogReducers.blogs);
     const blogCount = useSelector((state: any) => state.blogReducers.blogCount);
     const router = useRouter();
+    const {queryParams}: any = router.query;
     // const {search,state} = useLocation();
     // const url:any = search?.split('?')[1];
 
     useEffect(() => {
-        let {queryParams}: any = router.query;
         if(queryParams){
+            console.log(queryParams)
             let decoded: any = decodeURL(queryParams);
+            console.log(decoded)
             setParams(() => {
                 return {
                     ...decoded
@@ -45,7 +47,20 @@ const Blog = () => {
             })
             dispatch(getBlogList(decoded));
         }else {
-            dispatch(getBlogList(params));
+            let obj = {
+                page:1,
+                limit:5,
+                title: '',
+                tagIds: null,
+                categoryIds: null
+            }
+            setParams(() => {
+                return {
+                    ...obj
+                }
+            })
+            console.log('dededededed')
+            dispatch(getBlogList(obj));
         }
     }, [dispatch,router])
 
@@ -67,30 +82,31 @@ const Blog = () => {
 
 
     const handlePageClick = useCallback((val: any) => {
-        console.log(val);
-        let obj: any = {
-            page:1,
-            limit: 5,
-            title: '',
-            tagIds: null,
-            categoryIds: null
-        }
-        obj.page = val.selected + 1;
-
         if(val){
+            console.log(params)
+            let obj: any = {
+                page:params.page,
+                limit:params.limit,
+                title: params.title,
+                tagIds: params.tagIds,
+                categoryIds: params.categoryIds
+            }
+            obj.page = val.selected + 1;
+
+            setParams((prev: any) => {
+                return {
+                    ...prev,
+                    page: val.selected + 1,
+                }
+            })
+            if (window !== undefined) {
+                window.scrollTo(0, 0);
+            }
+
+
             router.replace({query: {queryParams:`${encodeURL(obj)}`}})
         }
-
-        setParams((prev: any) => {
-            return {
-                ...prev,
-                page: val.selected + 1,
-            }
-        })
-        if (window !== undefined) {
-            window.scrollTo(0, 0);
-        }
-    }, [])
+    }, [params])
 
     const gotoBlogId = (id: number) => {
         console.log(id)

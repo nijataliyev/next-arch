@@ -1,7 +1,7 @@
 import scss from './child-layout.module.scss';
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import * as data from '../../../../assets/db/db.json';
 import {useDispatch, useSelector} from "react-redux";
 import {getBlogCategories, getBlogTags} from "../../../../store/modules/blog-store/blog-action";
@@ -15,7 +15,15 @@ function ChildRootLayoutComponent({children}: any){
     const dispatch: any = useDispatch();
     const blogCategories: any = useSelector((state: any) => state.blogReducers.blogCategories);
     const blogTags: any = useSelector((state: any) => state.blogReducers.blogTags);
+    const [params,setParams] = useState<any>({
+        page:1,
+        limit: 5,
+        title: '',
+        tagIds: null,
+        categoryIds: null
+    })
     const router = useRouter();
+    let {queryParams}: any | undefined = router.query;
 
     useEffect(() => {
         let language: any = localStorage.getItem('lang');
@@ -25,31 +33,86 @@ function ChildRootLayoutComponent({children}: any){
         console.log(router)
     },[lang])
 
+    useEffect(() => {
+        if(queryParams){
+            let decoded: any = decodeURL(queryParams);
+            console.log(decoded);
+            let obj = {
+                page:decoded.page,
+                limit:decoded.limit,
+                title: decoded.title,
+                tagIds: decoded.tagIds,
+                categoryIds: decoded.categoryIds
+            }
+            setParams(() => {
+                return {
+                    ...obj
+                }
+            })
+        }else {
+            let obj = {
+                page:1,
+                limit:5,
+                title: '',
+                tagIds: null,
+                categoryIds: null
+            }
+            setParams(obj)
+        }
+    },[router])
+
     // const urlChangeHandler = (searchValue: string,blogCategoryId: number,blogTagId: number){
     //     router.push({query:})
     // }
 
-    const getCategoryId = (id: number) => {
+    const getCategoryId = useCallback((id: number) => {
         console.log(id);
-        let {queryParams}: any | undefined = router.query;
         if(queryParams){
             let decoded: any = decodeURL(queryParams);
-            console.log(queryParams)
+            let obj = {
+                page:decoded.page,
+                limit:decoded.limit,
+                title: decoded.title,
+                tagIds: decoded.tagIds,
+                categoryIds: id
+            }
+            router.replace({query: {queryParams:`${encodeURL(obj)}`}})
         }else {
             let obj: any = {
                 page:1,
                 limit: 5,
                 title: '',
                 tagIds: null,
-                categoryIds: null
+                categoryIds: id
             }
             obj.categoryIds = id
             router.replace({query: {queryParams:`${encodeURL(obj)}`}})
         }
-    }
+    },[router])
 
     const getTagId = (id: number) => {
         console.log(id);
+        if(queryParams){
+            let decoded: any = decodeURL(queryParams);
+            let obj = {
+                page:decoded.page,
+                limit:decoded.limit,
+                title: decoded.title,
+                tagIds: id,
+                categoryIds: decoded.categoryIds
+            }
+            router.replace({query: {queryParams:`${encodeURL(obj)}`}})
+        }else {
+            let obj: any = {
+                page:1,
+                limit: 5,
+                title: '',
+                tagIds: id,
+                categoryIds: null
+            }
+            obj.tagIds = id
+            router.replace({query: {queryParams:`${encodeURL(obj)}`}})
+        }
     }
 
     useEffect(() => {
@@ -57,18 +120,81 @@ function ChildRootLayoutComponent({children}: any){
         dispatch(getBlogTags())
     },[dispatch])
 
-    const handleInputChange = debounce((val: string) => {
-        console.log(val);
-        // this.setState((prev: any) =>{
-        //     return {
-        //         ...prev,
-        //         searchValue: val
-        //     }
-        // })
-        // if (val && val !== '') {
-        //     // this.getMyOrders(this.state.currentPage,this.state.pageSize, this.state.searchValue)
-        // }
-    },500)
+    const queryParamChange = useCallback(debounce((obj)=>{
+        console.log(obj)
+        if(obj !== null){
+            console.log('debounce abi')
+            router.replace({query: {queryParams:`${encodeURL(obj)}`}})
+        }else {
+            return false;
+        }
+    }, 500),[router])
+    const handleInputChange = useCallback((val: string)=>{
+            console.log('lmao')
+            console.log(val);
+        let obj: any = null
+            if(val?.trim()?.length > 0 && val?.trim() !== ''){
+                if(queryParams){
+                    let decoded: any = decodeURL(queryParams);
+                    console.log(decoded)
+                    obj = {
+                        page:1,
+                        limit:decoded.limit,
+                        title: val,
+                        tagIds: decoded.tagIds,
+                        categoryIds: decoded.categoryIds
+                    }
+
+                    console.log(obj)
+                    setParams(obj)
+                }else {
+                    obj = {
+                        page:1,
+                        limit:5,
+                        title: val,
+                        tagIds: null,
+                        categoryIds: null
+                    }
+                    setParams(() => {
+                        return {
+                            ...obj
+                        }
+                    })
+                    console.log('swsw')
+                }
+                console.log(val)
+                console.log('valid')
+                // dispatch(getContactForm(pageParams, {searchParams: e.target.value?.trim()}))
+            }else if(val?.length === 0) {
+                if(queryParams){
+                    let decoded: any = decodeURL(queryParams);
+                    obj = {
+                        page:1,
+                        limit:decoded.limit,
+                        title: val,
+                        tagIds: decoded.tagIds,
+                        categoryIds: decoded.categoryIds
+                    }
+                    setParams((prev: any) => {
+                        return {
+                            ...obj
+                        }
+                    })
+                }
+                console.log('invalid')
+                // dispatch(getContactForm({PageSize: 10, PageNumber: 1}, {searchParams: ''}))
+            }
+            // this.setState((prev: any) =>{
+            //     return {
+            //         ...prev,
+            //         searchValue: val
+            //     }
+            // })
+            // if (val && val !== '') {
+            //     // this.getMyOrders(this.state.currentPage,this.state.pageSize, this.state.searchValue)
+            // }
+        queryParamChange(obj)
+    },[queryParamChange, router.query])
 
     return (
         <div className={scss.child}>
@@ -77,7 +203,7 @@ function ChildRootLayoutComponent({children}: any){
                     <div className="col-4">
                         <div className={scss.child__search}>
                             <div className={scss.child__inp}>
-                                <input type="text" onChange={(e: any) => handleInputChange(e.target.value)}/>
+                                <input value={params.title} type="text" onChange={(e: any) => handleInputChange(e.target.value)}/>
                                 <FontAwesomeIcon icon={faSearch}/>
                             </div>
                         </div>
@@ -87,7 +213,7 @@ function ChildRootLayoutComponent({children}: any){
                                 {
                                     blogCategories && blogCategories.map((listCategory:any,index: number) => {
                                         return (
-                                            <li onClick={() => getCategoryId(listCategory.id)} key={index}>{listCategory.title}</li>
+                                            <li onClick={() => getCategoryId(listCategory.id)} className={params.categoryIds === listCategory.id ? scss.child__category__active : ''} key={index}>{listCategory.title}</li>
                                         )
                                     })
                                 }
@@ -99,7 +225,7 @@ function ChildRootLayoutComponent({children}: any){
                                 {
                                     blogTags && blogTags.map((listTags:any,index: number) => {
                                         return (
-                                            <li onClick={() => getTagId(listTags.id)} key={index}>{listTags.title}</li>
+                                            <li onClick={() => getTagId(listTags.id)} className={params.tagIds === listTags.id ? scss.child__tags__active : ''} key={index}>{listTags.title}</li>
                                         )
                                     })
                                 }

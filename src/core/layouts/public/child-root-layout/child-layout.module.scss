@@ -22,4 +22,52 @@
       color: $form-text-color;
     }
   }
+  &__category{
+    margin-top: rem(35);
+    h1{
+      font-size: rem(32);
+      font-family: $ec-bold;
+    }
+    &__active{
+      color: $main-color;
+    }
+    ul{
+      padding-left: 0;
+      list-style-type: none;
+      li{
+        margin-bottom: rem(15);
+        font-family: $ec-regular;
+        font-size: rem(18);
+        cursor: pointer;
+      }
+    }
+  }
+  &__tags{
+    margin-top: rem(35);
+    h1{
+      font-size: rem(32);
+      font-family: $ec-bold;
+    }
+    &__active{
+      border: 1px solid $main-color !important;
+      color: $white;
+      background-color: $main-color;
+    }
+    ul{
+      padding-left: 0;
+      list-style-type: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: rem(10);
+      li{
+        padding: rem(5) rem(7);
+        border: 1px solid $tag-border;
+        border-radius: rem(15);
+        margin-bottom: rem(5);
+        font-family: $ec-regular;
+        font-size: rem(16);
+        cursor: pointer;
+      }
+    }
+  }
 }
