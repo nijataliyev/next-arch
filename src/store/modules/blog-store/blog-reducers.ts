@@ -4,6 +4,7 @@ import {createSlice} from "@reduxjs/toolkit";
 const initialState: IBlogState = {
     blogs: [],
     blogCount: null,
+    blogDetail: null,
     blogCategories: [],
     blogTags: [],
     mobPrefix: []
@@ -23,6 +24,9 @@ export const blogSlice = createSlice({
             state.blogs = action.payload.rows;
             state.blogCount = action.payload.count;
         },
+        getBlogDetailSuccess(state,action){
+            state.blogDetail = action.payload;
+        },
         getMobPrefixSuccess(state,action){
             state.mobPrefix = action.payload;
         }
@@ -30,4 +34,4 @@ export const blogSlice = createSlice({
 })
 
 export default blogSlice.reducer;
-export const { getBlogSuccess,getBlogCategoriesSuccess,getMobPrefixSuccess,getBlogTagsSuccess } = blogSlice.actions;
+export const { getBlogSuccess,getBlogCategoriesSuccess,getMobPrefixSuccess,getBlogTagsSuccess,getBlogDetailSuccess } = blogSlice.actions;

@@ -3,5 +3,6 @@ export interface IBlogState {
     blogCount: null,
     blogCategories: [],
     blogTags: [],
+    blogDetail: null,
     mobPrefix: []
 }

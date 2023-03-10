@@ -1,0 +1,72 @@
+@import "src/assets/styles/abstracts";
+
+.blogDetail{
+  background-color: $white;
+  padding: rem(15);
+  margin-bottom: rem(15);
+  &__img{
+    width: 100%;
+    height: rem(350);
+    img{
+      object-fit: cover;
+    }
+  }
+  &__line{
+    width: 100%;
+    height: rem(3);
+    background-color: $tag-border;
+    margin: rem(20) 0;
+  }
+  &__category{
+    margin-top: rem(15);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    span{
+      font-family: $ec-bold;
+      font-size: rem(18);
+    }
+    ul{
+      padding-top: rem(2);
+      list-style-type: none;
+      padding-left: rem(10);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: rem(10);
+      li{
+        font-family: $ec-regular;
+      }
+    }
+  }
+  &__tag{
+    margin-top: rem(15);
+    ul{
+      list-style-type: none;
+      padding-left: 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: rem(10);
+      li{
+        background-color: $modal-bg-color;
+        border: 1px solid $tag-border;
+        padding: rem(3) rem(7);
+        border-radius: rem(15);
+        font-family: $ec-regular;
+      }
+    }
+  }
+  &__see{
+    margin-top: rem(15);
+    display: flex;
+    gap: rem(7);
+    svg{
+      color: $main-color;
+      width: rem(15);
+    }
+    p{
+      font-family: $ec-regular;
+    }
+  }
+}

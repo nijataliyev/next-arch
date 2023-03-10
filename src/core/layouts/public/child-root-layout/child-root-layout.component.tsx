@@ -76,7 +76,7 @@ function ChildRootLayoutComponent({children}: any){
                 tagIds: decoded.tagIds,
                 categoryIds: id
             }
-            router.replace({query: {queryParams:`${encodeURL(obj)}`}})
+            router.replace({pathname:'/blog',query: {queryParams:`${encodeURL(obj)}`}})
         }else {
             let obj: any = {
                 page:1,
@@ -86,7 +86,7 @@ function ChildRootLayoutComponent({children}: any){
                 categoryIds: id
             }
             obj.categoryIds = id
-            router.replace({query: {queryParams:`${encodeURL(obj)}`}})
+            router.replace({pathname:'/blog',query: {queryParams:`${encodeURL(obj)}`}})
         }
     },[router])
 
@@ -101,7 +101,7 @@ function ChildRootLayoutComponent({children}: any){
                 tagIds: id,
                 categoryIds: decoded.categoryIds
             }
-            router.replace({query: {queryParams:`${encodeURL(obj)}`}})
+            router.replace({pathname:'/blog',query: {queryParams:`${encodeURL(obj)}`}})
         }else {
             let obj: any = {
                 page:1,
@@ -111,7 +111,7 @@ function ChildRootLayoutComponent({children}: any){
                 categoryIds: null
             }
             obj.tagIds = id
-            router.replace({query: {queryParams:`${encodeURL(obj)}`}})
+            router.replace({pathname:'/blog',query: {queryParams:`${encodeURL(obj)}`}})
         }
     }
 
@@ -124,11 +124,13 @@ function ChildRootLayoutComponent({children}: any){
         console.log(obj)
         if(obj !== null){
             console.log('debounce abi')
-            router.replace({query: {queryParams:`${encodeURL(obj)}`}})
+            router.replace({pathname:'/blog',query: {queryParams:`${encodeURL(obj)}`}})
         }else {
             return false;
         }
     }, 500),[router])
+
+
     const handleInputChange = useCallback((val: string)=>{
             console.log('lmao')
             console.log(val);

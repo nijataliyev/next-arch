@@ -402,7 +402,7 @@ const ContactComponent = () => {
                                                                   handleInputChange(e, 'country'), onSelect(e)
                                                               }} selected={inputState.inputs.country.value}
                                                               countries={[...flags]}/>
-                                            {/*<input type={inputState.inputs.country.type} onChange={(e: any) => handleInputChange(e.target.value, 'country')}/>*/}
+                                            {/*<input types={inputState.inputs.country.types} onChange={(e: any) => handleInputChange(e.target.value, 'country')}/>*/}
                                             {
                                                 !inputState.inputs.country.isValid && inputState.inputs.country.touched ? <span
                                                     className={css.contact__left__error}>{inputState.inputs.country.currentErrTxt}</span> : null

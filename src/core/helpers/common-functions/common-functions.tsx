@@ -33,7 +33,7 @@ export const convertToBase64 = (file: any) => {
         };
       }
     } else {
-      console.warn('<input type="file"> is empty please choose file to convert!');
+      console.warn('<input types="file"> is empty please choose file to convert!');
       reject(null);
     }
     /**

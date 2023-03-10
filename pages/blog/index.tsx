@@ -14,7 +14,8 @@ import EyeIcon from '../../src/assets/images/FontAwsome (eye).svg';
 import * as data from '../../src/assets/db/db.json';
 import {ICategories, ITags} from "../../src/core/modules/models/blog-model/types/blog";
 import {decodeURL, encodeURL} from "../../src/core/helpers/common-functions/common-functions";
-import {useLocation} from "react-router";
+import LeftIcon from '../../src/assets/images/chevron-left-solid.svg';
+import RightIcon from '../../src/assets/images/chevron-right-solid.svg';
 
 const Blog = () => {
     const dispatch: any = useDispatch();
@@ -104,7 +105,7 @@ const Blog = () => {
             }
 
 
-            router.replace({query: {queryParams:`${encodeURL(obj)}`}})
+            router.replace({pathname:'/blog',query: {queryParams:`${encodeURL(obj)}`}})
         }
     }, [params])
 
@@ -166,16 +167,27 @@ const Blog = () => {
                             )
                         })
                     }
-                    <ReactPaginate
-                        containerClassName={scss.blog__pagination}
-                        activeClassName={scss.blog__pagination__active}
-                        pageClassName={scss.blog__pagination__btn}
-                        marginPagesDisplayed={1}
-                        breakLabel='...'
-                        pageRangeDisplayed={3}
-                        forcePage={params.page - 1}
-                        onPageChange={handlePageClick}
-                        pageCount={Math.ceil(blogCount / params.limit)}/>
+                    {
+                        blogList && blogList.length ?
+                        <ReactPaginate
+                            nextLabel={
+                                <Image src={RightIcon} alt={'Right'}/>
+                            }
+                            previousLabel={
+                                <Image src={LeftIcon} alt={'left'}/>
+                            }
+                            containerClassName={scss.blog__pagination}
+                            activeClassName={scss.blog__pagination__active}
+                            pageClassName={scss.blog__pagination__btn}
+                            previousClassName={scss.blog__pagination__previous}
+                            nextClassName={scss.blog__pagination__next}
+                            marginPagesDisplayed={1}
+                            breakLabel='...'
+                            pageRangeDisplayed={3}
+                            forcePage={params.page - 1}
+                            onPageChange={handlePageClick}
+                            pageCount={Math.ceil(blogCount / params.limit)}/> : null
+                    }
                 </>
             </div>
         </ChildRootLayoutComponent>

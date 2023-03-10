@@ -5,6 +5,7 @@
   flex-direction: column;
   gap: rem(10);
   &__list{
+    cursor: pointer;
     //height: rem(250);
     background-color: $white;
     border-radius: rem(15);
@@ -138,6 +139,24 @@
         background-color: $main-color;
         border: 1px solid $main-color;
         color: $white;
+      }
+    }
+    &__previous{
+      cursor: pointer;
+      a{
+        img{
+          width: rem(10);
+          margin-right: rem(15);
+        }
+      }
+    }
+    &__next{
+      cursor: pointer;
+      a{
+        img{
+          width: rem(10);
+          margin-left: rem(15);
+        }
       }
     }
   }

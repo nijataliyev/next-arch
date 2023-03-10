@@ -2,10 +2,11 @@ import {BlogService} from "../../../core/modules/services/blog-service/blog-serv
 import {container} from "tsyringe";
 import {Dispatch} from "redux";
 import {BlogCategoriesModel} from "../../../core/modules/models/blog-categories-model/blog-categories.model";
-import {getBlogCategoriesSuccess, getBlogSuccess, getBlogTagsSuccess, getMobPrefixSuccess} from "./blog-reducers";
+import {getBlogCategoriesSuccess, getBlogSuccess, getBlogTagsSuccess,getBlogDetailSuccess, getMobPrefixSuccess} from "./blog-reducers";
 import {MobilePrefixModel} from "../../../core/modules/models/mob-prefix-model/mobile-prefix.model";
 import {BlogModel} from "../../../core/modules/models/blog-model/blog.model";
 import {BlogTagsModel} from "../../../core/modules/models/blog-tags-model/blog-tags.model";
+import {BlogDetailModel} from "../../../core/modules/models/blog-detail-model/blog-detail.model";
 
 const service = container.resolve(BlogService);
 
@@ -20,6 +21,18 @@ export const getBlogList = (params: any) => (
             }
         }).then((result) => {
             dispatch(getBlogSuccess(result))
+        }).catch((err) => {
+            return Promise.reject(err);
+        })
+    }
+)
+
+export const getBlogDetails = (id: number) => (
+    (dispatch: Dispatch<any>) => {
+        return service.getBlogDetail(id).then((res) => {
+            return new BlogDetailModel(res);
+        }).then((result) => {
+            dispatch(getBlogDetailSuccess(result))
         }).catch((err) => {
             return Promise.reject(err);
         })

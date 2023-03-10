@@ -10,7 +10,7 @@ import {rootReducer} from "./root-reducer";
     })
 
 
-// export type RootState = ReturnType<typeof rootReducer>
+// export types RootState = ReturnType<typeof rootReducer>
 export type AppStore = ReturnType<any>
 export type AppDispatch = typeof store.dispatch
 

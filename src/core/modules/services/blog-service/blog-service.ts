@@ -16,6 +16,10 @@ export class BlogService{
         return axios.get(API.blogTags).then((res) => res.data.rows)
     }
 
+    getBlogDetail(id: number): Promise<any> {
+        return axios.get(API.blogs+`/${id}`).then((res) => res.data)
+    }
+
     getMobilePrefix(): Promise<any> {
         return axios.get(API.mobPrefix).then((res) => res.data)
     }
