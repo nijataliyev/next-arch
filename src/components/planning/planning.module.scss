@@ -148,6 +148,7 @@
         }
       }
       &__btn{
+        cursor: pointer;
         z-index: 1;
         border: none;
         outline: none;
@@ -156,7 +157,7 @@
         color: white;
         font-family: $ec-bold;
         font-size: (18);
-        padding: rem(20) rem(53);
+        padding: rem(22) rem(53);
         min-width: rem(300);
         position: absolute;
         top: rem(20);
@@ -188,6 +189,9 @@
       &:hover{
         .plan__right__items__btn{
           transform: translateX(-15px);
+        }
+        .plan__right__items__price{
+          visibility: hidden;
         }
       }
     }

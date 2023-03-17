@@ -11,6 +11,5 @@ export const setLoader = (payload: boolean) => (
 export const setLocalization = (payload: any) => (
     (dispatch: AppDispatch) => {
         dispatch(setLangSuccess(payload));
-        window.location.reload();
     }
 )

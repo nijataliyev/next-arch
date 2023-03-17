@@ -4,9 +4,8 @@ import Logo from '../../../../assets/images/logo.svg';
 import {useCallback, useEffect, useState} from "react";
 import * as data from '../../../../assets/db/db.json';
 import HeaderItemComponent from "./components/header-item/header-item.component";
-import {setLoader, setLocalization} from "../../../../store/modules/public-store/public-actions";
-import {useDispatch} from "react-redux";
-import {AppDispatch} from "../../../../store";
+import {setLocalization} from "../../../../store/modules/public-store/public-actions";
+import {useDispatch, useSelector} from "react-redux";
 import ModalComponent from "../../../packages/RModal/modal.component";
 import BodyComponent from "../../../packages/RModal/components/body.component";
 import {changeInputValue} from "../../../helpers/common-functions/common-functions";
@@ -17,6 +16,7 @@ import {faPhone} from "@fortawesome/free-solid-svg-icons";
 import {useRouter} from "next/router";
 import MobileHeaderItemComponent from "./components/mobile-header-item/mobile-header-item.component";
 import {postContactList} from "../../../../store/modules/contact-store/contact-action";
+import Link from "next/link";
 
 const HeaderComponent = () => {
     const router = useRouter();
@@ -24,7 +24,7 @@ const HeaderComponent = () => {
     const [nav, setNav] = useState<any>([]);
     const [staticContent, setStaticContent] = useState<any>(null);
     const [staticModalText,setStaticModalText] = useState<any>(null);
-    const [lang, setLang] = useState<string | any>('az');
+    const lang = useSelector(({publicReducers}: any)=>publicReducers.lang)
     const [show, setShow] = useState(false);
     const [inputState, setInputState] = useState({
         inputs: {
@@ -83,13 +83,12 @@ const HeaderComponent = () => {
     const [openDropMenu,setOpenDropMenu] = useState(false);
 
     useEffect(() => {
-        let datas: any = data;
-        let language: any = localStorage.getItem('lang');
-        setNav(datas[language]?.header)
-        setLang(language)
-        let langContent: any = datas[language]?.modal;
-        setStaticContent(datas[language]?.modal)
-        setStaticModalText(datas[language]?.modalContactButton)
+        let dataList: any = data;
+        console.log(dataList, lang)
+        setNav(dataList[lang]?.header)
+        let langContent: any = dataList[lang]?.modal;
+        setStaticContent(dataList[lang]?.modal)
+        setStaticModalText(dataList[lang]?.modalContactButton)
 
         setInputState((prev: any) => {
             let prevInputState = {...prev}
@@ -129,9 +128,9 @@ const HeaderComponent = () => {
 
     const handleSelect = useCallback((e: any) => {
         dispatch(setLocalization(e.target.value))
-        setLang(e.target.value)
         localStorage.setItem('lang', e.target.value);
-    }, [lang])
+        router.replace({pathname: router.pathname,query:{...router.query, langId: e.target.value}})
+    }, [router,lang])
 
     const openDropMenuContent = () => {
         setOpenDropMenu(true)
@@ -148,10 +147,6 @@ const HeaderComponent = () => {
     const handleInputChange = useCallback((val: string, inputName: string) => {
         changeInputValue({target: {value: val}}, inputName, inputState.inputs, setInputState)
     }, [inputState.inputs])
-
-    const toGo = useCallback(() => {
-        router.push('/')
-    },[])
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
@@ -193,7 +188,9 @@ const HeaderComponent = () => {
                     <div className="row" style={{height: '100%'}}>
                         <div className="col-6 col-sm-6 col-md-6 col-lg-3">
                             <div className={scss.header__left}>
-                                <Image onClick={toGo} src={Logo} alt="logo"/>
+                                <Link href={{pathname:'/',query:{...router.query,langId:lang}}}>
+                                    <Image src={Logo} alt="logo"/>
+                                </Link>
                             </div>
                         </div>
                         <div className="col-6 col-sm-6 col-md-6 col-lg-6">

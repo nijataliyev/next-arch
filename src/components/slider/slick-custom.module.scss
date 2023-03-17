@@ -1,0 +1,54 @@
+@import "../../assets/styles/abstracts";
+
+.slick-slider {
+  padding: rem(10);
+    position: absolute;
+    right: 0;
+    top: rem(55);
+    width: rem(160);
+    height: rem(160);
+    background-color: white;
+    box-shadow: 0px 0px 10px 0px rgba(107,107,107,0.50);
+  border-radius: rem(15);
+  .slick-list{
+    background-color: green;
+  }
+
+  //img{
+  //  width: 100%;
+  //  background-color: red;
+  //}
+
+    //.slick-arrow {
+    //  position: absolute;
+    //  top: 50%;
+    //  transform: translateY(-50%);
+    //  width: 50px;
+    //  height: 50px;
+    //  background-color: #fff;
+    //  border: none;
+    //  border-radius: 50%;
+    //  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+    //  z-index: 1;
+    //  cursor: pointer;
+    //
+    //  &:before {
+    //    content: "";
+    //    position: absolute;
+    //    top: 50%;
+    //    left: 50%;
+    //    transform: translate(-50%, -50%);
+    //    width: 20px;
+    //    height: 20px;
+    //    background-color: #000;
+    //    border-radius: 50%;
+    //  }
+    //}
+  }
+
+@media only screen and (max-width: 991px) {
+  .slick-slider{
+    left: 0;
+    top: 0;
+  }
+}

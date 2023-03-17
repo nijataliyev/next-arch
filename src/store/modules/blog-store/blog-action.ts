@@ -27,15 +27,9 @@ export const getBlogList = (params: any) => (
     }
 )
 
-export const getBlogDetails = (id: number) => (
+export const getBlogDetails = (data: any) => (
     (dispatch: Dispatch<any>) => {
-        return service.getBlogDetail(id).then((res) => {
-            return new BlogDetailModel(res);
-        }).then((result) => {
-            dispatch(getBlogDetailSuccess(result))
-        }).catch((err) => {
-            return Promise.reject(err);
-        })
+            dispatch(getBlogDetailSuccess(data))
     }
 )
 

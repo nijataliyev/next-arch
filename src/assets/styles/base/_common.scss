@@ -2,9 +2,11 @@ body {
     margin: 0;
 }
 html {
-    //scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
-
+* {
+    scroll-behavior: smooth;
+}
 .vjs-poster img{
     width: 100% !important;
     height: 100% !important;
@@ -21,16 +23,23 @@ img{
 }
 
 /* the slides */
-.slick-slide {
-    gap: 10px !important;
-}
+//.slick-slide {
+//    gap: 10px !important;
+//    display: flex;
+//    justify-content: center;
+//    div{
+//        display: flex;
+//        justify-content: center;
+//    }
+//}
 /* the parent */
-.slick-list {
-    margin: 0 -10px;
-}
+//.slick-list {
+//    margin: 0 -10px;
+//}
 
-.slick-track{
-    display: flex !important;
-    gap: 10px !important;
-}
+//.slick-track{
+//    display: flex !important;
+//    gap: 10px !important;
+//}
+
 

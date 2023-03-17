@@ -1,5 +1,6 @@
 import {injectable} from "tsyringe";
-import axios from "axios";
+import axios from '../../../axios/instances/axios';
+import serverAxios from "../../../axios/instances/axios-server";
 import {API} from "../../../config/api.config";
 
 @injectable()
@@ -16,8 +17,8 @@ export class BlogService{
         return axios.get(API.blogTags).then((res) => res.data.rows)
     }
 
-    getBlogDetail(id: number): Promise<any> {
-        return axios.get(API.blogs+`/${id}`).then((res) => res.data)
+    getBlogDetail(id: number,langId: string): Promise<any> {
+        return serverAxios.get(API.blogs+`/${id}`,{headers:{'accept-language': langId}}).then((res) => res.data)
     }
 
     getMobilePrefix(): Promise<any> {

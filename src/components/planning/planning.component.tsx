@@ -7,26 +7,24 @@ import PlanLeftImage from '../../assets/images/plan-left.svg';
 import PlanNumImage from '../../assets/images/plan-num.svg';
 import PlanManImage from '../../assets/images/plan-man.svg';
 import * as data from '../../assets/db/db.json';
+import {useRouter} from "next/router";
 const PlanningComponent = () => {
     const dispatch: any = useDispatch();
+    const router = useRouter();
     const plansList = useSelector((state: any) => state.planReducers.plans)
-    const [lang,setLang] = useState('az');
+    const lang = useSelector(({publicReducers}: any)=>publicReducers.lang)
     const [planList, setPlanList] = useState<any>(null);
     useEffect(() => {
         dispatch(getPlansList())
-    },[dispatch])
+    },[dispatch,router.query])
 
     useEffect(() => {
-        let language: any = localStorage.getItem('lang');
-        setLang(language);
         let dataList: any = data
-        let list = dataList[language]?.plan
+        let list = dataList[lang]?.plan
         setPlanList(list);
-
     },[lang])
 
     const scroolTo = useCallback((item: any,id: string) => {
-        console.log('scrool planning')
         if(id && id.length){
             if (typeof window !== "undefined") {
                 dispatch(setPlanId(item))

@@ -8,20 +8,17 @@ import ElementPic from '../../assets/images/element-pic.svg';
 import ElementPicBack from '../../assets/images/element-pic-back.svg';
 import GirlImage from '../../assets/images/Blog post-bro.svg';
 import Image from "next/image";
+import {useSelector} from "react-redux";
 const LearningComponent = () => {
-    const [lang,setLang] = useState('az');
+    const lang = useSelector(({publicReducers}: any)=>publicReducers.lang)
     const [learning, setLearning] = useState<any>(null);
 
     useEffect(() => {
-        let language: any = localStorage.getItem('lang');
         let dataList: any = data;
-        setLearning(dataList[language]?.learning)
-        setLang(language);
-
+        setLearning(dataList[lang]?.learning)
     },[lang])
 
     const scroolToElement = useCallback((id: string) => {
-        console.log('scrool learning')
         if(id && id.length){
             if (typeof window !== "undefined") {
                 let element = document.getElementById(id);
@@ -30,10 +27,6 @@ const LearningComponent = () => {
                 }
             }
         }
-    },[])
-
-    const goDemo = useCallback(() => {
-
     },[])
 
     return (
@@ -51,8 +44,8 @@ const LearningComponent = () => {
                                 <div className={css.learning__btn__demo}>
                                     <button onClick={() => scroolToElement('contact')}>{learning?.btnText}</button>
                                 </div>
-                                <div className={css.learning__btn__more} onClick={() => goDemo()}>
-                                    <Link href={"demo"}>{learning?.more}</Link>
+                                <div className={css.learning__btn__more}>
+                                    <Link href={{pathname:'/'+lang+'/demo'}}>{learning?.more}</Link>
                                     <FontAwesomeIcon icon={faArrowRight}/>
                                 </div>
                             </div>

@@ -9,5 +9,6 @@ export const API = {
     blogTags: environment + 'blog-tags',
     mobPrefix: environment + 'mob-prefixes',
     contactRequest: environment + 'contact-request',
-    scheduleDemo: environment + 'schedule-demo'
+    scheduleDemo: environment + 'schedule-demo',
+    subscribtion: environment + 'subscribtion'
 }

@@ -10,7 +10,7 @@ import {useRouter} from "next/router";
 import {decodeURL, encodeURL} from "../../../helpers/common-functions/common-functions";
 
 function ChildRootLayoutComponent({children}: any){
-    const [lang,setLang] = useState('az');
+    const lang = useSelector(({publicReducers}: any)=>publicReducers.lang)
     const [staticContent,setStaticContent] = useState<any>(null);
     const dispatch: any = useDispatch();
     const blogCategories: any = useSelector((state: any) => state.blogReducers.blogCategories);
@@ -23,20 +23,16 @@ function ChildRootLayoutComponent({children}: any){
         categoryIds: null
     })
     const router = useRouter();
-    let {queryParams}: any | undefined = router.query;
+    let {queryParams,langId}: any | undefined = router.query;
 
     useEffect(() => {
-        let language: any = localStorage.getItem('lang');
         let dataList: any = data;
-        setLang(language);
-        setStaticContent(dataList[language]?.blog)
-        console.log(router)
+        setStaticContent(dataList[lang]?.blog)
     },[lang])
 
     useEffect(() => {
         if(queryParams){
             let decoded: any = decodeURL(queryParams);
-            console.log(decoded);
             let obj = {
                 page:decoded.page,
                 limit:decoded.limit,
@@ -66,7 +62,6 @@ function ChildRootLayoutComponent({children}: any){
     // }
 
     const getCategoryId = useCallback((id: number) => {
-        console.log(id);
         if(queryParams){
             let decoded: any = decodeURL(queryParams);
             let obj = {
@@ -76,7 +71,7 @@ function ChildRootLayoutComponent({children}: any){
                 tagIds: decoded.tagIds,
                 categoryIds: id
             }
-            router.replace({pathname:'/blog',query: {queryParams:`${encodeURL(obj)}`}})
+            router.replace({pathname:router.pathname,query: {...router.query, queryParams:`${encodeURL(obj)}`}})
         }else {
             let obj: any = {
                 page:1,
@@ -86,12 +81,11 @@ function ChildRootLayoutComponent({children}: any){
                 categoryIds: id
             }
             obj.categoryIds = id
-            router.replace({pathname:'/blog',query: {queryParams:`${encodeURL(obj)}`}})
+            router.replace({pathname:router.pathname,query: {...router.query, queryParams:`${encodeURL(obj)}`}})
         }
     },[router])
 
     const getTagId = (id: number) => {
-        console.log(id);
         if(queryParams){
             let decoded: any = decodeURL(queryParams);
             let obj = {
@@ -101,7 +95,8 @@ function ChildRootLayoutComponent({children}: any){
                 tagIds: id,
                 categoryIds: decoded.categoryIds
             }
-            router.replace({pathname:'/blog',query: {queryParams:`${encodeURL(obj)}`}})
+            console.log(router.pathname)
+            router.replace({pathname:router.pathname,query: {...router.query,queryParams:`${encodeURL(obj)}`}})
         }else {
             let obj: any = {
                 page:1,
@@ -111,20 +106,21 @@ function ChildRootLayoutComponent({children}: any){
                 categoryIds: null
             }
             obj.tagIds = id
-            router.replace({pathname:'/blog',query: {queryParams:`${encodeURL(obj)}`}})
+            console.log(router.pathname)
+            router.replace({pathname:router.pathname,query: {...router.query, queryParams:`${encodeURL(obj)}`}})
         }
     }
 
     useEffect(() => {
+        console.log(router)
         dispatch(getBlogCategories())
         dispatch(getBlogTags())
-    },[dispatch])
+    },[dispatch,router])
 
     const queryParamChange = useCallback(debounce((obj)=>{
         console.log(obj)
         if(obj !== null){
-            console.log('debounce abi')
-            router.replace({pathname:'/blog',query: {queryParams:`${encodeURL(obj)}`}})
+            router.replace({pathname:router.pathname,query: {...router.query, queryParams:`${encodeURL(obj)}`}})
         }else {
             return false;
         }
@@ -132,8 +128,6 @@ function ChildRootLayoutComponent({children}: any){
 
 
     const handleInputChange = useCallback((val: string)=>{
-            console.log('lmao')
-            console.log(val);
         let obj: any = null
             if(val?.trim()?.length > 0 && val?.trim() !== ''){
                 if(queryParams){

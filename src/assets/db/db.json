@@ -5,12 +5,13 @@
       {
         "id": 1,
         "text": "Ana səhifə",
-        "linkto": "/"
+        "linkto": "/[langId]"
       },
       {
         "id": 2,
         "text": "Niyə Lorex",
-        "routeId": "video"
+        "routeId": "video",
+        "linkto": "/[langId]"
       },
       {
         "id": 3,
@@ -20,7 +21,7 @@
       {
         "id": 4,
         "text": "Bloq",
-        "linkto": "/blog"
+        "linkto": "/[langId]/blog"
       }
     ],
     "modalContactButton": "Əlaqə",
@@ -159,12 +160,13 @@
       {
         "id": 1,
         "text": "Main page",
-        "linkto": "/"
+        "linkto": "/[langId]"
       },
       {
         "id": 2,
         "text": "Why Lorex",
-        "routeId": "video"
+        "routeId": "video",
+        "linkto": "/[langId]"
       },
       {
         "id": 3,
@@ -174,7 +176,7 @@
       {
         "id": 4,
         "text": "Blog",
-        "linkto": "/blog"
+        "linkto": "/[langId]/blog"
       }
     ],
     "modalContactButton": "Contact",
@@ -313,12 +315,14 @@
       {
         "id": 1,
         "text": "Главная страница",
-        "linkto": "/"
+        "linkto": "/[langId]"
       },
       {
         "id": 2,
         "text": "Почему Лорекс",
-        "routeId": "video"
+        "routeId": "video",
+        "linkto": "/[langId]"
+
       },
       {
         "id": 3,
@@ -328,7 +332,7 @@
       {
         "id": 4,
         "text": "Блог",
-        "linkto": "/blog"
+        "linkto": "/[langId]/blog"
       }
     ],
     "modalContactButton": "Контакт",

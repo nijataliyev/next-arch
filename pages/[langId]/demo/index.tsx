@@ -1,26 +1,24 @@
 import scss from './demo.module.scss';
 import Image from "next/image";
-import DemoOne from '../../src/assets/images/demo1.svg';
-import DemoTwo from '../../src/assets/images/demo2.svg';
-import DemoThree from '../../src/assets/images/demo3.svg';
-import DemoFour from '../../src/assets/images/demo4.svg';
-import * as data from '../../src/assets/db/db.json';
+import DemoOne from '../../../src/assets/images/demo1.svg';
+import DemoTwo from '../../../src/assets/images/demo2.svg';
+import DemoThree from '../../../src/assets/images/demo3.svg';
+import DemoFour from '../../../src/assets/images/demo4.svg';
+import * as data from '../../../src/assets/db/db.json';
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
+import {useSelector} from "react-redux";
 
 const Demo = () => {
+    const lang = useSelector(({publicReducers}: any)=>publicReducers.lang)
     const router: any = useRouter();
-    const [lang,setLang] = useState('az');
     const [staticContent,setStaticContent] = useState<any>(null);
     useEffect(() => {
-        let language: any = localStorage.getItem('lang');
         let dataList: any = data;
-        setStaticContent(dataList[language]?.demo)
-        setLang(language)
+        setStaticContent(dataList[lang]?.demo)
     },[lang])
-
     const goToHome = () => {
-        router.push('/')
+        router.replace('/'+lang)
     }
 
     return (

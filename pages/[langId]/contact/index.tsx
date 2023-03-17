@@ -1,10 +1,10 @@
 import scss from './contact.module.scss';
-import * as data from '../../src/assets/db/db.json';
+import * as data from '../../../src/assets/db/db.json';
 import {useCallback, useEffect, useState} from "react";
-import {changeInputValue, touchInputs} from "../../src/core/helpers/common-functions/common-functions";
+import {changeInputValue, touchInputs} from "../../../src/core/helpers/common-functions/common-functions";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
-import {postContactList} from "../../src/store/modules/contact-store/contact-action";
+import {postContactList} from "../../../src/store/modules/contact-store/contact-action";
 import {useDispatch} from "react-redux";
 
 const Contact = () => {
@@ -152,7 +152,7 @@ const Contact = () => {
                             <p>{staticContent?.text}</p>
                         </div>
                         <div className={scss.contact__form}>
-                            <form action="" onSubmit={handleSubmit}>
+                            <form action="[lang]/contact" onSubmit={handleSubmit}>
                                 <div className={scss.contact__form__content}>
                                     <label htmlFor="">{staticContent?.username}
                                         <sup>

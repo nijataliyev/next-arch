@@ -8,51 +8,43 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import module from "../header-item/header-item.module.scss";
 import Link from "next/link";
 import {setLocalization} from "../../../../../../store/modules/public-store/public-actions";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import * as data from '../../../../../../assets/db/db.json';
-import FaceBookIcon from '../../../../../../assets/images/icons/facebook-f.svg';
-import InstagramIcon from '../../../../../../assets/images/icons/instagram.svg';
-import LinkedinIcon from '../../../../../../assets/images/icons/linkedin-in.svg';
-import YoutubeIcon from '../../../../../../assets/images/icons/youtube.svg';
-import {Im} from "react-flags-select";
+import FaceBookIcon from '../../../../../../assets/images/icons/facebook-f-brands.svg';
+import InstagramIcon from '../../../../../../assets/images/icons/instagram-brands.svg';
+import LinkedinIcon from '../../../../../../assets/images/icons/linkedin-in-brands.svg';
+import YoutubeIcon from '../../../../../../assets/images/icons/youtube-brands.svg';
 
 const MobileHeaderItemComponent = ({showModal, setModalDropShow, nav}: any) => {
     const dispatch: any = useDispatch();
     const router = useRouter();
-    const [lang,setLang] = useState('');
+    const lang = useSelector(({publicReducers}: any)=>publicReducers.lang);
     const [staticContent,setStaticContent] = useState<any>(null);
     const toGo = useCallback(() => {
-        router.push('/')
+        router.push('/'+lang)
     }, [])
 
     useEffect(() => {
-        console.log(router)
-    },[router])
-
-    useEffect(() => {
-        let language: any = localStorage.getItem('lang');
         let dataList: any = data;
-        setLang(language)
-        setStaticContent(dataList[language]?.demo)
+        setStaticContent(dataList[lang]?.demo)
     },[lang])
 
-    const scroolElement = (routeName: string) => {
-        console.log('scrool mobile')
+    const scroolElement = (link:string,routeName: string) => {
         if(routeName && routeName.length){
-            router.replace('/').then(() => {
+            router.replace({pathname: link ?? router.pathname, query:{...router.query}}).then(() => {
                 let element: any = document.querySelector("#"+routeName);
-                setModalDropShow(false)
                 if(element){
                     element.scrollIntoView({behavior: 'smooth'})
+                    setModalDropShow(false)
                 }
             })
         }
     }
     
-    const handleClick = useCallback((lang: string) => {
-        dispatch(setLocalization(lang))
-        setLang(lang)
-        localStorage.setItem('lang', lang);
+    const handleClick = useCallback((language: string) => {
+        dispatch(setLocalization(language))
+        localStorage.setItem('lang', language);
+        router.replace({pathname: router.pathname, query:{...router.query,langId:language}})
     },[dispatch,lang])
 
     return (
@@ -64,7 +56,9 @@ const MobileHeaderItemComponent = ({showModal, setModalDropShow, nav}: any) => {
                             <div className="col-12">
                                 <div className={scss.mobile__header}>
                                     <div className={scss.mobile__header__logo}>
-                                        <Image onClick={toGo} src={Logo} alt="logo"/>
+                                        <Link href={{pathname:'/',query:{...router.query,langId:lang}}} onClick={() => setModalDropShow(false)}>
+                                            <Image src={Logo} alt="logo"/>
+                                        </Link>
                                     </div>
                                     <div className={scss.mobile__header__icon}>
                                         <FontAwesomeIcon onClick={() => setModalDropShow(false)} icon={faXmark}/>
@@ -78,21 +72,21 @@ const MobileHeaderItemComponent = ({showModal, setModalDropShow, nav}: any) => {
                                     {
                                         nav.length && nav.map((navList: any, index: number) => {
                                             return (
-                                                <li className={router.pathname === navList?.linkto ? scss.mobile__activeClass : scss.mobile__content__list}
+                                                <li className={(router.pathname === navList?.linkto) && !navList.routeId ? scss.mobile__activeClass : scss.mobile__content__list}
                                                     key={index}>
-                                                    {navList.linkto ?
-                                                        <Link href={navList?.linkto || undefined} onClick={() => setModalDropShow(false)}>{navList.text}</Link> :
-                                                        <a onClick={() => scroolElement(navList.routeId)}
+                                                    {!navList.routeId ?
+                                                        <Link shallow={true} href={{pathname: navList?.linkto || undefined,query:{langId:lang}}} onClick={() => setModalDropShow(false)}>{navList.text}</Link> :
+                                                        <a onClick={() => scroolElement(navList.linkto,navList.routeId)}
                                                            className={module.header__static}>{navList.text}</a>}
                                                 </li>
                                             )
                                         })
                                     }
-                                    <li className={router.pathname === '/demo' ? scss.mobile__activeClass : scss.mobile__content__list}>
-                                        <Link href={'/demo'} onClick={() => setModalDropShow(false)}>{staticContent?.demoBtn}</Link>
+                                    <li className={router.pathname === `/[langId]/demo` ? scss.mobile__activeClass : scss.mobile__content__list}>
+                                        <Link href={{pathname:'/'+lang+'/demo'}} onClick={() => setModalDropShow(false)}>{staticContent?.demoBtn}</Link>
                                     </li>
-                                    <li className={router.pathname === '/contact' ? scss.mobile__activeClass : scss.mobile__content__list}>
-                                        <Link href={'/contact'} onClick={() => setModalDropShow(false)}>{staticContent?.navContact}</Link>
+                                    <li className={router.pathname === '/[langId]/contact' ? scss.mobile__activeClass : scss.mobile__content__list}>
+                                        <Link href={{pathname:'/'+lang+'/contact'}} onClick={() => setModalDropShow(false)}>{staticContent?.navContact}</Link>
                                     </li>
                                 </ul>
                             </div>

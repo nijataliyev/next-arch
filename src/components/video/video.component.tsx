@@ -3,16 +3,15 @@ import React, {useEffect, useRef, useState} from "react";
 import videojs from "video.js";
 import 'video.js/dist/video-js.css';
 import * as data from '../../assets/db/db.json';
+import {useSelector} from "react-redux";
 const VideoComponent = () => {
     const videoRef: any = useRef(null);
-    const [lang,setLang] = useState('az');
+    const lang = useSelector(({publicReducers}: any)=>publicReducers.lang)
     const [staticContent,setStaticContent] = useState<any>(null);
 
     useEffect(() => {
         let dataList: any = data;
-        let language: any = localStorage.getItem('lang');
-        setLang(language);
-        setStaticContent(dataList[language]?.video)
+        setStaticContent(dataList[lang]?.video)
     },[lang])
 
     useEffect(() => {

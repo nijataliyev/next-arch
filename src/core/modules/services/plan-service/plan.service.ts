@@ -1,5 +1,5 @@
 import {injectable} from "tsyringe";
-import axios from "axios";
+import axios from "../../../axios/instances/axios";
 import {API} from "../../../config/api.config";
 
 @injectable()

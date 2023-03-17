@@ -17,8 +17,8 @@
     align-items: center;
     justify-content: flex-end;
     svg{
-      width: rem(40);
-      height: rem(40);
+      width: rem(30);
+      height: rem(30);
     }
   }
 
@@ -26,10 +26,14 @@
     height: 100%;
     display: flex;
     align-items: center;
-    img{
-      max-width: rem(250);
+    a{
       height: 100%;
-      cursor: pointer;
+      width: 100%;
+      img{
+        max-width: rem(250);
+        height: 100%;
+        cursor: pointer;
+      }
     }
   }
 
@@ -240,7 +244,7 @@
         height: 100%;
         width: 100%;
         font-family: $ec-regular;
-        font-size: rem(14);
+        font-size: rem(16);
         svg{
           color: $main-color;
           width: rem(40);
@@ -264,13 +268,13 @@
         border: none;
         outline: none;
         font-family: $ec-bold;
-        font-size: rem(14);
+        font-size: rem(16);
         color: $main-color;
         background-color: transparent;
         option{
           color: black;
           font-family: $ec-bold;
-          font-size: rem(14);
+          font-size: rem(16);
         }
       }
     }

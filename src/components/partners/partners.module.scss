@@ -17,7 +17,8 @@
     margin-bottom: rem(35);
     &__images{
       img{
-        width: 100%;
+        margin: 0 auto;
+        width: 98%;
         height: rem(150);
         object-fit: cover;
       }

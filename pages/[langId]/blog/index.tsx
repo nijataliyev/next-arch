@@ -1,27 +1,26 @@
 import {useCallback, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getBlogList} from "../../src/store/modules/blog-store/blog-action";
+import {getBlogList} from "../../../src/store/modules/blog-store/blog-action";
 import scss from './blog.module.scss';
 import {AppProps} from "next/app";
 import ReactPaginate from 'react-paginate';
-import ChildRootLayoutComponent from "../../src/core/layouts/public/child-root-layout/child-root-layout.component";
+import ChildRootLayoutComponent from "../../../src/core/layouts/public/child-root-layout/child-root-layout.component";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import Image from "next/image";
-import EmptyIcon from '../../src/assets/images/empty.jpg';
-import CalendarIcon from '../../src/assets/images/FontAwsome (calendar-day).svg';
-import EyeIcon from '../../src/assets/images/FontAwsome (eye).svg';
-import * as data from '../../src/assets/db/db.json';
-import {ICategories, ITags} from "../../src/core/modules/models/blog-model/types/blog";
-import {decodeURL, encodeURL} from "../../src/core/helpers/common-functions/common-functions";
-import LeftIcon from '../../src/assets/images/chevron-left-solid.svg';
-import RightIcon from '../../src/assets/images/chevron-right-solid.svg';
+import EmptyIcon from '../../../src/assets/images/empty.jpg';
+import CalendarIcon from '../../../src/assets/images/FontAwsome (calendar-day).svg';
+import EyeIcon from '../../../src/assets/images/FontAwsome (eye).svg';
+import * as data from '../../../src/assets/db/db.json';
+import {ICategories, ITags} from "../../../src/core/modules/models/blog-model/types/blog";
+import {decodeURL, encodeURL} from "../../../src/core/helpers/common-functions/common-functions";
+import LeftIcon from '../../../src/assets/images/chevron-left-solid.svg';
+import RightIcon from '../../../src/assets/images/chevron-right-solid.svg';
 
 const Blog = () => {
+    const lang = useSelector(({publicReducers}: any)=>publicReducers.lang)
     const dispatch: any = useDispatch();
-    const [lang,setLang] = useState('az');
     const [staticContent,setStaticContent] = useState<any>(null);
-    const [searchParams, setSearchParams] = useState({page: 1, limit: 5})
     const [params,setParams] = useState<any>({
         page:1,
         limit: 5,
@@ -33,14 +32,10 @@ const Blog = () => {
     const blogCount = useSelector((state: any) => state.blogReducers.blogCount);
     const router = useRouter();
     const {queryParams}: any = router.query;
-    // const {search,state} = useLocation();
-    // const url:any = search?.split('?')[1];
 
     useEffect(() => {
         if(queryParams){
-            console.log(queryParams)
             let decoded: any = decodeURL(queryParams);
-            console.log(decoded)
             setParams(() => {
                 return {
                     ...decoded
@@ -60,31 +55,18 @@ const Blog = () => {
                     ...obj
                 }
             })
-            console.log('dededededed')
             dispatch(getBlogList(obj));
         }
     }, [dispatch,router])
 
-    // useEffect(() => {
-    //     if(url){
-    //         console.log(url)
-    //        let decodedData = decodeURL(url)
-    //         console.log(decodedData)
-    //     }
-    //     console.log(router.query)
-    // },[router])
-
     useEffect(() => {
-        let language: any = localStorage.getItem('lang');
-        setLang(language);
         let dataList: any = data;
-        setStaticContent(dataList[language]?.blog);
+        setStaticContent(dataList[lang]?.blog);
     },[lang])
 
 
     const handlePageClick = useCallback((val: any) => {
         if(val){
-            console.log(params)
             let obj: any = {
                 page:params.page,
                 limit:params.limit,
@@ -105,13 +87,13 @@ const Blog = () => {
             }
 
 
-            router.replace({pathname:'/blog',query: {queryParams:`${encodeURL(obj)}`}})
+            router.replace({pathname:router.pathname,query: {...router.query, queryParams:`${encodeURL(obj)}`}})
         }
     }, [params])
 
     const gotoBlogId = (id: number) => {
         console.log(id)
-        router.replace(`/blog/${id}`)
+        router.replace({pathname: router.pathname+'/'+id,query:{...router.query}})
     }
 
     return (

@@ -6,8 +6,11 @@ import {useRouter} from "next/router";
 import Image from "next/image";
 import Logo from '../../../../../../assets/images/logo_idea-01.svg';
 import {changeInputValue} from "../../../../../helpers/common-functions/common-functions";
+import {useDispatch, useSelector} from "react-redux";
+import {postSubscribeList} from "../../../../../../store/modules/top-footer-store/top-footer.action";
 const TopFooterComponent = () => {
-    const [lang,setLang] = useState('az');
+    const dispatch: any = useDispatch();
+    const lang = useSelector(({publicReducers}: any)=>publicReducers.lang);
     const [inputState,setInputState] = useState({
         inputs:{
             email: {
@@ -35,13 +38,10 @@ const TopFooterComponent = () => {
 
     useEffect(() => {
         let datalist: any = data;
-        let language: any = localStorage.getItem('lang');
-        setLang(language);
-        setStaticContent(datalist[language]?.footer)
+        setStaticContent(datalist[lang]?.footer)
     },[lang])
 
     const scoolElement = useCallback((str: any) => {
-        console.log('scrool top footer')
         if(str && str.length){
             router.replace('/').then(() => {
                 let element: any = document.querySelector("#"+str);
@@ -60,6 +60,22 @@ const TopFooterComponent = () => {
         e.preventDefault();
         if(inputState.inputs.email.isValid){
             console.log('yes')
+
+            let obj:any = {
+                email: inputState.inputs.email.value,
+                lang: localStorage.getItem('lang')
+            }
+            dispatch(postSubscribeList(obj))
+            setInputState((prev: any) =>{
+                let prevInputState = {...prev}
+                let prevInput = prevInputState.inputs;
+                prevInput = {...prevInput, value: ''}
+                prevInputState = {...prevInputState,inputs: prevInput}
+                console.log(prevInputState)
+                return {
+                    ...prevInputState
+                }
+            })
         }else {
             return false;
         }
@@ -69,7 +85,7 @@ const TopFooterComponent = () => {
         <div className={scss.top}>
             <div className={'container'}>
                 <div className="row">
-                    <div className="col-md-6 col-lg-3">
+                    <div className="col-12 col-sm-6 col-md-6 col-lg-3">
                         <div className={scss.top__left}>
                             <h3>{staticContent?.commonHeading}</h3>
                             <ul className={scss.top__nav}>
@@ -79,7 +95,7 @@ const TopFooterComponent = () => {
                                             <li key={index}>
                                                 {
                                                     navList?.linkto ?
-                                                        <Link href={navList?.linkto || undefined}>{navList?.text}</Link> :
+                                                        <Link shallow={true} href={{pathname: navList?.linkto || undefined, query: {langId: lang}}}>{navList?.text}</Link> :
                                                         <a onClick={() => scoolElement(navList?.routeId)}>{navList?.text}</a>
                                                 }
                                             </li>
@@ -89,7 +105,7 @@ const TopFooterComponent = () => {
                             </ul>
                         </div>
                     </div>
-                    <div className="col-md-6 col-lg-4">
+                    <div className="col-12 col-sm-6 col-md-6 col-lg-4">
                         <div className={scss.top__middle}>
                             <h3>{staticContent?.contactHeading}</h3>
                             <div className={scss.top__info}>
@@ -106,11 +122,11 @@ const TopFooterComponent = () => {
                             </div>
                         </div>
                     </div>
-                    <div className={'col-md-12 col-lg-5'}>
+                    <div className={"col-12 col-sm-12 col-md-12 col-lg-5"}>
                         <div className={scss.top__right}>
                             <h3>{staticContent?.subscribeHeading}</h3>
                             <p>{staticContent?.text}</p>
-                            <form action="" onSubmit={formSubmit}>
+                            <form onSubmit={formSubmit}>
                                 <div className={scss.top__form}>
                                     <input type={inputState.inputs.email.type} onChange={(e) => handleInputChange(e.target.value,'email')}/>
                                     <button className={!inputState.inputs.email.isValid ? scss.top__form__btnError : scss.top__form__btnSuccess}>{staticContent?.btn}</button>

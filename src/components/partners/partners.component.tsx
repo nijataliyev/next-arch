@@ -6,25 +6,24 @@ import {getPartners} from "../../store/modules/partners-store/partners-action";
 import Image from "next/image";
 import {IPartners} from "../../core/modules/models/partners-model/types/partners";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import NatureOne from '../../assets/stattic-img/nature_5.jpg';
+import {useRouter} from "next/router";
 
 const PartnersComponent = () => {
     const dispatch: any = useDispatch();
     const partnersList = useSelector((state: any) => state.partnersReducers.partners)
-    const [lang, setLang] = useState('az');
+    const lang = useSelector(({publicReducers}: any)=>publicReducers.lang)
     const [staticContent, setStaticContent] = useState<any>(null)
 
     const settings = {
         dots: false,
+        gap: 10,
         infinite: true,
         slidesToShow: 3,
         slidesToScroll: 1,
         spaceBetween: 10,
         autoplay: true,
         arrows: false,
-        // speed: 2000,
         autoplaySpeed: 2000,
         pauseOnHover: true,
         responsive: [
@@ -54,7 +53,6 @@ const PartnersComponent = () => {
                 }
             }
         ]
-        // cssEase: "linear"
     };
 
     useEffect(() => {
@@ -62,10 +60,8 @@ const PartnersComponent = () => {
     }, [dispatch])
 
     useEffect(() => {
-        let language: any = localStorage.getItem('lang');
         let dataList: any = data;
-        setStaticContent(dataList[language]?.partners)
-        setLang(language);
+        setStaticContent(dataList[lang]?.partners)
     }, [lang])
 
     return (

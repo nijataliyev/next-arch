@@ -12,17 +12,18 @@ import FirstImg from '../../assets/images/freepik--background-simple--inject-46.
 import SecondImg from '../../assets/images/computer.svg';
 import ThirdImg from '../../assets/images/freepik--Hands--inject-46.svg';
 import {postScheduleDemoList} from "../../store/modules/contact-store/contact-action";
+import {useRouter} from "next/router";
 
 const ContactComponent = () => {
     const dispatch: any = useDispatch();
+    const router = useRouter();
     const planId = useSelector((state: any) => state.planReducers.planId)
     const blogCategoriesList = useSelector((state: any) => state.blogReducers.blogCategories)
     const mobPrefix = useSelector((state: any) => state.blogReducers.mobPrefix)
     const plansList = useSelector((state: any) => state.planReducers.plans)
+    const lang = useSelector(({publicReducers}: any)=>publicReducers.lang)
     const [flags, setFlags] = useState<string[]>([]);
     const [prefix, setPrefix] = useState('');
-    const [lang, setLang] = useState('az');
-    const [select, setSelect] = useState("AZ");
     const [staticContent, setStaticContent] = useState<any>(null)
     const [inputState, setInputState] = useState({
         inputs: {
@@ -155,7 +156,7 @@ const ContactComponent = () => {
     useEffect(() => {
         dispatch(getBlogCategories())
         dispatch(getMobPrefix())
-    }, [dispatch])
+    }, [dispatch,router])
 
     useEffect(() => {
         setInputState((prev: any) => {
@@ -169,19 +170,6 @@ const ContactComponent = () => {
             }
         })
     }, [blogCategoriesList])
-
-    // useEffect(() => {
-    //     setInputState((prev: any) => {
-    //         console.log(prev)
-    //         let prevInputState: any = {...prev}
-    //         const prevInput: any = prevInputState.inputs
-    //         prevInput.plan = {...prevInput.plan, options: [...plansList]}
-    //         prevInputState = {...prevInputState, inputs: prevInput}
-    //         return {
-    //             ...prevInputState
-    //         }
-    //     })
-    // }, [plansList])
 
     useEffect(() => {
         const list = mobPrefix.map((item: any) => {
@@ -205,11 +193,9 @@ const ContactComponent = () => {
     },[planId])
 
     useEffect(() => {
-        let language: any = localStorage.getItem('lang');
         let dataList: any = data;
-        const langContent = dataList[language]?.contact
+        const langContent = dataList[lang]?.contact
         setStaticContent(langContent)
-        setLang(language);
 
         setInputState((prev: any) => {
             let prevInputState: any = {...prev}
@@ -284,7 +270,6 @@ const ContactComponent = () => {
     }, [inputState.inputs])
 
     const onSelect = (code: any) => {
-        setSelect(code)
         if (mobPrefix) {
             let selectedItem = mobPrefix.find((item: any) => item.code === code)
             setPrefix(selectedItem.dialCode)
@@ -303,10 +288,6 @@ const ContactComponent = () => {
                 businessSphereId: 0,
                 planId: 0
             }
-
-            let dialCode: string = '';
-
-
             requestBody.fullname = inputState.inputs.fullName.value;
             requestBody.email = inputState.inputs.email.value;
             requestBody.contact = prefix ?  (prefix+inputState.inputs.phone.value) : ('+994'+inputState.inputs.phone.value);
