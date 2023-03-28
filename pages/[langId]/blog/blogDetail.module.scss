@@ -1,5 +1,30 @@
 @import "../../../src/assets/styles/abstracts/index";
-
+.back{
+  background-color: $white;
+  max-width: rem(110);
+  height: rem(46);
+  margin-bottom: rem(15);
+  border-radius: rem(10);
+  button{
+    cursor: pointer;
+    background-color: $white;
+    border: none;
+    border-radius: rem(10);
+    display: flex;
+    gap: rem(10);
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    span{
+      font-family: $ec-regular;
+      font-size: rem(16);
+    }
+    img{
+      width: rem(16);
+    }
+  }
+}
 .blogDetail{
   background-color: $white;
   padding: rem(15);
@@ -67,6 +92,17 @@
     }
     p{
       font-family: $ec-regular;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 991px) {
+  .blogDetail{
+    &__category{
+      ul{
+        padding-left: 0;
+      }
     }
   }
 }

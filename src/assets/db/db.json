@@ -16,7 +16,8 @@
       {
         "id": 3,
         "text": "Qiymətlər",
-        "routeId": "planning"
+        "routeId": "planning",
+        "linkto": "/[langId]"
       },
       {
         "id": 4,
@@ -78,7 +79,9 @@
     },
     "blog": {
       "category": "Kateqoriyalar",
-      "tag": "Təglər"
+      "tag": "Təglər",
+      "notInfo": "Axtarış üzrə məlumat tapılmadı",
+      "back": "Geri"
     },
     "partners": {
       "title": "Bizi seçənlər",
@@ -93,17 +96,19 @@
         {
           "id": 1,
           "text": "Niyə Lorex",
-          "routeId": "video"
+          "routeId": "video",
+          "linkto": "/[langId]"
         },
         {
           "id": 2,
           "text": "Qiymətlər",
-          "routeId": "planning"
+          "routeId": "planning",
+          "linkto": "/[langId]"
         },
         {
           "id": 3,
           "text": "Bloq",
-          "linkto": "/blog"
+          "linkto": "/[langId]/blog"
         },
         {
           "id": 4,
@@ -171,7 +176,8 @@
       {
         "id": 3,
         "text": "Payments",
-        "routeId": "planning"
+        "routeId": "planning",
+        "linkto": "/[langId]"
       },
       {
         "id": 4,
@@ -234,7 +240,9 @@
     },
     "blog": {
       "category": "Categories",
-      "tag": "Tags"
+      "tag": "Tags",
+      "notInfo": "Search information not found",
+      "back": "Back"
     },
     "partners": {
       "title": "Those who choose us",
@@ -248,17 +256,19 @@
         {
           "id": 1,
           "text": "Why Lorex",
-          "routeId": "video"
+          "routeId": "video",
+          "linkto": "/[langId]"
         },
         {
           "id": 2,
           "text": "Price",
-          "routeId": "planning"
+          "routeId": "planning",
+          "linkto": "/[langId]"
         },
         {
           "id": 3,
           "text": "Blog",
-          "linkto": "/blog"
+          "linkto": "/[langId]/blog"
         },
         {
           "id": 4,
@@ -327,7 +337,8 @@
       {
         "id": 3,
         "text": "Цены",
-        "routeId": "planning"
+        "routeId": "planning",
+        "linkto": "/[langId]"
       },
       {
         "id": 4,
@@ -390,7 +401,9 @@
     },
     "blog": {
       "category": "Категории",
-      "tag": "Теги"
+      "tag": "Теги",
+      "notInfo": "Информация для поиска не найдена",
+      "back": "Назад"
     },
     "partners": {
       "title": "Те, кто выбирает нас",
@@ -404,17 +417,19 @@
         {
           "id": 1,
           "text": "Почему Лорекс",
-          "routeId": "video"
+          "routeId": "video",
+          "linkto": "/[langId]"
         },
         {
           "id": 2,
           "text": "Цены",
-          "routeId": "planning"
+          "routeId": "planning",
+          "linkto": "/[langId]"
         },
         {
           "id": 3,
           "text": "Блог",
-          "linkto": "/blog"
+          "linkto": "/[langId]/blog"
         },
         {
           "id": 4,

@@ -7,7 +7,6 @@
   padding: rem(11) rem(20);
   text-shadow: none;
   font-size: rem(10);
-  //color: $main-button-text-area-color;
   cursor: pointer;
   font-weight: 500;
   background-color: $main-color;
@@ -22,71 +21,6 @@
     box-shadow: none;
   }
 
-  //&__primary {
-  //  color: $button-text-color !important;
-  //  background-color: $primary-button-color !important;
-  //  border-color: $primary-button-color;
-  //}
-  //
-  //&__add__primary{
-  //  color: $button-text-color !important;
-  //  background-color: $btn-bg !important;
-  //  border-color: $btn-bg !important;
-  //}
-  //
-  //&__info {
-  //  color: $button-text-color !important;
-  //  background-color: $info-button-color;
-  //  border-color: $info-button-color;
-  //}
-  //
-  //&__success {
-  //  color: $button-text-color !important;
-  //  background-color: $success-button-color;
-  //  border-color: $success-button-color;
-  //}
-  //
-  //&__restart{
-  //  background-color: $upload-button-color !important;
-  //  color: $btn-bg !important;
-  //}
-  //
-  //&__warning {
-  //  color: $button-text-color !important;
-  //  background-color: $warning-button-color;
-  //  border-color: $warning-button-color;
-  //}
-  //
-  //&__danger {
-  //  color: $button-text-color !important;
-  //  background-color: $danger-button-color;
-  //  border-color: $danger-button-color;
-  //}
-
-  //&__secondary {
-  //  color: $button-text-color !important;
-  //  background-color: $secondary-button-color;
-  //  border-color: $secondary-button-color;
-  //}
-  //
-  //&__dark {
-  //  color: $button-text-color !important;
-  //  background-color: $dark-button-color !important;
-  //  border-color: $dark-button-color !important;
-  //}
-  //
-  //&__gray {
-  //  color: $gray-button-text-color !important;
-  //  background-color: $btn-bg-light;
-  //}
-
-
-
-  //&__cancel {
-  //  background-color: $bg-color-btn-cancel !important;
-  //  color: $white !important;
-  //}
-
   &__outline{
     border: 1px solid;
   }
@@ -96,30 +30,6 @@
     background-color: $white !important;
     border: rem(1) solid $bg-btn !important;
   }
-
-  //&__outline__info {
-  //  color: $button-text-color !important;
-  //  background-color: $info-button-color;
-  //  border-color: $info-button-color;
-  //}
-
-  //&__outline__success {
-  //  color: $button-text-color !important;
-  //  background-color: $success-button-color;
-  //  border-color: $success-button-color;
-  //}
-
-  //&__outline__warning {
-  //  color: $button-text-color !important;
-  //  background-color: $warning-button-color;
-  //  border-color: $warning-button-color;
-  //}
-
-  //&__outline__danger {
-  //  color: $button-text-color !important;
-  //  background-color: $danger-button-color !important;
-  //  border-color: $danger-button-color !important;
-  //}
 
 
   &__rounded {

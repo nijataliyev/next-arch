@@ -1,6 +1,6 @@
 import scss from './bottom-footer.module.scss';
 import Image from 'next/image';
-import Logo from '../../../../../../assets/images/Group 128.svg';
+import Logo from '../../../../../../assets/images/group-128.svg';
 import FaceBook from '../../../../../../assets/images/facebook-f-brands.svg';
 import Instagram from '../../../../../../assets/images/instagram-brands.svg';
 import Linkedin from '../../../../../../assets/images/linkedin-in-brands.svg';

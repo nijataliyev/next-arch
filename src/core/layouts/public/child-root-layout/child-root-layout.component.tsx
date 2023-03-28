@@ -8,34 +8,39 @@ import {getBlogCategories, getBlogTags} from "../../../../store/modules/blog-sto
 import debounce from "lodash.debounce";
 import {useRouter} from "next/router";
 import {decodeURL, encodeURL} from "../../../helpers/common-functions/common-functions";
+import CancelBlueIcon from '../../../../assets/images/icons/cancel--blue-rounded.svg';
+import CancelWhiteIcon from '../../../../assets/images/icons/cancel-white-rounded.svg';
+import FilterIcon from '../../../../assets/images/icons/filter.svg';
+import Image from "next/image";
 
-function ChildRootLayoutComponent({children}: any){
-    const lang = useSelector(({publicReducers}: any)=>publicReducers.lang)
-    const [staticContent,setStaticContent] = useState<any>(null);
+function ChildRootLayoutComponent({children}: any) {
+    const lang = useSelector(({publicReducers}: any) => publicReducers.lang)
+    const [staticContent, setStaticContent] = useState<any>(null);
     const dispatch: any = useDispatch();
+    const [isDropDown,setIsDropDown] = useState(false);
     const blogCategories: any = useSelector((state: any) => state.blogReducers.blogCategories);
     const blogTags: any = useSelector((state: any) => state.blogReducers.blogTags);
-    const [params,setParams] = useState<any>({
-        page:1,
+    const [params, setParams] = useState<any>({
+        page: 1,
         limit: 5,
         title: '',
         tagIds: null,
         categoryIds: null
     })
     const router = useRouter();
-    let {queryParams,langId}: any | undefined = router.query;
+    let {queryParams, langId}: any | undefined = router.query;
 
     useEffect(() => {
         let dataList: any = data;
         setStaticContent(dataList[lang]?.blog)
-    },[lang])
+    }, [lang])
 
     useEffect(() => {
-        if(queryParams){
+        if (queryParams) {
             let decoded: any = decodeURL(queryParams);
             let obj = {
-                page:decoded.page,
-                limit:decoded.limit,
+                page: decoded.page,
+                limit: decoded.limit,
                 title: decoded.title,
                 tagIds: decoded.tagIds,
                 categoryIds: decoded.categoryIds
@@ -45,195 +50,300 @@ function ChildRootLayoutComponent({children}: any){
                     ...obj
                 }
             })
-        }else {
+        } else {
             let obj = {
-                page:1,
-                limit:5,
+                page: 1,
+                limit: 5,
                 title: '',
                 tagIds: null,
                 categoryIds: null
             }
             setParams(obj)
         }
-    },[router])
-
-    // const urlChangeHandler = (searchValue: string,blogCategoryId: number,blogTagId: number){
-    //     router.push({query:})
-    // }
+    }, [router])
 
     const getCategoryId = useCallback((id: number) => {
-        if(queryParams){
+        if (queryParams) {
             let decoded: any = decodeURL(queryParams);
-            let obj = {
-                page:decoded.page,
-                limit:decoded.limit,
-                title: decoded.title,
-                tagIds: decoded.tagIds,
-                categoryIds: id
+            if (id !== decoded.categoryIds) {
+                let obj = {
+                    page: decoded.page,
+                    limit: decoded.limit,
+                    title: decoded.title,
+                    tagIds: decoded.tagIds,
+                    categoryIds: id
+                }
+                router.replace({pathname: router.pathname, query: {...router.query, queryParams: `${encodeURL(obj)}`}})
+            } else {
+                let obj = {
+                    page: decoded.page,
+                    limit: decoded.limit,
+                    title: decoded.title,
+                    tagIds: decoded.tagIds,
+                    categoryIds: null
+                }
+                router.replace({pathname: router.pathname, query: {...router.query, queryParams: `${encodeURL(obj)}`}})
             }
-            router.replace({pathname:router.pathname,query: {...router.query, queryParams:`${encodeURL(obj)}`}})
-        }else {
+        } else {
             let obj: any = {
-                page:1,
+                page: 1,
                 limit: 5,
                 title: '',
                 tagIds: null,
                 categoryIds: id
             }
             obj.categoryIds = id
-            router.replace({pathname:router.pathname,query: {...router.query, queryParams:`${encodeURL(obj)}`}})
+            router.replace({pathname: router.pathname, query: {...router.query, queryParams: `${encodeURL(obj)}`}})
         }
-    },[router])
+    }, [router])
 
     const getTagId = (id: number) => {
-        if(queryParams){
+        if (queryParams) {
             let decoded: any = decodeURL(queryParams);
-            let obj = {
-                page:decoded.page,
-                limit:decoded.limit,
-                title: decoded.title,
-                tagIds: id,
-                categoryIds: decoded.categoryIds
+            if (id !== decoded.tagIds) {
+                let obj = {
+                    page: decoded.page,
+                    limit: decoded.limit,
+                    title: decoded.title,
+                    tagIds: id,
+                    categoryIds: decoded.categoryIds
+                }
+                router.replace({pathname: router.pathname, query: {...router.query, queryParams: `${encodeURL(obj)}`}})
+            } else {
+                let obj = {
+                    page: decoded.page,
+                    limit: decoded.limit,
+                    title: decoded.title,
+                    tagIds: null,
+                    categoryIds: decoded.categoryIds
+                }
+                router.replace({pathname: router.pathname, query: {...router.query, queryParams: `${encodeURL(obj)}`}})
             }
-            console.log(router.pathname)
-            router.replace({pathname:router.pathname,query: {...router.query,queryParams:`${encodeURL(obj)}`}})
-        }else {
+        } else {
             let obj: any = {
-                page:1,
+                page: 1,
                 limit: 5,
                 title: '',
                 tagIds: id,
                 categoryIds: null
             }
             obj.tagIds = id
-            console.log(router.pathname)
-            router.replace({pathname:router.pathname,query: {...router.query, queryParams:`${encodeURL(obj)}`}})
+            router.replace({pathname: router.pathname, query: {...router.query, queryParams: `${encodeURL(obj)}`}})
         }
     }
 
     useEffect(() => {
-        console.log(router)
         dispatch(getBlogCategories())
         dispatch(getBlogTags())
-    },[dispatch,router])
+    }, [dispatch, router])
 
-    const queryParamChange = useCallback(debounce((obj)=>{
-        console.log(obj)
-        if(obj !== null){
-            router.replace({pathname:router.pathname,query: {...router.query, queryParams:`${encodeURL(obj)}`}})
-        }else {
+    const queryParamChange = useCallback(debounce((obj) => {
+        if (obj !== null) {
+            router.replace({pathname: router.pathname, query: {...router.query, queryParams: `${encodeURL(obj)}`}})
+        } else {
             return false;
         }
-    }, 500),[router])
+    }, 500), [router])
 
 
-    const handleInputChange = useCallback((val: string)=>{
+    const handleInputChange = useCallback((val: string) => {
         let obj: any = null
-            if(val?.trim()?.length > 0 && val?.trim() !== ''){
-                if(queryParams){
-                    let decoded: any = decodeURL(queryParams);
-                    console.log(decoded)
-                    obj = {
-                        page:1,
-                        limit:decoded.limit,
-                        title: val,
-                        tagIds: decoded.tagIds,
-                        categoryIds: decoded.categoryIds
-                    }
-
-                    console.log(obj)
-                    setParams(obj)
-                }else {
-                    obj = {
-                        page:1,
-                        limit:5,
-                        title: val,
-                        tagIds: null,
-                        categoryIds: null
-                    }
-                    setParams(() => {
-                        return {
-                            ...obj
-                        }
-                    })
-                    console.log('swsw')
+        if (val?.trim()?.length > 0 && val?.trim() !== '') {
+            if (queryParams) {
+                let decoded: any = decodeURL(queryParams);
+                obj = {
+                    page: 1,
+                    limit: decoded.limit,
+                    title: val,
+                    tagIds: decoded.tagIds,
+                    categoryIds: decoded.categoryIds
                 }
-                console.log(val)
-                console.log('valid')
-                // dispatch(getContactForm(pageParams, {searchParams: e.target.value?.trim()}))
-            }else if(val?.length === 0) {
-                if(queryParams){
-                    let decoded: any = decodeURL(queryParams);
-                    obj = {
-                        page:1,
-                        limit:decoded.limit,
-                        title: val,
-                        tagIds: decoded.tagIds,
-                        categoryIds: decoded.categoryIds
-                    }
-                    setParams((prev: any) => {
-                        return {
-                            ...obj
-                        }
-                    })
+                setParams(obj)
+            } else {
+                obj = {
+                    page: 1,
+                    limit: 5,
+                    title: val,
+                    tagIds: null,
+                    categoryIds: null
                 }
-                console.log('invalid')
-                // dispatch(getContactForm({PageSize: 10, PageNumber: 1}, {searchParams: ''}))
+                setParams(() => {
+                    return {
+                        ...obj
+                    }
+                })
             }
-            // this.setState((prev: any) =>{
-            //     return {
-            //         ...prev,
-            //         searchValue: val
-            //     }
-            // })
-            // if (val && val !== '') {
-            //     // this.getMyOrders(this.state.currentPage,this.state.pageSize, this.state.searchValue)
-            // }
+        } else if (val?.length === 0) {
+            if (queryParams) {
+                let decoded: any = decodeURL(queryParams);
+                obj = {
+                    page: 1,
+                    limit: decoded.limit,
+                    title: val,
+                    tagIds: decoded.tagIds,
+                    categoryIds: decoded.categoryIds
+                }
+                setParams((prev: any) => {
+                    return {
+                        ...obj
+                    }
+                })
+            }
+        }
         queryParamChange(obj)
-    },[queryParamChange, router.query])
+    }, [queryParamChange, router.query])
+
+    const toggleDropDown = useCallback(() => {
+        setIsDropDown(prev => !prev)
+    },[])
 
     return (
-        <div className={scss.child}>
-            <div className="container">
-                <div className="row">
-                    <div className="col-4">
-                        <div className={scss.child__search}>
-                            <div className={scss.child__inp}>
-                                <input value={params.title} type="text" onChange={(e: any) => handleInputChange(e.target.value)}/>
-                                <FontAwesomeIcon icon={faSearch}/>
+        <>
+            <div className={scss.child}>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12 col-lg-4">
+                            <div className={scss.child__search}>
+                                <div className={scss.child__inp}>
+                                    <input value={params.title} type="text"
+                                           onChange={(e: any) => handleInputChange(e.target.value)}/>
+                                    <FontAwesomeIcon icon={faSearch}/>
+                                </div>
+                            </div>
+                            <div className={scss.child__category}>
+                                <h1>{staticContent?.category}</h1>
+                                <ul>
+                                    {
+                                        blogCategories && blogCategories.map((listCategory: any, index: number) => {
+                                            return (
+                                                <li onClick={() => getCategoryId(listCategory.id)}
+                                                    className={params.categoryIds === listCategory.id ? scss.child__category__active : ''}
+                                                    key={index}>
+                                                    {
+                                                        params.categoryIds === listCategory.id ?
+                                                            <Image className={scss.child__category__icon} src={CancelBlueIcon}
+                                                                   alt={'CancelBlueIcon'}/> : null
+                                                    }
+                                                    {listCategory.title}
+                                                </li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                            </div>
+                            <div className={scss.child__tags}>
+                                <h1>{staticContent?.tag}</h1>
+                                <ul>
+                                    {
+                                        blogTags && blogTags.map((listTags: any, index: number) => {
+                                            return (
+                                                <li onClick={() => getTagId(listTags.id)}
+                                                    className={params.tagIds === listTags.id ? scss.child__tags__active : ''}
+                                                    key={index}>
+                                                    {listTags.title}
+                                                    {
+                                                        params.tagIds === listTags.id ?
+                                                            <Image className={scss.child__tags__icon} src={CancelWhiteIcon}
+                                                                   alt={'CancelWhiteIcon'}/> : null
+                                                    }
+                                                </li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                            </div>
+                            <div className={scss.child__mobile}>
+                                <div className={scss.child__mobile__search}>
+                                    <input type="text" value={params.title} onChange={(e: any) => handleInputChange(e.target.value)}/>
+                                    <FontAwesomeIcon icon={faSearch}/>
+                                </div>
+                                <div className={scss.child__mobile__filter}>
+                                    <button onClick={() => toggleDropDown()}>
+                                        <Image src={FilterIcon} alt={'FilterIcon'}/>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <div className={scss.child__category}>
-                            <h1>{staticContent?.category}</h1>
-                            <ul>
-                                {
-                                    blogCategories && blogCategories.map((listCategory:any,index: number) => {
-                                        return (
-                                            <li onClick={() => getCategoryId(listCategory.id)} className={params.categoryIds === listCategory.id ? scss.child__category__active : ''} key={index}>{listCategory.title}</li>
-                                        )
-                                    })
-                                }
-                            </ul>
+                        <div className="col-12 col-lg-8">
+                            {!isDropDown && children}
                         </div>
-                        <div className={scss.child__tags}>
-                            <h1>{staticContent?.tag}</h1>
-                            <ul>
-                                {
-                                    blogTags && blogTags.map((listTags:any,index: number) => {
-                                        return (
-                                            <li onClick={() => getTagId(listTags.id)} className={params.tagIds === listTags.id ? scss.child__tags__active : ''} key={index}>{listTags.title}</li>
-                                        )
-                                    })
-                                }
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="col-8">
-                        {children}
                     </div>
                 </div>
             </div>
-        </div>
+            {
+                isDropDown && (
+                    <div className={scss.dropdown}>
+                        <div className="container">
+                            <div className="row mt-20">
+                                <div className="col-12">
+                                    <div className={scss.child__mobile}>
+                                        <div className={scss.child__mobile__search}>
+                                            <input type="text" value={params.title} onChange={(e: any) => handleInputChange(e.target.value)}/>
+                                            <FontAwesomeIcon icon={faSearch}/>
+                                        </div>
+                                        <div className={scss.child__mobile__filter}>
+                                            <button onClick={() => toggleDropDown()}>
+                                                <Image src={FilterIcon} alt={'FilterIcon'}/>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-12">
+                                    <div className={scss.dropdown__category}>
+                                        <h1>{staticContent?.category}</h1>
+                                        <ul>
+                                            {
+                                                blogCategories && blogCategories.map((listCategory: any, index: number) => {
+                                                    return (
+                                                        <li onClick={() => getCategoryId(listCategory.id)}
+                                                            className={params.categoryIds === listCategory.id ? scss.dropdown__category__active : ''}
+                                                            key={index}>
+                                                            {
+                                                                params.categoryIds === listCategory.id ?
+                                                                    <Image className={scss.dropdown__category__icon} src={CancelBlueIcon}
+                                                                           alt={'CancelBlueIcon'}/> : null
+                                                            }
+                                                            {listCategory.title}
+                                                        </li>
+                                                    )
+                                                })
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-12">
+                                    <div className={scss.dropdown__tags}>
+                                        <h1>{staticContent?.tag}</h1>
+                                        <ul>
+                                            {
+                                                blogTags && blogTags.map((listTags: any, index: number) => {
+                                                    return (
+                                                        <li onClick={() => getTagId(listTags.id)}
+                                                            className={params.tagIds === listTags.id ? scss.dropdown__tags__active : ''}
+                                                            key={index}>
+                                                            {listTags.title}
+                                                            {
+                                                                params.tagIds === listTags.id ?
+                                                                    <Image className={scss.dropdown__tags__icon} src={CancelWhiteIcon}
+                                                                           alt={'CancelWhiteIcon'}/> : null
+                                                            }
+                                                        </li>
+                                                    )
+                                                })
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+        </>
     )
 }
 

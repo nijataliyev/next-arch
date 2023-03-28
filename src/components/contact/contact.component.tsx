@@ -160,7 +160,6 @@ const ContactComponent = () => {
 
     useEffect(() => {
         setInputState((prev: any) => {
-            console.log(prev)
             let prevInputState: any = {...prev}
             const prevInput: any = prevInputState.inputs
             prevInput.profession = {...prevInput.profession, options: [...blogCategoriesList]}

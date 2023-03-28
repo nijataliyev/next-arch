@@ -189,19 +189,6 @@
           border-radius: rem(10);
         }
       }
-
-      //button {
-      //  margin-top: rem(20);
-      //  border-radius: rem(10);
-      //  background-color: $main-color;
-      //  color: white;
-      //  font-family: $ec-bold;
-      //  font-size: rem(18);
-      //  border: none;
-      //  outline: none;
-      //  padding: rem(18) rem(90);
-      //  cursor: pointer;
-      //}
     }
   }
 
@@ -284,9 +271,6 @@
 
 @media only screen and (max-width: 991px) {
   .header{
-    //&__info{
-    //  display: none;
-    //}
 
     &__bars{
       display: flex;

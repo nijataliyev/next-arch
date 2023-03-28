@@ -11,7 +11,7 @@ import BodyComponent from "../../../packages/RModal/components/body.component";
 import {changeInputValue} from "../../../helpers/common-functions/common-functions";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStar,faBars} from "@fortawesome/free-solid-svg-icons";
-import CallCenter from '../../../../assets/images/Call center-bro.svg';
+import CallCenter from '../../../../assets/images/call-center-bro.svg';
 import {faPhone} from "@fortawesome/free-solid-svg-icons";
 import {useRouter} from "next/router";
 import MobileHeaderItemComponent from "./components/mobile-header-item/mobile-header-item.component";
@@ -84,7 +84,6 @@ const HeaderComponent = () => {
 
     useEffect(() => {
         let dataList: any = data;
-        console.log(dataList, lang)
         setNav(dataList[lang]?.header)
         let langContent: any = dataList[lang]?.modal;
         setStaticContent(dataList[lang]?.modal)

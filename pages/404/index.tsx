@@ -13,8 +13,6 @@ const NotFoundPage = () => {
 
     useEffect(() => {
         let dataList: any = data;
-
-        console.log(dataList[lang || 'az'])
         setStaticContent(dataList[lang || 'az']?.notFound)
     },[lang])
 

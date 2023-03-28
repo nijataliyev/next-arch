@@ -285,9 +285,6 @@ export function checkInputValidation(value: any, rules: any, input: any, inputSt
     if (!thisValid) {
       input.currentErrTxt = rules.minLength.errorText;
     }
-    // if(thisValid){
-    //     input.currentErrTxt = ""
-    // }
   }
   if (rules.maxLength) {
     const thisValid = value.trim().length <= Number(rules.maxLength.value);
@@ -295,9 +292,6 @@ export function checkInputValidation(value: any, rules: any, input: any, inputSt
     if (!thisValid) {
       input.currentErrTxt = rules.maxLength.errorText;
     }
-    // if(thisValid){
-    //     input.currentErrTxt = ""
-    // }
   }
   if (rules.regexp) {
     if (value.trim().length > 0) {

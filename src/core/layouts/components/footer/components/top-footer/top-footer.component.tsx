@@ -8,11 +8,12 @@ import Logo from '../../../../../../assets/images/logo_idea-01.svg';
 import {changeInputValue} from "../../../../../helpers/common-functions/common-functions";
 import {useDispatch, useSelector} from "react-redux";
 import {postSubscribeList} from "../../../../../../store/modules/top-footer-store/top-footer.action";
+
 const TopFooterComponent = () => {
     const dispatch: any = useDispatch();
-    const lang = useSelector(({publicReducers}: any)=>publicReducers.lang);
-    const [inputState,setInputState] = useState({
-        inputs:{
+    const lang = useSelector(({publicReducers}: any) => publicReducers.lang);
+    const [inputState, setInputState] = useState({
+        inputs: {
             email: {
                 type: 'text',
                 label: 'Tip',
@@ -33,50 +34,47 @@ const TopFooterComponent = () => {
             }
         }, formValid: false
     })
-    const [staticContent,setStaticContent] = useState<any>(null);
+    const [staticContent, setStaticContent] = useState<any>(null);
     const router = useRouter();
 
     useEffect(() => {
         let datalist: any = data;
         setStaticContent(datalist[lang]?.footer)
-    },[lang])
+    }, [lang])
 
-    const scoolElement = useCallback((str: any) => {
-        if(str && str.length){
-            router.replace('/').then(() => {
-                let element: any = document.querySelector("#"+str);
-                if(element){
+    const scoolElement = useCallback((link: string,str: any) => {
+        if (str && str.length) {
+            router.replace({pathname: link ?? router.pathname, query: {...router.query}}).then(() => {
+                let element: any = document.querySelector("#" + str);
+                if (element) {
                     element.scrollIntoView({behavior: 'smooth'})
                 }
             })
         }
-    },[])
-    
-    const handleInputChange = useCallback((val:string, inputName: string) => {
+    }, [router])
+
+    const handleInputChange = useCallback((val: string, inputName: string) => {
         changeInputValue({target: {value: val}}, inputName, inputState.inputs, setInputState)
-    },[inputState.inputs])
+    }, [inputState.inputs])
 
     const formSubmit = (e: any) => {
         e.preventDefault();
-        if(inputState.inputs.email.isValid){
-            console.log('yes')
-
-            let obj:any = {
+        if (inputState.inputs.email.isValid) {
+            let obj: any = {
                 email: inputState.inputs.email.value,
                 lang: localStorage.getItem('lang')
             }
             dispatch(postSubscribeList(obj))
-            setInputState((prev: any) =>{
+            setInputState((prev: any) => {
                 let prevInputState = {...prev}
                 let prevInput = prevInputState.inputs;
                 prevInput = {...prevInput, value: ''}
-                prevInputState = {...prevInputState,inputs: prevInput}
-                console.log(prevInputState)
+                prevInputState = {...prevInputState, inputs: prevInput}
                 return {
                     ...prevInputState
                 }
             })
-        }else {
+        } else {
             return false;
         }
     }
@@ -90,13 +88,16 @@ const TopFooterComponent = () => {
                             <h3>{staticContent?.commonHeading}</h3>
                             <ul className={scss.top__nav}>
                                 {
-                                    staticContent?.nav?.map((navList: any,index: number) => {
+                                    staticContent?.nav?.map((navList: any, index: number) => {
                                         return (
                                             <li key={index}>
                                                 {
-                                                    navList?.linkto ?
-                                                        <Link shallow={true} href={{pathname: navList?.linkto || undefined, query: {langId: lang}}}>{navList?.text}</Link> :
-                                                        <a onClick={() => scoolElement(navList?.routeId)}>{navList?.text}</a>
+                                                    !navList?.routeId ?
+                                                        <Link shallow={true} href={{
+                                                            pathname: navList?.linkto || undefined,
+                                                            query: {langId: lang}
+                                                        }}>{navList?.text}</Link> :
+                                                        <a onClick={() => scoolElement(navList?.linkto,navList?.routeId)}>{navList?.text}</a>
                                                 }
                                             </li>
                                         )
@@ -128,8 +129,10 @@ const TopFooterComponent = () => {
                             <p>{staticContent?.text}</p>
                             <form onSubmit={formSubmit}>
                                 <div className={scss.top__form}>
-                                    <input type={inputState.inputs.email.type} onChange={(e) => handleInputChange(e.target.value,'email')}/>
-                                    <button className={!inputState.inputs.email.isValid ? scss.top__form__btnError : scss.top__form__btnSuccess}>{staticContent?.btn}</button>
+                                    <input type={inputState.inputs.email.type}
+                                           onChange={(e) => handleInputChange(e.target.value, 'email')}/>
+                                    <button
+                                        className={!inputState.inputs.email.isValid ? scss.top__form__btnError : scss.top__form__btnSuccess}>{staticContent?.btn}</button>
                                 </div>
                             </form>
                         </div>

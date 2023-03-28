@@ -64,7 +64,6 @@ export const getBlogTags = () => (
 export const getMobPrefix = () => (
     (dispatch: Dispatch<any>) => {
         return service.getMobilePrefix().then((res) => {
-            console.log(res)
             return res.map((mobPrefixList: any) => {
                 return new MobilePrefixModel(mobPrefixList);
             })

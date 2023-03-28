@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
 import ElementPic from '../../assets/images/element-pic.svg';
 import ElementPicBack from '../../assets/images/element-pic-back.svg';
-import GirlImage from '../../assets/images/Blog post-bro.svg';
+import GirlImage from '../../assets/images/Blog-post-bro.svg';
 import Image from "next/image";
 import {useSelector} from "react-redux";
 const LearningComponent = () => {

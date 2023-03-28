@@ -1,6 +1,6 @@
 import ChildRootLayoutComponent from "../../../src/core/layouts/public/child-root-layout/child-root-layout.component";
 import {useRouter} from "next/router";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getBlogDetails} from "../../../src/store/modules/blog-store/blog-action";
 import Image from "next/image";
@@ -11,6 +11,8 @@ import {faEye} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {container} from "tsyringe";
 import {BlogService} from "../../../src/core/modules/services/blog-service/blog-service";
+import ArrowLeft from '../../../src/assets/images/icons/arrow-left.svg';
+import {decodeURL, encodeURL} from "../../../src/core/helpers/common-functions/common-functions";
 
 const BlogId = ({res}:any) => {
     const router = useRouter();
@@ -23,7 +25,6 @@ const BlogId = ({res}:any) => {
     useEffect(() => {
         let dataList: any = data;
         setStaticContent(dataList[lang]?.blog)
-        console.log(res)
     },[lang])
 
     useEffect(() => {
@@ -32,8 +33,25 @@ const BlogId = ({res}:any) => {
         }
     },[dispatch,router])
 
+    const goBack = useCallback(() => {
+        let {queryParams}: any = router.query;
+        if(queryParams){
+            let decoded: any = decodeURL(queryParams);
+            router.replace({pathname: '/'+lang+'/blog',query:{queryParams:encodeURL(decoded)}})
+        }else {
+            router.replace({pathname: '/'+lang+'/blog'})
+        }
+        // router.replace({pathname: router.pathname + '/blog', query:{...router.query}})
+    },[router])
+
     return (
         <ChildRootLayoutComponent>
+            <div className={scss.back} onClick={() => goBack()}>
+                <button>
+                    <Image src={ArrowLeft} alt={'ArrowLeft'}/>
+                    <span>{staticContent?.back}</span>
+                </button>
+            </div>
             <div className={scss.blogDetail}>
                 <div className={scss.blogDetail__img}>
                     <Image src={blogDetail?.img ? blogDetail?.img : EmptyIcon} alt={'image'}/>

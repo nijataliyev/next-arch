@@ -9,13 +9,14 @@ import Link from "next/link";
 import {useRouter} from "next/router";
 import Image from "next/image";
 import EmptyIcon from '../../../src/assets/images/empty.jpg';
-import CalendarIcon from '../../../src/assets/images/FontAwsome (calendar-day).svg';
-import EyeIcon from '../../../src/assets/images/FontAwsome (eye).svg';
+import CalendarIcon from '../../../src/assets/images/calendar-day.svg';
+import EyeIcon from '../../../src/assets/images/fontAwsome-eye.svg';
 import * as data from '../../../src/assets/db/db.json';
 import {ICategories, ITags} from "../../../src/core/modules/models/blog-model/types/blog";
 import {decodeURL, encodeURL} from "../../../src/core/helpers/common-functions/common-functions";
 import LeftIcon from '../../../src/assets/images/chevron-left-solid.svg';
 import RightIcon from '../../../src/assets/images/chevron-right-solid.svg';
+import NotFoundInfoIcon from '../../../src/assets/images/icons/group-187.svg';
 
 const Blog = () => {
     const lang = useSelector(({publicReducers}: any)=>publicReducers.lang)
@@ -23,7 +24,7 @@ const Blog = () => {
     const [staticContent,setStaticContent] = useState<any>(null);
     const [params,setParams] = useState<any>({
         page:1,
-        limit: 5,
+        limit: 10,
         title: '',
         tagIds: null,
         categoryIds: null
@@ -45,7 +46,7 @@ const Blog = () => {
         }else {
             let obj = {
                 page:1,
-                limit:5,
+                limit:10,
                 title: '',
                 tagIds: null,
                 categoryIds: null
@@ -92,7 +93,6 @@ const Blog = () => {
     }, [params])
 
     const gotoBlogId = (id: number) => {
-        console.log(id)
         router.replace({pathname: router.pathname+'/'+id,query:{...router.query}})
     }
 
@@ -101,7 +101,7 @@ const Blog = () => {
             <div className={scss.blog}>
                 <>
                     {
-                        blogList && blogList.map((listItem: any, index: number) => {
+                        blogList && blogList.length ? blogList.map((listItem: any, index: number) => {
                             return (
                                 <div onClick={() => gotoBlogId(listItem.id)} key={index} className={scss.blog__list}>
                                     <div className={scss.blog__img}>
@@ -147,10 +147,14 @@ const Blog = () => {
                                     </div>
                                 </div>
                             )
-                        })
+                        }) :
+                            <div className={scss.blog__empty}>
+                                <h1>{staticContent?.notInfo}</h1>
+                                <Image src={NotFoundInfoIcon} alt={'NotFoundInfoIcon'}/>
+                            </div>
                     }
                     {
-                        blogList && blogList.length ?
+                        blogList && blogList.length && blogCount > 10 ?
                         <ReactPaginate
                             nextLabel={
                                 <Image src={RightIcon} alt={'Right'}/>

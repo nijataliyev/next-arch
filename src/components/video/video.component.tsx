@@ -24,7 +24,7 @@ const VideoComponent = () => {
                 src: '/videos/lorex4.mp4',
                 type: 'video/webm'
             }],
-            poster: '/images/Group 182.png',
+            poster: '/images/group-182.png',
             posterTest: 'test',
             responsive: true,
             width: 1000,
@@ -35,7 +35,6 @@ const VideoComponent = () => {
 
         return () => {
             if (player && !player.isDisposed()) {
-                console.log(player)
                 player.dispose();
                 // playerRef.current = null;
             }
