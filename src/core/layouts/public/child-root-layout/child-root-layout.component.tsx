@@ -22,7 +22,7 @@ function ChildRootLayoutComponent({children}: any) {
     const blogTags: any = useSelector((state: any) => state.blogReducers.blogTags);
     const [params, setParams] = useState<any>({
         page: 1,
-        limit: 5,
+        limit: 10,
         title: '',
         tagIds: null,
         categoryIds: null
@@ -53,7 +53,7 @@ function ChildRootLayoutComponent({children}: any) {
         } else {
             let obj = {
                 page: 1,
-                limit: 5,
+                limit: 10,
                 title: '',
                 tagIds: null,
                 categoryIds: null
@@ -87,7 +87,7 @@ function ChildRootLayoutComponent({children}: any) {
         } else {
             let obj: any = {
                 page: 1,
-                limit: 5,
+                limit: 10,
                 title: '',
                 tagIds: null,
                 categoryIds: id
@@ -122,7 +122,7 @@ function ChildRootLayoutComponent({children}: any) {
         } else {
             let obj: any = {
                 page: 1,
-                limit: 5,
+                limit: 10,
                 title: '',
                 tagIds: id,
                 categoryIds: null
@@ -162,7 +162,7 @@ function ChildRootLayoutComponent({children}: any) {
             } else {
                 obj = {
                     page: 1,
-                    limit: 5,
+                    limit: 10,
                     title: val,
                     tagIds: null,
                     categoryIds: null
